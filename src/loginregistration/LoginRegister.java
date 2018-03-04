@@ -35,6 +35,7 @@ public class LoginRegister extends HttpServlet {
         String submitType = request.getParameter("submit");
 
 
+
         Customer c = cd.getCustomer(username, password);
         Admin a = ad.getAdmin(username, password);
 
@@ -75,9 +76,11 @@ public class LoginRegister extends HttpServlet {
 
         //registration
         if (submitType.equals("register")) {
+            boolean passwordRequirement = TestLoginFunctions.passwordRequirementCheck(password); //returns true if password meets requirements (at least 1 capital, no spaces, 1 symbol)
 
-            if (c.getUsername() == null && cd.isNewUsername(username)) {
+            if (c.getUsername() == null && cd.isNewUsername(username) && passwordRequirement) {
 
+                TestLoginFunctions.sendEmailVerification(email);
                 c.setEmail(email);
                 c.setUsername(username);
                 c.setPassword(password);
@@ -85,7 +88,12 @@ public class LoginRegister extends HttpServlet {
                 cd.insertCustomer(c);
                 request.setAttribute("successMessage", "Registered successfully!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else {
+            }
+            else if(!passwordRequirement){
+                request.setAttribute("errorMessage", "Password does not meet requirements. Passwords must contain 1 upper-case letter, 1 symbol, and no spaces");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            }
+            else {
                 request.setAttribute("errorMessage", "This username was registered! Please use another username!");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             }
