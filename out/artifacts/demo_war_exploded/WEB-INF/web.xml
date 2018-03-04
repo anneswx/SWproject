@@ -6,11 +6,12 @@
 
     <servlet>
         <servlet-name>LoginRegister</servlet-name>
-        <servlet-class>login.submit.registration.LoginRegister</servlet-class>
+        <servlet-class>loginregistration.LoginRegister</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>LoginRegister</servlet-name>
         <url-pattern>/loginRegister</url-pattern>
     </servlet-mapping>
+
 </web-app>

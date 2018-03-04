@@ -13,11 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-
+    <link rel="stylesheet" type="text/css" href="style.css"/>
     <title>Login</title>
 </head>
 <body>
+
+<h1>Election System</h1>
+
 <div class="container-fluid"> <!-- div to hold all other divs -->
     <%@ include file="includes/navBar.jsp" %>
     <div class="row-fluid">
@@ -30,7 +32,8 @@
                         <div class="col-md-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input name="username" placeholder="Username" class="form-control" type="text" autofocus="autofocus">
+                                <input name="username" placeholder="Username" class="form-control" type="text"
+                                       autofocus="autofocus">
                             </div>
                         </div>
                     </div>
@@ -43,11 +46,11 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-12">
-                            <div class="input-group">
-                                <button type="submit" class="btn btn-md btn-success pull-right">Login </button>
+                            <div style="margin:0 auto;" class="input-group">
+                                <button type="submit" name="submit" value="login"
+                                        class="btn btn-md btn-success pull-right">Login</button>
                             </div>
                         </div>
                     </div>
@@ -55,13 +58,16 @@
             </form>
         </div>
     </div>
-<p style="color:red;">${message}</p>
-<p style="color:green;">${successMessage}</p>
-ssss</div><!-- close main div -->
+
+    <p style="color:red;">${errorMessage}</p>
+    <p style="color:green;">${successMessage}</p>
+
+</div><!-- close main div -->
 <br><br><br><br><br><br>
 <%@ include file="includes/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        crossorigin="anonymous"></script>
 <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
