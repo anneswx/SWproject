@@ -31,6 +31,7 @@ public class LoginRegister extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String password2 = request.getParameter("password2");
         String email = request.getParameter("email");
         String submitType = request.getParameter("submit");
 
@@ -78,7 +79,14 @@ public class LoginRegister extends HttpServlet {
         if (submitType.equals("register")) {
             boolean passwordRequirement = TestLoginFunctions.passwordRequirementCheck(password); //returns true if password meets requirements (at least 1 capital, no spaces, 1 symbol)
             boolean usernameRequirement = TestLoginFunctions.usernameRequirementCheck(username);
-            if (c.getUsername() == null && cd.isNewUsername(username) && usernameRequirement && passwordRequirement) {
+            boolean passwordsMatch = false;
+
+            //checks that both passwords match
+            if(password.equals(password2)){
+                passwordsMatch=true;
+            }
+
+            if (c.getUsername() == null && cd.isNewUsername(username) && usernameRequirement && passwordRequirement && passwordsMatch) {
 
                 TestLoginFunctions.sendEmailVerification(email, username);
                 c.setEmail(email);
@@ -88,6 +96,10 @@ public class LoginRegister extends HttpServlet {
                 cd.insertCustomer(c);
                 request.setAttribute("successMessage", "Registered successfully!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
+            else if(!passwordsMatch){
+                request.setAttribute("errorMessage", "Password fields don't match.");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
             }
             else if(!usernameRequirement){
                 request.setAttribute("errorMessage", "Username does not meet requirements. Usernames may not contain any special symbols or white spaces. Usernames must also be at least 3 characters long.");
