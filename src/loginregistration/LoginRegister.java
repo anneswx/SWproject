@@ -77,10 +77,10 @@ public class LoginRegister extends HttpServlet {
         //registration
         if (submitType.equals("register")) {
             boolean passwordRequirement = TestLoginFunctions.passwordRequirementCheck(password); //returns true if password meets requirements (at least 1 capital, no spaces, 1 symbol)
+            boolean usernameRequirement = TestLoginFunctions.usernameRequirementCheck(username);
+            if (c.getUsername() == null && cd.isNewUsername(username) && usernameRequirement && passwordRequirement) {
 
-            if (c.getUsername() == null && cd.isNewUsername(username) && passwordRequirement) {
-
-                TestLoginFunctions.sendEmailVerification(email);
+                TestLoginFunctions.sendEmailVerification(email, username);
                 c.setEmail(email);
                 c.setUsername(username);
                 c.setPassword(password);
@@ -89,8 +89,12 @@ public class LoginRegister extends HttpServlet {
                 request.setAttribute("successMessage", "Registered successfully!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
+            else if(!usernameRequirement){
+                request.setAttribute("errorMessage", "Username does not meet requirements. Usernames may not contain any special symbols or white spaces. Usernames must also be at least 3 characters long.");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            }
             else if(!passwordRequirement){
-                request.setAttribute("errorMessage", "Password does not meet requirements. Passwords must contain 1 upper-case letter, 1 symbol, and no spaces");
+                request.setAttribute("errorMessage", "Password does not meet requirements. Passwords must contain 1 upper-case letter, 1 symbol, and no spaces.");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             }
             else {

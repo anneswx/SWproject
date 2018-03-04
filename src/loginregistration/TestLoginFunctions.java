@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 public class TestLoginFunctions {
 
-    public static void sendEmailVerification(String clientEmail){
+    public static void sendEmailVerification(String clientEmail, String user){
         String username = "fswe.login.check.team12@gmail.com";
         String password = "fsweIsFun";
 
@@ -40,7 +40,8 @@ public class TestLoginFunctions {
 
             message.setSubject("Register Your Account");
 
-            message.setText("Welcome to our election system. To register your account please click the link below: ");
+            message.setText("Welcome to our election system. To register your account please click the link below: \n" +
+                    "Username: "+user);
 
             Transport transport = session.getTransport("smtp");
             transport.connect(host, username, password);
@@ -83,5 +84,32 @@ public class TestLoginFunctions {
                 }
             }
         }
+    }
+
+    public static boolean usernameRequirementCheck(String usernameToCheck){
+        Pattern p = Pattern.compile("[^A-Za-z0-9]");
+        Matcher m = p.matcher(usernameToCheck);
+
+        //checks that the username doesn't contain any special characters
+        if(usernameToCheck.length()>3) {
+            if (m.find() == true) {
+                return false;
+            } else {
+                p = Pattern.compile("\\s");
+                m = p.matcher(usernameToCheck);
+
+                //checks that the username does not have any white spaces
+                if (m.find() == true) {
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        }else{
+            return false;
+        }
+
+
     }
 }
