@@ -1,0 +1,20 @@
+provider username: webappuser
+password: 123
+connUrl: jdbc:mysql://localhost/db
+Schema(database) name: db
+
+Table name: admin
+id: int
+username: varchar
+password: varchar
+manager: int 
+
+Table name: customer
+userid: int
+username: varchar
+password: varchar
+email: varchar
+voterstatus: int
+realname: varchar
+ssn: int
+address: varchar
