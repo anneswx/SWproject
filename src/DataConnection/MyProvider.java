@@ -2,7 +2,7 @@ package DataConnection;
 
 public interface MyProvider {
 
-    String username="webappuser" ;
-    String pwd="123" ;
-    String connUrl="jdbc:mysql://localhost/db" ;
+    String username="voterapp@bais" ;
+    String pwd="P@$$w0rD" ;
+    String connUrl="jdbc:mysql://bais.mysql.database.azure.com/db" ;
 }
