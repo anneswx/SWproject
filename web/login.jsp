@@ -57,7 +57,7 @@
     </div>
 <p style="color:red;">${message}</p>
 <p style="color:green;">${successMessage}</p>
-ssss</div><!-- close main div -->
+</div><!-- close main div -->
 <br><br><br><br><br><br>
 <%@ include file="includes/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
