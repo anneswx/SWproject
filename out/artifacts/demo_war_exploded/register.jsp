@@ -8,32 +8,57 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="XA-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
     <title>Title</title>
 </head>
 <body>
-<h1>Hello, please register:</h1>
+<div class="container-fluid">
+    <%@ include file="includes/navBar.jsp" %>
 
-<form action="loginRegister" method="post">
-    <table style="background-color: lightgreen; margin-left: 20px; margin-left:20px;">
-        <tr>
-            <td><h3 style="color: red;">Registration Page</h3></td>
-        </tr>
-        <tr>
-            <td>username:</td>
-            <td><input type="text" name="username" width="30"/></td>
-        </tr>
-        <tr>
-            <td> password:</td>
-            <td><input type="password" name="password" width="10"/></td>
-        </tr>
-        <tr>
-            <td> Re-Type password:</td>
-            <td><input type="password" name="password2" width="10"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="submit" value="register"/></td>
-        </tr>
-    </table>
-</form>
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Become a User</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="loginRegister" method="post">
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" autofocus="autofocus">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="username" id="username" class="form-control input-sm" placeholder="Username" autofocus="autofocus" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="password" name="password2" id="password2" class="form-control input-sm" placeholder="Re-type Password">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="Register" class="btn btn-success btn-block">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%@ include file="includes/footer.jsp" %>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>
