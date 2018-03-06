@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: kate
-  Date: 2/26/2018
-  Time: 6:57 PM
+  Date: 3/4/2018
+  Time: 7:48 PM
   To change this template use File | Settings | File Templates.
 --%>
 <nav class="navbar navbar-inverse">
@@ -15,7 +15,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.jsp">Voter Application</a>
+            <a class="navbar-brand" href="index.jsp">Voter Application | Administrator</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -25,12 +25,8 @@
                 <li><a href="#">Contact Us</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
-                <li><a href="./login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-=======
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
->>>>>>> bootstrap
-                <li><a href="./register.jsp"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Admin function</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

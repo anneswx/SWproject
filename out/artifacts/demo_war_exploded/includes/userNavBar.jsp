@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: kate
-  Date: 2/26/2018
-  Time: 6:57 PM
+  Date: 3/4/2018
+  Time: 6:58 PM
   To change this template use File | Settings | File Templates.
 --%>
 <nav class="navbar navbar-inverse">
@@ -22,16 +22,19 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="index.jsp">Home</a></li>
+                <li><a href="#" class="dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>Profile</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-ok"></span>Vote</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
-                <li><a href="./login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-=======
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
->>>>>>> bootstrap
-                <li><a href="./register.jsp"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav><!-- close navigation bar -->

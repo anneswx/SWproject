@@ -19,7 +19,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="library" exported="" scope="PROVIDED" name="GlassFish 5.0.0" level="application_server_libraries" />
     <orderEntry type="library" exported="" name="javax:javaee-api:8.0" level="project" />
+=======
+    <orderEntry type="library" exported="" scope="TEST" name="GlassFish 5.0.0" level="application_server_libraries" />
+    <orderEntry type="library" name="jquery-3.2.1.slim" level="application" />
+    <orderEntry type="library" name="popper" level="application" />
+    <orderEntry type="library" name="javax.servlet-api-3.1.0" level="project" />
+>>>>>>> bootstrap
   </component>
 </module>

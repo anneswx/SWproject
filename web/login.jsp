@@ -59,8 +59,8 @@
         </div>
     </div>
 
-    <p style="color:red;">${errorMessage}</p>
-    <p style="color:green;">${successMessage}</p>
+<p style="color:red;">${message}</p>
+<p style="color:green;">${successMessage}</p>
 
 </div><!-- close main div -->
 <br><br><br><br><br><br>
