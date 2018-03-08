@@ -21,13 +21,16 @@
 
 <h1>Election System</h1>
 
+
 <div class="container-fluid"> <!-- div to hold all other divs -->
+	<% if (request.getAttribute("successMessage") == null){ %>
     <%@ include file="includes/navBar.jsp" %>
     <div class="row-fluid">
         <div class="col-md-offset-4 col-md-4" id="box">
             <h2>Please Login</h2>
             <hr>
-            <form action="loginRegister" method="post" class="form-horizontal" id="contact_form">
+            <p style="color:red;">${errorMessage}</p>
+            <form method="post" class="form-horizontal">
                 <fieldset>
                     <div class="form-group">
                         <div class="col-md-12">
@@ -58,10 +61,17 @@
                 </fieldset>
             </form>
         </div>
+        <% }
+    		else { %>
+    			<%@ include file="includes/userNavBar.jsp" %>
+    				<div class="row-fluid">
+        				<div class="col-md-offset-4 col-md-4" id="box">
+            				<h2>You've been successfully logged in!</h2>
+            			</div>
+            		</div>
+    		<% }
+    		%>
     </div>
-
-<p style="color:red;">${message}</p>
-<p style="color:green;">${successMessage}</p>
 
 </div><!-- close main div -->
 <br><br><br><br><br><br>

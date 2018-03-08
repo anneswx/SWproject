@@ -17,9 +17,9 @@
     <p>Hello, ${username}</p>
     <p style="color: green" ;>${successMessage}</p>
     <p>voter information status: ${noteMessage}</p>
-    <% if ((Integer) request.getAttribute("voterstatus") == 0) { %>
+    <% //if ((Integer) request.getAttribute("voterstatus") == 0) { %>
     <p><input type="submit" name="submit" value="become a voter"/></p>
-    <% } %>
+    <% //} %>
     <p><input type="submit" name="submit" value="logout"/></p>
 </form>
 </body>
