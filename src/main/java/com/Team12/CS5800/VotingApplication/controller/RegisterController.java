@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.Team12.CS5800.VotingApplication.service.LoginService;
 import com.Team12.CS5800.VotingApplication.service.RegisterService;
 
 @Controller
@@ -19,7 +18,7 @@ public class RegisterController {
     RegisterService service;
 
     @RequestMapping(value="/register", method = RequestMethod.GET)
-    public String showLoginPage(ModelMap model){
+    public String showRegisterPage(ModelMap model){
         return "register";
     }
 
