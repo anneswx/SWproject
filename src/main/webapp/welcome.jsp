@@ -22,12 +22,18 @@
 <h1>Election System</h1>
 
 <div class="container-fluid"> <!-- div to hold all other divs -->
-    <%@ include file="includes/navBar.jsp" %>
+
+<% if (request.getAttribute("username") == null){ %>
+	<%@ include file="includes/navBar.jsp" %>
     <div class="row-fluid">
         <div class="col-md-offset-2 col-md-8" id="box">
             <h2>Welcome to our voting service! Please register or login!</h2>
         </div>
     </div>
+<% }
+    		else { %>
+    		<% } %>
+    
 
 </div><!-- close main div -->
 <br><br><br><br><br><br>
