@@ -31,30 +31,109 @@
                 </div>
                 <div class="panel-body">
                     <form action="loginRegister" method="post">
+                    		<div class ="form-group">
+                    			<input type="text" name="name" id="name" class="form-control input-sm" placeholder="Name" autofocus="autofocus" required/>
+                    		</div>
+                    		<div class = "form-group">
+                    			<input type="text" name="address" id="address" class="form-control input-sm" placeholder="Address" required/>
+                    		</div>
+                    		<div class = "form-group">
+                    			<input type="text" name="city" id="city" class="form-control input-sm" placeholder="City" required/>
+                    		</div>
+                    		<div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+		                    		<div class = "form-group">
+		                    			<select class="form-control" id="state" name="state" required>
+										<option value="AK">Alaska</option>
+										<option value="AL">Alabama</option>
+										<option value="AR">Arkansas</option>
+										<option value="AZ">Arizona</option>
+										<option value="CA">California</option>
+										<option value="CO">Colorado</option>
+										<option value="CT">Connecticut</option>
+										<option value="DC">District of Columbia</option>
+										<option value="DE">Delaware</option>
+										<option value="FL">Florida</option>
+										<option value="GA">Georgia</option>
+										<option value="HI">Hawaii</option>
+										<option value="IA">Iowa</option>
+										<option value="ID">Idaho</option>
+										<option value="IL">Illinois</option>
+										<option value="IN">Indiana</option>
+										<option value="KS">Kansas</option>
+										<option value="KY">Kentucky</option>
+										<option value="LA">Louisiana</option>
+										<option value="MA">Massachusetts</option>
+										<option value="MD">Maryland</option>
+										<option value="ME">Maine</option>
+										<option value="MI">Michigan</option>
+										<option value="MN">Minnesota</option>
+										<option value="MO">Missouri</option>
+										<option value="MS">Mississippi</option>
+										<option value="MT">Montana</option>
+										<option value="NC">North Carolina</option>
+										<option value="ND">North Dakota</option>
+										<option value="NE">Nebraska</option>
+										<option value="NH">New Hampshire</option>
+										<option value="NJ">New Jersey</option>
+										<option value="NM">New Mexico</option>
+										<option value="NV">Nevada</option>
+										<option value="NY">New York</option>
+										<option value="OH">Ohio</option>
+										<option value="OK">Oklahoma</option>
+										<option value="OR">Oregon</option>
+										<option value="PA">Pennsylvania</option>
+										<option value="PR">Puerto Rico</option>
+										<option value="RI">Rhode Island</option>
+										<option value="SC">South Carolina</option>
+										<option value="SD">South Dakota</option>
+										<option value="TN">Tennessee</option>
+										<option value="TX">Texas</option>
+										<option value="UT">Utah</option>
+										<option value="VA">Virginia</option>
+										<option value="VT">Vermont</option>
+										<option value="WA">Washington</option>
+										<option value="WI">Wisconsin</option>
+										<option value="WV">West Virginia</option>
+										<option value="WY">Wyoming</option>
+									</select>
+		                    		</div>
+		                    	</div>
+		                    	<div class="col-xs-6 col-sm-6 col-md-6">
+		                    		<div class = "form-group">
+                    					<input type="text" name="zipcode" id="zipcode" class="form-control input-sm" placeholder="Zip Code" required/>
+                    				</div>
+		                    	</div>
+		                </div>
+                    		<!--  city, state, zip -->
+                    		<div class = "form-group">
+                    			<input type="number" name="ssn" id="ssn" class="form-control input-sm" placeholder="Social Security Number" required/>
+                    		</div>
                         <div class="form-group">
                             <input type="email" name="email" id="email" class="form-control input-sm"
-                                   placeholder="Email Address" autofocus="autofocus">
+                                   placeholder="Email Address"  required>
                         </div>
 
                         <div class="form-group">
                             <input type="text" name="username" id="username" class="form-control input-sm"
-                                   placeholder="Username" autofocus="autofocus" required>
+                                   placeholder="Username" required>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" class="form-control input-sm"
-                                           placeholder="Password">
+                                           placeholder="Password" required>
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="password" name="password2" id="password2" class="form-control input-sm"
-                                           placeholder="Re-type Password">
+                                           placeholder="Re-type Password" required>
                                 </div>
                             </div>
                         </div>
+                        
                         <input type="submit" name ="submit" value="Register" class="btn btn-success btn-block">
                     </form>
                 </div>

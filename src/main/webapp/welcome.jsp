@@ -23,7 +23,8 @@
 
 <div class="container-fluid"> <!-- div to hold all other divs -->
 
-<% if (request.getAttribute("username") == null){ %>
+<%  
+if (request.getAttribute("customer") == null && request.getAttribute("admin") == null){ %>
 	<%@ include file="includes/navBar.jsp" %>
     <div class="row-fluid">
         <div class="col-md-offset-2 col-md-8" id="box">
@@ -31,8 +32,11 @@
         </div>
     </div>
 <% }
-    		else { %>
-    		<% } %>
+    else if (request.getAttribute("customer") == null) { %>
+    		<h2>Customer welcome!</h2>
+    	<% } else { %>
+    		<h2>Admin Welcome!</h2>
+    	<% } %>
     
 
 </div><!-- close main div -->
