@@ -19,7 +19,7 @@ public class SessionGrabber {
 	}
 
 	public String checkAdminStatus(String sessionID) {
-		return "";
+		return "admin";
 	}
 	
 	public int getVoterStatus(String sessionID) {

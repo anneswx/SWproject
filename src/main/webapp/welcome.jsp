@@ -6,6 +6,7 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
 <html>
 
 <head>
@@ -23,7 +24,40 @@
 
 <div class="container-fluid"> <!-- div to hold all other divs -->
 
-<%  
+<% 
+String sessionCode = ""; 
+	Cookie[] cookies = null;
+	
+	cookies = request.getCookies();
+	if ( cookies != null) {
+		for (int i = 0; i < cookies.length; i++) {
+			
+			if (cookies[i].getName().equals("sessionID")) {
+				sessionCode = cookies[i].getValue();
+				System.out.println(cookies[i].getValue());
+				
+			}
+		}
+	}
+	
+	if (sessionCode.equals("")){ // Not logged in
+		System.out.println("Not logged in");
+	} else {
+		SessionGrabber sg = new SessionGrabber();
+		String userStatus = sg.checkAdminStatus(sessionCode);
+		if (userStatus.equals("admin")){
+			System.out.println("Hello admin!");
+		}
+		else if (userStatus.equals("moderator")) {
+			System.out.println("Hello moderator!");
+		}
+		else { // user
+			System.out.println("Hello user!");
+		}
+	}
+
+
+//cookie.SessionID.value;
 if (request.getAttribute("customer") == null && request.getAttribute("admin") == null){ %>
 	<%@ include file="includes/navBar.jsp" %>
     <div class="row-fluid">
