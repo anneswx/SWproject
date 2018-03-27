@@ -52,6 +52,7 @@ String sessionCode = "";
 			System.out.println("Hello moderator!");
 		}
 		else { // user
+			int voterStatus = sg.getVoterStatus(sessionCode);
 			System.out.println("Hello user!");
 		}
 	}
