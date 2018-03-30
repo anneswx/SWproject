@@ -31,9 +31,19 @@
                 </div>
                 <div class="panel-body">
                     <form action="loginRegister" method="post">
-                    		<div class ="form-group">
-                    			<input type="text" name="name" id="name" class="form-control input-sm" placeholder="Name" autofocus="autofocus" required/>
+                    		<div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                    				<div class ="form-group">
+                    					<input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name" autofocus="autofocus" required/>
+                    				</div>
+                    			</div>
+                    			<div class="col-xs-6 col-sm-6 col-md-6">
+                    				<div class ="form-group">
+                    					<input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name" required/>
+                    				</div>
+                    			</div>
                     		</div>
+                    		
                     		<div class = "form-group">
                     			<input type="text" name="address" id="address" class="form-control input-sm" placeholder="Address" required/>
                     		</div>

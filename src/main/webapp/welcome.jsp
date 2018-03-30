@@ -53,6 +53,15 @@ String sessionCode = "";
 		}
 		else { // user
 			int voterStatus = sg.getVoterStatus(sessionCode);
+			if (voterStatus == 0) { // Not applied
+				
+			}
+			else if (voterStatus == 1) { // Applied but not yet approved
+				
+			}
+			else { // Registered and was approved
+				
+			}
 			System.out.println("Hello user!");
 		}
 	}

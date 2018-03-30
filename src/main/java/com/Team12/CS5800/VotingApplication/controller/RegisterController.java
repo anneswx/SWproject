@@ -23,7 +23,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String showWelcomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, @RequestParam int ssn, @RequestParam String address, @RequestParam String name, @RequestParam String city, @RequestParam String state, @RequestParam String zipcode, @RequestParam String email){
+    public String showWelcomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, @RequestParam int ssn, @RequestParam String address, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String city, @RequestParam String state, @RequestParam String zipcode, @RequestParam String email){
 
        /* boolean isValidUser = service.registerUser(name, password);
 
