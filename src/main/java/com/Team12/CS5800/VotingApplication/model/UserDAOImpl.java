@@ -31,8 +31,6 @@ public class UserDAOImpl implements UserDAO {
             ps.setInt(3, 0);
             ps.executeUpdate();
             
-            System.out.println("Inserts user");
-            
             // get id back
             con = MyConnectionProvider.getCon();
             ps = con.prepareStatement("select * from users where username = ?");
@@ -42,8 +40,6 @@ public class UserDAOImpl implements UserDAO {
             rs.first();
             int id = rs.getInt(1);
             rs.close();
-            
-            System.out.println("Gets ID");
             
             con = MyConnectionProvider.getCon();
             ps = con.prepareStatement("INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
@@ -62,7 +58,6 @@ public class UserDAOImpl implements UserDAO {
 
             status = 1;
             con.close();
-            System.out.println("Ends register");
         } catch (Exception e) {
             System.out.println(e);
             status = 0;
@@ -241,6 +236,37 @@ public class UserDAOImpl implements UserDAO {
         }
         return status;
 
+	}
+	
+	public int verifyEmail(String emailAuthKey) {
+		int status = 0;
+		try {
+		 
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from emailtokens where emailAuthKey = ?");
+			ps.setString(1, emailAuthKey);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			int userID = rs.getInt(2);
+			rs.close();
+		
+			
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("UPDATE user_info SET emailAuth=1 WHERE id=?");
+
+			ps.setInt(1, userID);
+			ps.executeUpdate();
+         
+			status = 1;
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+			status = 0;
+		}
+
+		return status;
 	}
 	
 }

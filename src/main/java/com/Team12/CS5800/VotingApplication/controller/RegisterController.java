@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.Team12.CS5800.VotingApplication.model.EmailAuthGrabber;
 import com.Team12.CS5800.VotingApplication.model.SessionGrabber;
 import com.Team12.CS5800.VotingApplication.service.RegisterService;
 
@@ -55,6 +56,10 @@ public class RegisterController {
     	sg.storeSession(cookieToAdd, userID);
     	
     	response.addCookie(new Cookie("sessionID", cookieToAdd));
+    	
+    	EmailAuthGrabber eag = new EmailAuthGrabber();
+    	String emailAuthKey = eag.generateEmailAuthID() + email;
+    	eag.storeEmailAuthKey(emailAuthKey, userID);
 
     return model;
     

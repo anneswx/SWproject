@@ -7,6 +7,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.EmailAuthGrabber" %>
 <html>
 
 <head>
@@ -25,14 +26,18 @@
 <div class="container-fluid"> <!-- div to hold all other divs -->
 
 <% 
-String sessionCode = ""; 
+
 	Cookie[] cookies = null;
+	boolean wasLoggedIn = false;
+	String sessionCode = "";
 	
 	cookies = request.getCookies();
 	if ( cookies != null) {
 		for (int i = 0; i < cookies.length; i++) {
 			
-			if (cookies[i].getName().equals("sessionID")) {
+			if (cookies[i].getName().equals("sessionID") && !cookies[i].getValue().equals("")) {
+				SessionGrabber sg = new SessionGrabber();
+				
 				sessionCode = cookies[i].getValue();
 				
 			}
@@ -42,88 +47,76 @@ String sessionCode = "";
 	if (sessionCode.equals("")){ // Not logged in
 		%>
 		<%@ include file="includes/navBar.jsp" %>
-    		<div class="row-fluid">
-        		<div class="col-md-offset-2 col-md-8" id="box">
-            		<h2>Welcome to our voting service! Please register or login!</h2>
-        		</div>
-    		</div>
-		
-		
+
 		<%
 	} else {
 		SessionGrabber sg = new SessionGrabber();
 		String userStatus = sg.checkAdminStatus(sessionCode);
-		String firstName = sg.getFirstName(sessionCode);
-		pageContext.setAttribute("firstName", firstName);
+
 		if (userStatus.equals("admin")){
 			%>
 			
 			<%@ include file="includes/adminNavBar.jsp" %>
-    			<div class="row-fluid">
-        			<div class="col-md-offset-2 col-md-8" id="box">
-            			<h2>Welcome, ${firstName}! </h2>
-        			</div>
-    			</div>
-			
+
 			<%
 		}
 		else if (userStatus.equals("manager")) {
 			%>
 			
 			<%@ include file="includes/managerNavBar.jsp" %>
-    			<div class="row-fluid">
-        			<div class="col-md-offset-2 col-md-8" id="box">
-            			<h2>Welcome, ${firstName}! </h2>
-        			</div>
-    			</div>
 			
 			<%
 		}
 		else { // user
-			int voterStatus = sg.getVoterStatus(sessionCode);
 
-			if (voterStatus == 0) { // Not applied
 				%>
 				
 				<%@ include file="includes/userNavBar.jsp" %>
-    				<div class="row-fluid">
-        				<div class="col-md-offset-2 col-md-8" id="box">
-            				<h2>Welcome, ${firstName}! Make sure you apply to become a voter before the next election cycle!</h2>
-        				</div>
-    				</div>
 				
 				<%
-			}
-			else if (voterStatus == 1) { // Applied but not yet approved
-				%>
-				
-				<%@ include file="includes/userNavBar.jsp" %>
-    				<div class="row-fluid">
-        				<div class="col-md-offset-2 col-md-8" id="box">
-            				<h2>Welcome, ${firstName}! An administrator is reviewing your application now! Please check in again later! </h2>
-        				</div>
-    				</div>
-				
-				<%
-				
-			}
-			else { // Registered and was approved
-				%>
-				
-				<%@ include file="includes/userNavBar.jsp" %>
-    				<div class="row-fluid">
-        				<div class="col-md-offset-2 col-md-8" id="box">
-            				<h2>Welcome, ${firstName}! </h2>
-        				</div>
-    				</div>
-				
-				<%
-				
-			}
+    			
 		}
 	}
-%>
+	
 
+	
+	String emailAuthKey = request.getParameter("authKey");
+	
+	EmailAuthGrabber eag = new EmailAuthGrabber();
+	
+	int emailSuccess = eag.updateEmailStatus(emailAuthKey);
+	
+	boolean emailFound;
+	if(emailSuccess == 0){ // was not successful
+		emailFound = false;
+	}
+	else {
+		emailFound = true;
+		eag.removeEmailKey(emailAuthKey);
+	}
+	
+
+	
+	if (!emailFound) { // Not logged in
+%>
+		<div class="row-fluid">
+        		<div class="col-md-offset-2 col-md-8" id="box">
+            		<h2>Whoops! That was an invalid email key! Could you have arrived on this page by accident?</h2>
+        		</div>
+    		</div>
+
+<% } 
+	else { %>
+		
+		<div class="row-fluid">
+        		<div class="col-md-offset-2 col-md-8" id="box">
+            		<h2>Your email was approved!</h2>
+        		</div>
+    		</div>
+
+<% } %>
+
+    
 </div><!-- close main div -->
 <br><br><br><br><br><br>
 <%@ include file="includes/footer.jsp" %>
