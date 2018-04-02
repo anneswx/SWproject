@@ -121,8 +121,22 @@ public class User {
     private AdminStatus adminStatus;
     private UserInfo userInfo;
     
+    private UserDAOImpl UDAO = new UserDAOImpl();
+    
     public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode) {
-    		// manual set all these fields DON'T USE SET
+    		this.id = id;
+    		this.username = username;
+    		this.password = password;
+    		if (adminStatus == 0) {
+    			this.adminStatus = AdminStatus.USER;
+    		}
+    		else if (adminStatus == 1) {
+    			this.adminStatus = AdminStatus.MANAGER;
+    		}
+    		else {
+    			this.adminStatus = AdminStatus.ADMIN;
+    		}
+    		this.userInfo = new UserInfo(email, voterstatus, firstName, lastName, ssn, address, city, state, zipcode);
     }
     
     public int getID() {
@@ -135,7 +149,7 @@ public class User {
     
     public void setUsername(String newUsername) {
     		username = newUsername;
-    		// update db
+    		UDAO.updateUser(this);
     }
     
     public String getPassword() {
@@ -144,7 +158,7 @@ public class User {
     
     public void setPassword(String newPassword) {
     		password = newPassword;
-    		// update db
+    		UDAO.updateUser(this);
     }
     
     public AdminStatus getAdminStatus() {
@@ -153,7 +167,7 @@ public class User {
     
     public void setAdminStatus(AdminStatus newStatus) {
     		adminStatus = newStatus;
-    		// update db
+    		UDAO.updateUser(this);
     }
     
     public String getEmail() {
@@ -162,7 +176,7 @@ public class User {
     
     public void setEmail(String newEmail) {
     		userInfo.setEmail(newEmail);
-    		// Access DB
+    		UDAO.updateUser(this);
     }
     
     public VoterStatus getVoterStatus() {
@@ -171,7 +185,7 @@ public class User {
     
     public void setVoterStatus(VoterStatus newStatus) {
     		userInfo.setVoterStatus(newStatus);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     public String getFirstName() {
@@ -180,7 +194,7 @@ public class User {
     
     public void setFirstName(String newFirstName) {
     		userInfo.setFirstName(newFirstName);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     public String getLastName() {
@@ -189,7 +203,7 @@ public class User {
     
     public void setLastName(String newLastName) {
     		userInfo.setLastName(newLastName);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     public int getSSN() {
@@ -198,7 +212,7 @@ public class User {
     
     public void setSSN(int newSSN) {
     		userInfo.setSSN(newSSN);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     public String getAddress() {
@@ -207,7 +221,7 @@ public class User {
     
     public void setAddress(String newAddress) {
     		userInfo.setAddress(newAddress);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     public String getCity() {
@@ -216,7 +230,7 @@ public class User {
     
     public void setCity(String newCity) {
     		userInfo.setCity(newCity);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     public String getState() {
@@ -225,7 +239,7 @@ public class User {
     
     public void setState(String newState) {
     		userInfo.setState(newState);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     public String getZipCode() {
@@ -234,7 +248,7 @@ public class User {
     
     public void setZipCode(String newZipCode) {
     		userInfo.setZipCode(newZipCode);
-    		// access db
+    		UDAO.updateUser(this);
     }
     
     
