@@ -31,14 +31,19 @@ public class UserDAOImpl implements UserDAO {
             ps.setInt(3, 0);
             ps.executeUpdate();
             
+            System.out.println("Inserts user");
+            
             // get id back
             con = MyConnectionProvider.getCon();
             ps = con.prepareStatement("select * from users where username = ?");
             ps.setString(1, username);
             
             ResultSet rs = ps.executeQuery();
+            rs.first();
             int id = rs.getInt(1);
             rs.close();
+            
+            System.out.println("Gets ID");
             
             con = MyConnectionProvider.getCon();
             ps = con.prepareStatement("INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
@@ -57,6 +62,7 @@ public class UserDAOImpl implements UserDAO {
 
             status = 1;
             con.close();
+            System.out.println("Ends register");
         } catch (Exception e) {
             System.out.println(e);
             status = 0;
@@ -64,6 +70,67 @@ public class UserDAOImpl implements UserDAO {
         return status;
 	}
 	
+	public boolean validateUser(String username, String password) {
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from users where username = ?");
+			ps.setString(1, username);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			String dbPassword = rs.getString(3);
+			if (dbPassword != null) {
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+	    			if (passwordEncoder.matches(password, dbPassword)) {
+	    				return true;
+	    			}
+			}
+		} catch (Exception e) {
+            System.out.println(e);
+        }
+		return false;
+	}
+	
+	public User getUserWithUsername(String username) {
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from users where username = ?");
+			ps.setString(1, username);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			int id = rs.getInt(1);
+			String password = rs.getString(3);
+			int adminStatus = rs.getInt(4);
+			rs.close();
+			
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from user_info where id = ?");
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			rs.first();
+			String email = rs.getString(2);
+			int voterStatus = rs.getInt(3);
+			String firstName = rs.getString(4);
+			String lastName = rs.getString(5);
+			int ssn = rs.getInt(6);
+			String address = rs.getString(7);
+			String city = rs.getString(8);
+			String state = rs.getString(9);
+			String zipcode = rs.getString(10);
+			rs.close();
+			
+			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode);
+			
+			} catch (Exception e) {
+	             System.out.println(e);
+	         }
+			
+			return new User(0, "", "", 0, "", 0, "", "", 0, "", "", "", "");
+	}
+			
 	// Returns a user object based on the session id
 	// SELECT * FROM db.users WHERE db.users.username = "username";
 	public User getUser(String sessionID) {
@@ -75,6 +142,7 @@ public class UserDAOImpl implements UserDAO {
 		ps.setString(1, sessionID);
 		
 		ResultSet rs = ps.executeQuery();
+		rs.first();
 		String username = rs.getString(2);
 		rs.close();
 		
@@ -83,6 +151,7 @@ public class UserDAOImpl implements UserDAO {
 		ps.setString(1, username);
 		
 		rs = ps.executeQuery();
+		rs.first();
 		int id = rs.getInt(1);
 		String password = rs.getString(3);
 		int adminStatus = rs.getInt(4);
@@ -93,6 +162,7 @@ public class UserDAOImpl implements UserDAO {
 		ps.setInt(1, id);
 		
 		rs = ps.executeQuery();
+		rs.first();
 		String email = rs.getString(2);
 		int voterStatus = rs.getInt(3);
 		String firstName = rs.getString(4);

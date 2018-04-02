@@ -36,26 +36,13 @@ public class LoginController {
     public ModelAndView showHomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, HttpServletResponse response){
 
     		int userID;
-    		boolean isValidAdmin = service.validateAdmin(username, password);
-    		if (!isValidAdmin) { // is not an admin but could be a user
-    			boolean isValidUser = service.validateUser(username, password);
-    			if (!isValidUser) { // is not a user or an admin
-    	            model.addObject("errorMessage", "Invalid Credentials");
-    	            return model;
-    	        }
-    			else { // is user, but not an admin
-    				Customer thisUser = service.getUser(username, password);
-    				userID = thisUser.getUserid();
-    				//model.addObject("customer", "hi");
-    				
-    			}
-    		} else { // is an admin
-    			Admin thisAdmin = service.getAdmin(username, password);
-    			userID = thisAdmin.getAid();
-    			//model.addObject("admin", "hi");
+    		boolean isValidLogin = service.validateUser(username, password);
+    		if (!isValidLogin) {
+    			model.addObject("errorMessage", "Invalid Credentials");
+	        return model;
+    		} else {
+    			userID = service.getUser(username).getID();
     		}
-        
-        //model.addObject("successMessage", "You've been logged in!");
         
         model.setViewName("redirect:/");
 

@@ -29,8 +29,9 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Become a User</h3>
                 </div>
+                <p style="color:red;">${errorMessage}</p>
                 <div class="panel-body">
-                    <form action="loginRegister" method="post">
+                    <form method="post">
                     		<div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                     				<div class ="form-group">
@@ -150,7 +151,7 @@
             </div>
         </div>
     </div>
-    <p style="color:red;">${errorMessage}</p>
+    
 </div>
 <%@ include file="includes/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
