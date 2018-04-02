@@ -13,6 +13,8 @@ public class SessionGrabber {
 	
 	static Connection con;
     static PreparedStatement ps;
+    
+    private UserDAOImpl UDAO = new UserDAOImpl();
 	
 	public String generateSessionID() {
 		return randomString(25);
@@ -48,27 +50,6 @@ public class SessionGrabber {
 		}
 		return status;
 	}
-	
-	/*
-	 * DELETE FROM Customers
-WHERE CustomerName='Alfreds Futterkiste';
-
-	 *  public int insertCustomer(Customer c) {
-        int status = 0;
-        try {
-            con = MyConnectionProvider.getCon();
-            ps = con.prepareStatement("insert into customer (username, password,email)values(?,?,?)");
-            ps.setString(1, c.getUsername());
-            ps.setString(2, c.getPassword());
-            ps.setString(3, c.getEmail());
-            status = ps.executeUpdate();
-            con.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return status;
-    }
-	 */
 
 	public String randomString( int len ){
 	   StringBuilder sb = new StringBuilder( len );
@@ -78,19 +59,41 @@ WHERE CustomerName='Alfreds Futterkiste';
 	}
 
 	public String checkAdminStatus(String sessionID) {
-		return "admin";
+		AdminStatus aStatus = UDAO.getUser(sessionID).getAdminStatus();
+		if (aStatus == AdminStatus.USER) {
+			return "user";
+		}
+		else if (aStatus == AdminStatus.MANAGER) {
+			return "manager";
+		}
+		else { // admin
+			return "admin";
+		}
 	}
 	
 	public int getVoterStatus(String sessionID) {
-		return 0;
+		VoterStatus vStatus = UDAO.getUser(sessionID).getVoterStatus();
+		if (vStatus == VoterStatus.NOT_APPLIED) {
+			return 0;
+		}
+		else if (vStatus == VoterStatus.APPLIED) {
+			return 1;
+		}
+		else { // approved
+			return 2;
+		}
 	}
 
-	public String getRealName(String sessionID) {
-		return "";
+	public String getFirstName(String sessionID) {
+		return UDAO.getUser(sessionID).getFirstName();
+	}
+	
+	public String getLastName(String sessionID) {
+		return UDAO.getUser(sessionID).getLastName();
 	}
 	
 	public String getAddress(String sessionID) {
-		return "";
+		return UDAO.getUser(sessionID).getAddress();
 	}
 	
 	public int getSSN(String sessionID) {
@@ -108,6 +111,11 @@ WHERE CustomerName='Alfreds Futterkiste';
 	public String getZip(String sessionID) {
 		return "";
 	}
+	
+	public String getUsername(String sessionID) {
+		return "";
+	}
+	
 
 
 	

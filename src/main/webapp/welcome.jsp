@@ -48,8 +48,8 @@ String sessionCode = "";
 		if (userStatus.equals("admin")){
 			System.out.println("Hello admin!");
 		}
-		else if (userStatus.equals("moderator")) {
-			System.out.println("Hello moderator!");
+		else if (userStatus.equals("manager")) {
+			System.out.println("Hello manager!");
 		}
 		else { // user
 			int voterStatus = sg.getVoterStatus(sessionCode);
