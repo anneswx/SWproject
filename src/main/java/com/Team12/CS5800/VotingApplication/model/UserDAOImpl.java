@@ -143,16 +143,16 @@ public class UserDAOImpl implements UserDAO {
 		
 		ResultSet rs = ps.executeQuery();
 		rs.first();
-		String username = rs.getString(2);
+		int id = rs.getInt(2);
 		rs.close();
 		
 		con = MyConnectionProvider.getCon();
-		ps = con.prepareStatement("select * from users where username = ?");
-		ps.setString(1, username);
+		ps = con.prepareStatement("select * from users where id = ?");
+		ps.setInt(1, id);
 		
 		rs = ps.executeQuery();
 		rs.first();
-		int id = rs.getInt(1);
+		String username = rs.getString(2);
 		String password = rs.getString(3);
 		int adminStatus = rs.getInt(4);
 		rs.close();

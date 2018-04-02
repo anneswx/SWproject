@@ -34,54 +34,95 @@ String sessionCode = "";
 			
 			if (cookies[i].getName().equals("sessionID")) {
 				sessionCode = cookies[i].getValue();
-				System.out.println(cookies[i].getValue());
 				
 			}
 		}
 	}
 	
 	if (sessionCode.equals("")){ // Not logged in
-		System.out.println("Not logged in");
+		%>
+		<%@ include file="includes/navBar.jsp" %>
+    		<div class="row-fluid">
+        		<div class="col-md-offset-2 col-md-8" id="box">
+            		<h2>Welcome to our voting service! Please register or login!</h2>
+        		</div>
+    		</div>
+		
+		
+		<%
 	} else {
 		SessionGrabber sg = new SessionGrabber();
 		String userStatus = sg.checkAdminStatus(sessionCode);
+		String firstName = sg.getFirstName(sessionCode);
+		pageContext.setAttribute("firstName", firstName);
 		if (userStatus.equals("admin")){
-			System.out.println("Hello admin!");
+			%>
+			
+			<%@ include file="includes/adminNavBar.jsp" %>
+    			<div class="row-fluid">
+        			<div class="col-md-offset-2 col-md-8" id="box">
+            			<h2>Welcome, ${firstName}! </h2>
+        			</div>
+    			</div>
+			
+			<%
 		}
 		else if (userStatus.equals("manager")) {
-			System.out.println("Hello manager!");
+			%>
+			
+			<%@ include file="includes/managerNavBar.jsp" %>
+    			<div class="row-fluid">
+        			<div class="col-md-offset-2 col-md-8" id="box">
+            			<h2>Welcome, ${firstName}! </h2>
+        			</div>
+    			</div>
+			
+			<%
 		}
 		else { // user
 			int voterStatus = sg.getVoterStatus(sessionCode);
+
 			if (voterStatus == 0) { // Not applied
+				%>
 				
+				<%@ include file="includes/userNavBar.jsp" %>
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>Welcome, ${firstName}! Make sure you apply to become a voter before the next election cycle!</h2>
+        				</div>
+    				</div>
+				
+				<%
 			}
 			else if (voterStatus == 1) { // Applied but not yet approved
+				%>
+				
+				<%@ include file="includes/userNavBar.jsp" %>
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>Welcome, ${firstName}! An administrator is reviewing your application now! Please check in again later! </h2>
+        				</div>
+    				</div>
+				
+				<%
 				
 			}
 			else { // Registered and was approved
+				%>
+				
+				<%@ include file="includes/adminNavBar.jsp" %>
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>Welcome, ${firstName}! </h2>
+        				</div>
+    				</div>
+				
+				<%
 				
 			}
-			System.out.println("Hello user!");
 		}
 	}
-
-
-//cookie.SessionID.value;
-if (request.getAttribute("customer") == null && request.getAttribute("admin") == null){ %>
-	<%@ include file="includes/navBar.jsp" %>
-    <div class="row-fluid">
-        <div class="col-md-offset-2 col-md-8" id="box">
-            <h2>Welcome to our voting service! Please register or login!</h2>
-        </div>
-    </div>
-<% }
-    else if (request.getAttribute("customer") == null) { %>
-    		<h2>Customer welcome!</h2>
-    	<% } else { %>
-    		<h2>Admin Welcome!</h2>
-    	<% } %>
-    
+%>
 
 </div><!-- close main div -->
 <br><br><br><br><br><br>

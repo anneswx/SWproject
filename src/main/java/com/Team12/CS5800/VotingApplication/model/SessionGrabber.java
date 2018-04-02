@@ -97,23 +97,23 @@ public class SessionGrabber {
 	}
 	
 	public int getSSN(String sessionID) {
-		return 0;
+		return UDAO.getUser(sessionID).getSSN();
 	}
 	
 	public String getCity(String sessionID) {
-		return "";
+		return UDAO.getUser(sessionID).getCity();
 	}
 	
 	public String getState(String sessionID) {
-		return "";
+		return UDAO.getUser(sessionID).getState();
 	}
 
 	public String getZip(String sessionID) {
-		return "";
+		return UDAO.getUser(sessionID).getZipCode();
 	}
 	
 	public String getUsername(String sessionID) {
-		return "";
+		return UDAO.getUser(sessionID).getUsername();
 	}
 	
 
