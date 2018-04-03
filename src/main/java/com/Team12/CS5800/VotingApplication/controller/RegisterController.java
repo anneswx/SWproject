@@ -34,7 +34,17 @@ public class RegisterController {
     public ModelAndView showWelcomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, @RequestParam String password2, @RequestParam int ssn, @RequestParam String address, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String city, @RequestParam String state, @RequestParam String zipcode, @RequestParam String email, HttpServletResponse response){
 
     	if (!password.equals(password2)) {
-    		model.addObject("errorMessage", "Passwords must match");
+    		model.addObject("errorMessage", "Passwords must match.");
+    		return model;
+    	}
+    	
+    	if (!TestLoginFunctions.passwordRequirementCheck(password)) {
+    		model.addObject("errorMessage", "Your password must contain at least one uppercase character and at least one special character and cannot contain spaces.");
+    		return model;
+    	}
+    	
+    	if (!TestLoginFunctions.usernameRequirementCheck(username)) {
+    		model.addObject("errorMessage", "Your username must contain three characters and cannot consist of any special characters or spaces.");
     		return model;
     	}
     	
@@ -42,7 +52,7 @@ public class RegisterController {
 
     	int userID;
     	if (!successful) {
-    		model.addObject("errorMessage", "That username is not available");
+    		model.addObject("errorMessage", "That username is not available.");
     		return model;
     	}
     	else {
@@ -62,9 +72,9 @@ public class RegisterController {
     	String emailAuthKey = eag.generateEmailAuthID() + email;
     	eag.storeEmailAuthKey(emailAuthKey, userID);
     	
-    	TestLoginFunctions tlf = new TestLoginFunctions();
+    
     	
-    	tlf.sendEmailVerification(email, username, emailAuthKey);
+    	TestLoginFunctions.sendEmailVerification(email, username, emailAuthKey);
 
     return model;
     
