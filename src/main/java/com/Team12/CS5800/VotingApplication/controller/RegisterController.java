@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.Team12.CS5800.VotingApplication.model.EmailAuthGrabber;
 import com.Team12.CS5800.VotingApplication.model.SessionGrabber;
+import com.Team12.CS5800.VotingApplication.model.TestLoginFunctions;
 import com.Team12.CS5800.VotingApplication.service.RegisterService;
 
 @Controller
@@ -60,6 +61,10 @@ public class RegisterController {
     	EmailAuthGrabber eag = new EmailAuthGrabber();
     	String emailAuthKey = eag.generateEmailAuthID() + email;
     	eag.storeEmailAuthKey(emailAuthKey, userID);
+    	
+    	TestLoginFunctions tlf = new TestLoginFunctions();
+    	
+    	tlf.sendEmailVerification(email, username, emailAuthKey);
 
     return model;
     

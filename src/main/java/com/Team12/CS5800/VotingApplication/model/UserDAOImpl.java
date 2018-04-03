@@ -247,19 +247,22 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(1, emailAuthKey);
 			
 			ResultSet rs = ps.executeQuery();
-			rs.first();
-			int userID = rs.getInt(2);
-			rs.close();
+			if(rs.first()) {
+				rs.first();
+			
+				int userID = rs.getInt(2);
+				rs.close();
 		
 			
-			con = MyConnectionProvider.getCon();
-			ps = con.prepareStatement("UPDATE user_info SET emailAuth=1 WHERE id=?");
+				con = MyConnectionProvider.getCon();
+				ps = con.prepareStatement("UPDATE user_info SET emailAuth=1 WHERE id=?");
 
-			ps.setInt(1, userID);
-			ps.executeUpdate();
+				ps.setInt(1, userID);
+				ps.executeUpdate();
          
-			status = 1;
-			con.close();
+				status = 1;
+				con.close();
+			}
 
 		} catch (Exception e) {
 			System.out.println(e);

@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 public class TestLoginFunctions {
 
-    public static void sendEmailVerification(String clientEmail, String user){
+    public static void sendEmailVerification(String clientEmail, String user, String authKeyLink){
         String username = "fswe.login.check.team12@gmail.com";
         String password = "fsweIsFun";
 
@@ -40,8 +40,12 @@ public class TestLoginFunctions {
 
             message.setSubject("Register Your Account");
 
-            message.setText("Welcome to our election system. To register your account please click the link below: \n" +
-                    "Username: "+user);
+            String url = "http://localhost:8080/emailAuth?authKey=" + authKeyLink;
+            
+            String html = "Welcome, " + user + "! \nPlease <a href='" + url + "'> validate your email here</a>.";
+            
+            message.setText(html, "UTF-8", "html");
+
 
             Transport transport = session.getTransport("smtp");
             transport.connect(host, username, password);

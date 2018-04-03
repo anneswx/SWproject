@@ -84,9 +84,12 @@
 	
 	EmailAuthGrabber eag = new EmailAuthGrabber();
 	
+	boolean emailFound = false;
+	
+	if(emailAuthKey != ""){
+	
 	int emailSuccess = eag.updateEmailStatus(emailAuthKey);
 	
-	boolean emailFound;
 	if(emailSuccess == 0){ // was not successful
 		emailFound = false;
 	}
@@ -94,7 +97,7 @@
 		emailFound = true;
 		eag.removeEmailKey(emailAuthKey);
 	}
-	
+	}
 
 	
 	if (!emailFound) { // Not logged in
