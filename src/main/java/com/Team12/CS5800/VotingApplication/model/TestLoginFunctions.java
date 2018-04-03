@@ -116,4 +116,14 @@ public class TestLoginFunctions {
 
 
     }
+    
+    public static boolean socialSecurityNumberCheck(String ssn) {
+    		Pattern p = Pattern.compile("^\\d{9}$");
+    		Matcher m = p.matcher(ssn);
+    		
+    		boolean b = m.matches();
+    		
+    		return b;
+    }
+
 }

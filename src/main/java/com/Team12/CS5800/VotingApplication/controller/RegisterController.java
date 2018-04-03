@@ -31,7 +31,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public ModelAndView showWelcomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, @RequestParam String password2, @RequestParam int ssn, @RequestParam String address, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String city, @RequestParam String state, @RequestParam String zipcode, @RequestParam String email, HttpServletResponse response){
+    public ModelAndView showWelcomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, @RequestParam String password2, @RequestParam String ssn, @RequestParam String address, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String city, @RequestParam String state, @RequestParam String zipcode, @RequestParam String email, HttpServletResponse response){
 
     	if (!password.equals(password2)) {
     		model.addObject("errorMessage", "Passwords must match.");
@@ -48,7 +48,14 @@ public class RegisterController {
     		return model;
     	}
     	
-    	boolean successful = service.registerUser(username, password, email, first_name, last_name, ssn, address, city, state, zipcode);
+    	if (!TestLoginFunctions.socialSecurityNumberCheck(ssn)) {
+    		model.addObject("errorMessage", "Please input your social security number in the following format XXXXXXXXX. A social security number should be 9 digits in a row.");
+    		return model;
+    	}
+    	
+    	int convertedSSN = Integer.parseInt(ssn);
+    	
+    	boolean successful = service.registerUser(username, password, email, first_name, last_name, convertedSSN, address, city, state, zipcode);
 
     	int userID;
     	if (!successful) {

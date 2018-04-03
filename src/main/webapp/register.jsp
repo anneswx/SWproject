@@ -118,7 +118,7 @@
 		                </div>
                     		<!--  city, state, zip -->
                     		<div class = "form-group">
-                    			<input type="number" name="ssn" id="ssn" class="form-control input-sm" placeholder="Social Security Number" required/>
+                    			<input type="text" name="ssn" id="ssn" class="form-control input-sm" placeholder="Social Security Number" required/>
                     		</div>
                         <div class="form-group">
                             <input type="email" name="email" id="email" class="form-control input-sm"
