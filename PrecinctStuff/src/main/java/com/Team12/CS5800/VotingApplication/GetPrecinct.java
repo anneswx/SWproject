@@ -1,4 +1,4 @@
-package com.Team12.CS5800.VotingApplication;
+package com.Team12.CS5800.PrecinctStuff;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
@@ -36,7 +36,8 @@ public class GetPrecinct {
     	 * IMPORTANT: the file path must be specified like this. For some reason
     	 * general file path directories return "file not found exceptions"
     	 */
-        File shapeFile = new File ("C:\\Users\\Kyle\\Documents\\workspace-sts-3.9.3.RELEASE\\PrecinctStuff\\data\\ia_final.shp"); //if code doesn't work check file addresses
+    	
+        File shapeFile = new File ("/Users/heatherkemp/Documents/SoftwareEngineering/SWproject/PrecinctStuff/ia_final.shp"); //if code doesn't work check file addresses
         System.out.println(shapeFile.canRead());
         
         FileDataStore store = FileDataStoreFinder.getDataStore(shapeFile);

@@ -7,6 +7,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
+
 <html>
 
 <head>
@@ -25,6 +26,8 @@
 <div class="container-fluid"> <!-- div to hold all other divs -->
 
 <% 
+
+
 String sessionCode = ""; 
 	Cookie[] cookies = null;
 	
