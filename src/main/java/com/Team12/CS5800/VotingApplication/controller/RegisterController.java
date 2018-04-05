@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Team12.CS5800.VotingApplication.model.EmailAuthGrabber;
+import com.Team12.CS5800.VotingApplication.model.GetPrecinct;
 import com.Team12.CS5800.VotingApplication.model.SessionGrabber;
 import com.Team12.CS5800.VotingApplication.model.TestLoginFunctions;
 import com.Team12.CS5800.VotingApplication.service.RegisterService;
@@ -53,9 +54,18 @@ public class RegisterController {
     		return model;
     	}
     	
+    	String precinct = "";
+    	
+    	try {
+    		precinct = GetPrecinct.precinctLookup(address, city, state);
+    	} catch (Exception e) {
+    		model.addObject("errorMessage", "We can't find your given address. Please enter a valid address, city, and state combination.");
+    		return model;
+    	}
+    	
     	int convertedSSN = Integer.parseInt(ssn);
     	
-    	boolean successful = service.registerUser(username, password, email, first_name, last_name, convertedSSN, address, city, state, zipcode);
+    	boolean successful = service.registerUser(username, password, email, first_name, last_name, convertedSSN, address, city, state, zipcode, precinct);
 
     	int userID;
     	if (!successful) {

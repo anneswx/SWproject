@@ -11,11 +11,11 @@ public class RegisterService {
 	
 	private UserDAOImpl UDAO = new UserDAOImpl();
 	
-	public boolean registerUser(String username, String password, String email, String first_name, String last_name, int socialSecurity, String address, String city, String state, String zipcode) {
+	public boolean registerUser(String username, String password, String email, String first_name, String last_name, int socialSecurity, String address, String city, String state, String zipcode, String precinct) {
 		int voterStatus = 0;
 		int adminStatus = 0;
 		
-		int status = UDAO.insertUser(username, password, adminStatus, email, voterStatus, first_name, last_name, socialSecurity, address, city, state, zipcode);
+		int status = UDAO.insertUser(username, password, adminStatus, email, voterStatus, first_name, last_name, socialSecurity, address, city, state, zipcode, precinct);
 
 		if (status == 0) {
 			return false;

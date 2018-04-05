@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.Team12.CS5800.VotingApplication.model.Admin;
-import com.Team12.CS5800.VotingApplication.model.Customer;
-import com.Team12.CS5800.VotingApplication.model.GetPrecinct;
 import com.Team12.CS5800.VotingApplication.model.SessionGrabber;
 import com.Team12.CS5800.VotingApplication.service.LoginService;
 
@@ -54,12 +51,6 @@ public class LoginController {
         sg.storeSession(cookieToAdd, userID);
         
         response.addCookie(new Cookie("sessionID", cookieToAdd));
-        
-        try {
-        	System.out.println(GetPrecinct.precinctLookup("3195 Kerry Court", "Dubuque", "Iowa"));
-        } catch (Exception e) {
-        	System.out.println(e);
-        }
         
         return model;
     }

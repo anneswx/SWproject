@@ -40,7 +40,7 @@ public class GetPrecinct {
     	 */
     	
 
-        File shapeFile = new ClassPathResource("/ia_final.shp").getFile(); //if code doesn't work check file addresses
+        File shapeFile = new ClassPathResource("data/ia_final.shp").getFile(); //if code doesn't work check file addresses
         System.out.println(shapeFile.canRead());
         
         FileDataStore store = FileDataStoreFinder.getDataStore(shapeFile);
@@ -63,7 +63,8 @@ public class GetPrecinct {
             while(iterator.hasNext()){
                 SimpleFeature feature =iterator.next();
 
-                precinct = (String)feature.getAttribute( "PRECINCT" );
+                precinct = (String)feature.getAttribute( "NAME10" );
+                
                 
             }
 

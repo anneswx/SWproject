@@ -19,8 +19,9 @@ public class User {
 		 private String city;
 		 private String state;
 		 private String zipcode;
+		 private String precinct;
 		 
-		 public UserInfo( String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode) {
+		 public UserInfo( String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode, String precinct) {
 			 this.email = email;
 			 if(voterstatus == 0) {
 				 this.voterstatus = VoterStatus.NOT_APPLIED;
@@ -38,6 +39,7 @@ public class User {
 			 this.city = city;
 			 this.state = state;
 			 this.zipcode = zipcode;
+			 this.precinct = precinct;
 		 }
 		 
 		 public String getEmail() {
@@ -111,6 +113,14 @@ public class User {
 		 public void setZipCode(String newZip) {
 			 this.zipcode = newZip;
 		 }
+		 
+		 public String getPrecinct() {
+			 return this.precinct;
+		 }
+		 
+		 public void setPrecinct(String precinct) {
+			 this.precinct = precinct;
+		 }
 
 	}
 	
@@ -123,7 +133,7 @@ public class User {
     
     private UserDAOImpl UDAO = new UserDAOImpl();
     
-    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode) {
+    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode, String precinct) {
     		this.id = id;
     		this.username = username;
     		this.password = password;
@@ -136,7 +146,7 @@ public class User {
     		else {
     			this.adminStatus = AdminStatus.ADMIN;
     		}
-    		this.userInfo = new UserInfo(email, voterstatus, firstName, lastName, ssn, address, city, state, zipcode);
+    		this.userInfo = new UserInfo(email, voterstatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
     }
     
     public int getID() {
@@ -248,6 +258,15 @@ public class User {
     
     public void setZipCode(String newZipCode) {
     		userInfo.setZipCode(newZipCode);
+    		UDAO.updateUser(this);
+    }
+    
+    public String getPrecinct() {
+    		return userInfo.getPrecinct();
+    }
+    
+    public void setPrecinct(String precinct) {
+    		userInfo.setPrecinct(precinct);
     		UDAO.updateUser(this);
     }
     
