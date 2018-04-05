@@ -7,6 +7,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.EmailAuthGrabber" %>
 
 <html>
 
@@ -86,16 +87,35 @@ String sessionCode = "";
 			int voterStatus = sg.getVoterStatus(sessionCode);
 
 			if (voterStatus == 0) { // Not applied
+				
+				EmailAuthGrabber eag = new EmailAuthGrabber();
+				System.out.println(sg.getUsername(sessionCode));
+				if (eag.checkValidatedEmail(sessionCode) == 0){
+					
 				%>
 				
 				<%@ include file="includes/userNavBar.jsp" %>
     				<div class="row-fluid">
         				<div class="col-md-offset-2 col-md-8" id="box">
-            				<h2>Welcome, ${firstName}! Make sure you apply to become a voter before the next election cycle!</h2>
+            				<h2>Welcome, ${firstName}! Make sure to verify your email! You can't become a voter without doing so!</h2>
         				</div>
     				</div>
 				
 				<%
+				}
+				else {
+					%>
+					
+					<%@ include file="includes/userNavBar.jsp" %>
+    					<div class="row-fluid">
+        					<div class="col-md-offset-2 col-md-8" id="box">
+            					<h2>Welcome, ${firstName}! Make sure you apply to become a voter before the next election cycle! To apply, <a href="/voterApply">click here!</a></h2>
+        					</div>
+    					</div>
+					
+					
+					<%
+				}
 			}
 			else if (voterStatus == 1) { // Applied but not yet approved
 				%>

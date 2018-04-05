@@ -30,9 +30,9 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(2, hashedPassword);
             ps.setInt(3, 0);
             ps.executeUpdate();
+            ps.close();
             
             // get id back
-            con = MyConnectionProvider.getCon();
             ps = con.prepareStatement("select * from users where username = ?");
             ps.setString(1, username);
             
@@ -40,8 +40,8 @@ public class UserDAOImpl implements UserDAO {
             rs.first();
             int id = rs.getInt(1);
             rs.close();
+            ps.close();
             
-            con = MyConnectionProvider.getCon();
             ps = con.prepareStatement("INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode, precinct) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         // 
             ps.setInt(1, id);
@@ -58,6 +58,7 @@ public class UserDAOImpl implements UserDAO {
             ps.executeUpdate();
 
             status = 1;
+            ps.close();
             con.close();
         } catch (Exception e) {
             System.out.println(e);
@@ -75,6 +76,9 @@ public class UserDAOImpl implements UserDAO {
 			ResultSet rs = ps.executeQuery();
 			rs.first();
 			String dbPassword = rs.getString(3);
+			ps.close();
+			con.close();
+			rs.close();
 			if (dbPassword != null) {
 				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -100,8 +104,8 @@ public class UserDAOImpl implements UserDAO {
 			String password = rs.getString(3);
 			int adminStatus = rs.getInt(4);
 			rs.close();
+			ps.close();
 			
-			con = MyConnectionProvider.getCon();
 			ps = con.prepareStatement("select * from user_info where id = ?");
 			ps.setInt(1, id);
 			
@@ -116,8 +120,10 @@ public class UserDAOImpl implements UserDAO {
 			String city = rs.getString(8);
 			String state = rs.getString(9);
 			String zipcode = rs.getString(10);
-			String precinct = rs.getString(11);
+			String precinct = rs.getString(12);
 			rs.close();
+			ps.close();
+			con.close();
 			
 			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
 			
@@ -142,8 +148,8 @@ public class UserDAOImpl implements UserDAO {
 		rs.first();
 		int id = rs.getInt(2);
 		rs.close();
+		ps.close();
 		
-		con = MyConnectionProvider.getCon();
 		ps = con.prepareStatement("select * from users where id = ?");
 		ps.setInt(1, id);
 		
@@ -153,8 +159,8 @@ public class UserDAOImpl implements UserDAO {
 		String password = rs.getString(3);
 		int adminStatus = rs.getInt(4);
 		rs.close();
+		ps.close();
 		
-		con = MyConnectionProvider.getCon();
 		ps = con.prepareStatement("select * from user_info where id = ?");
 		ps.setInt(1, id);
 		
@@ -169,8 +175,10 @@ public class UserDAOImpl implements UserDAO {
 		String city = rs.getString(8);
 		String state = rs.getString(9);
 		String zipcode = rs.getString(10);
-		String precinct = rs.getString(11);
+		String precinct = rs.getString(12);
 		rs.close();
+		ps.close();
+		con.close();
 		
 		return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
 		
@@ -204,8 +212,9 @@ public class UserDAOImpl implements UserDAO {
             }
             ps.setInt(4, user.getID());
             ps.executeUpdate();
+            ps.close();
             
-            con = MyConnectionProvider.getCon();
+            
             ps = con.prepareStatement("UPDATE user_info SET email = ?, voter_status = ?, first_name = ?, last_name = ?, ssn = ?, address = ?, city = ?, state = ?, zipcode = ?, precinct = ? WHERE id = ?");
         // INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             
@@ -234,6 +243,7 @@ public class UserDAOImpl implements UserDAO {
             ps.executeUpdate();
 
             status = 1;
+            ps.close();
             con.close();
         } catch (Exception e) {
             System.out.println(e);
@@ -257,15 +267,16 @@ public class UserDAOImpl implements UserDAO {
 			
 				int userID = rs.getInt(2);
 				rs.close();
+				ps.close();
 		
 			
-				con = MyConnectionProvider.getCon();
 				ps = con.prepareStatement("UPDATE user_info SET emailAuth=1 WHERE id=?");
 
 				ps.setInt(1, userID);
 				ps.executeUpdate();
          
 				status = 1;
+				ps.close();
 				con.close();
 			}
 

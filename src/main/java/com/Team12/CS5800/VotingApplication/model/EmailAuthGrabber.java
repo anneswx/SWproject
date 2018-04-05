@@ -3,6 +3,7 @@ package com.Team12.CS5800.VotingApplication.model;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.Team12.CS5800.VotingApplication.model.DataConnection.MyConnectionProvider;
 
@@ -28,6 +29,7 @@ public class EmailAuthGrabber {
 			ps.setString(1, emailAuthID);
 			ps.setInt(2, userID);
 			status = ps.executeUpdate();
+			ps.close();
 			con.close();
 			
 		} catch (Exception e) {
@@ -43,6 +45,7 @@ public class EmailAuthGrabber {
 			ps = con.prepareStatement("delete from emailtokens where emailAuthKey = ?");
 			ps.setString(1, sessionID);
 			status = ps.executeUpdate();
+			ps.close();
 			con.close();
 			
 		} catch (Exception e) {
@@ -61,6 +64,37 @@ public class EmailAuthGrabber {
 
 	public int updateEmailStatus(String emailAuthKey) {
 		return UDAO.verifyEmail(emailAuthKey);
+	}
+	
+	public int checkValidatedEmail(String sessionID) {
+		try {
+			
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from sessions where sessionid = ?");
+			ps.setString(1, sessionID);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			int id = rs.getInt(2);
+			rs.close();
+			ps.close();
+			
+			ps = con.prepareStatement("select * from user_info where id = ?");
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			rs.first();
+			int emailStatus = rs.getInt(11);
+			rs.close();
+			ps.close();
+			con.close();
+			
+			return emailStatus;
+					
+			} catch (Exception e) {
+	             System.out.println(e);
+	             return 0;
+	         }
 	}
 	
 }

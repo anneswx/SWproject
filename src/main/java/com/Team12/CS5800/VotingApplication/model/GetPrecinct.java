@@ -65,7 +65,6 @@ public class GetPrecinct {
 
                 precinct = (String)feature.getAttribute( "NAME10" );
                 
-                
             }
 
         }finally {

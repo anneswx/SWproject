@@ -28,6 +28,7 @@ public class SessionGrabber {
 			ps.setString(1, sessionID);
 			ps.setInt(2, userID);
 			status = ps.executeUpdate();
+			ps.close();
 			con.close();
 			
 		} catch (Exception e) {
@@ -43,6 +44,7 @@ public class SessionGrabber {
 			ps = con.prepareStatement("delete from sessions where sessionid=?");
 			ps.setString(1, sessionID);
 			status = ps.executeUpdate();
+			ps.close();
 			con.close();
 			
 		} catch (Exception e) {
