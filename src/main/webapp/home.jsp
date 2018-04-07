@@ -1,26 +1,43 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Anne Sun
-  Date: 2/24/2018
-  Time: 2:38 PM
-  To change this template use File | Settings | File Templates.
+<%-- 
+    Document   : userNavBar
+    Created on : Mar 8, 2018, 9:54:55 AM
+    Author     : kate
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Welcome</title>
-</head>
-<body>
-
-<h1>Election System</h1>
-<form action="loginRegister" method="post">
-    <p>Hello, ${username}</p>
-    <p style="color: green" ;>${successMessage}</p>
-    <p>voter information status: ${noteMessage}</p>
-    <% //if ((Integer) request.getAttribute("voterstatus") == 0) { %>
-    <p><input type="submit" name="submit" value="become a voter"/></p>
-    <% //} %>
-    <p><input type="submit" name="submit" value="logout"/></p>
-</form>
-</body>
-</html>
+<nav class="navbar navbar-inverse top-navbar" id="top-nav">
+    <div class="container-fluid">
+        <div class="navbar-header">      
+            <a class="navbar-brand" href="#">Voter Application</a>
+        </div>  
+        <ul class="social-icon pull-right list-inline">
+            <li class="dropdown">
+                <a class="alerts-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-bell"></span>
+                    <span class="number">6</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Notification 1</a></li>
+                    <li><a href="#">Notification 2</a></li>
+                    <li><a href="#">Notification 3</a></li>
+                </ul>
+            </li> 
+            <li class="dropdown">
+                <a class="user-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>             
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="./index.jsp">Logout</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="tasks-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> 
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </li>
+        </ul>       
+    </div>  
+</nav>

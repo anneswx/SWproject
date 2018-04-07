@@ -1,33 +1,32 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kate
-  Date: 2/26/2018
-  Time: 6:57 PM
-  To change this template use File | Settings | File Templates.
+<%-- 
+    Document   : navBar
+    Created on : Mar 8, 2018, 9:52:10 AM
+    Author     : kate
 --%>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse top-navbar" id="top-nav">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <div class="navbar-header">      
             <a class="navbar-brand" href="/">Voter Application</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav><!-- close navigation bar -->
+        </div>  
+        <ul class="social-icon pull-right list-inline">
+            <li class="dropdown">
+                <a class="user-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>             
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="tasks-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> 
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </li>
+        </ul>       
+    </div>  
+</nav>
