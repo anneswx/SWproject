@@ -18,10 +18,45 @@
     <title>Registration</title>
 </head>
 <body>
-<h1>Election System</h1>
 
-<div class="container-fluid">
+<%
+
+Cookie[] cookies = null;
+boolean wasLoggedIn = false;
+
+cookies = request.getCookies();
+if ( cookies != null) {
+	for (int i = 0; i < cookies.length; i++) {
+		
+		if (cookies[i].getName().equals("sessionID") && !cookies[i].getValue().equals("")) {
+			wasLoggedIn = true;
+		}
+	}
+}
+
+if (wasLoggedIn) { %>
+
+<%@ include file="includes/userNavBar.jsp" %>
+			<div class="container-fluid"> 
+				<div class="row-fluid">
+    				<div class="col-md-offset-4 col-md-4" id="box">
+        				<h2>You are already registered! Did you land here by mistake!</h2>
+        			</div>
+        			</div>
+        		</div>
+	
+<% }
+
+
+else {
+
+%>
+
+
+
     <%@ include file="includes/navBar.jsp" %>
+    
+    <div class="container-fluid">
 
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -153,6 +188,9 @@
     </div>
     
 </div>
+<% 
+}
+%>
 <%@ include file="includes/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"

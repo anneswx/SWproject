@@ -1,43 +1,33 @@
 <%-- 
-    Document   : userNavBar
-    Created on : Mar 8, 2018, 9:54:55 AM
+    Document   : userHome
+    Created on : Mar 8, 2018, 10:11:15 AM
     Author     : kate
 --%>
-<nav class="navbar navbar-inverse top-navbar" id="top-nav">
-    <div class="container-fluid">
-        <div class="navbar-header">      
-            <a class="navbar-brand" href="#">Voter Application</a>
-        </div>  
-        <ul class="social-icon pull-right list-inline">
-            <li class="dropdown">
-                <a class="alerts-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-bell"></span>
-                    <span class="number">6</span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Notification 1</a></li>
-                    <li><a href="#">Notification 2</a></li>
-                    <li><a href="#">Notification 3</a></li>
-                </ul>
-            </li> 
-            <li class="dropdown">
-                <a class="user-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>             
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="./index.jsp">Logout</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="tasks-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> 
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Help</a></li>
-                </ul>
-            </li>
-        </ul>       
-    </div>  
-</nav>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="XA-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+
+    <title>welcome</title>
+</head>
+<body>
+<%@ include file="includes/userNavBar.jsp" %>
+<div class="container-fluid"> <!-- div to hold all other divs -->
+    <h1>hello user</h1>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+</div>
+</body>
+</html>

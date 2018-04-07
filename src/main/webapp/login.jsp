@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -22,13 +23,36 @@
     <title>Login</title>
 </head>
 <body>
+<%
+	Cookie[] cookies = null;
+	boolean wasLoggedIn = false;
+	
+	cookies = request.getCookies();
+	if ( cookies != null) {
+		for (int i = 0; i < cookies.length; i++) {
+			
+			if (cookies[i].getName().equals("sessionID") && !cookies[i].getValue().equals("")) {
+				wasLoggedIn = true;
+			}
+		}
+	}
+	
+	if (wasLoggedIn) { %>
+	
+	<%@ include file="includes/userNavBar.jsp" %>
+    			<div class="container-fluid"> 
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>You are already logged in! Did you land here by mistake!</h2>
+            			</div>
+            		</div>
+		
+	<% }
+	
 
-<h1>Election System</h1>
-
-
-<div class="container-fluid"> <!-- div to hold all other divs -->
-	<% if (request.getAttribute("successMessage") == null){ %>
+	else if (request.getAttribute("successMessage") == null){ %>
     <%@ include file="includes/navBar.jsp" %>
+    <div class="container-fluid"> 
     <div class="row-fluid">
 
      <div class="login">
@@ -79,6 +103,7 @@
         <% }
     		else { %>
     			<%@ include file="includes/userNavBar.jsp" %>
+    			<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-4 col-md-4" id="box">
             				<h2>You've been successfully logged in!</h2>
