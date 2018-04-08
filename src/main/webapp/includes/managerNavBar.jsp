@@ -6,6 +6,7 @@
 <nav class="navbar navbar-inverse top-navbar" id="top-nav">
     <div class="container-fluid">
         <div class="navbar-header">      
+
             <a class="navbar-brand" href="/">Voter Application</a>
             <a href="javascript:;" class="sidebar-toggle">
                 <i class="fa fa-bars"></i>

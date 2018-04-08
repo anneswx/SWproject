@@ -78,13 +78,15 @@ String sessionCode = "";
 		else if (userStatus.equals("manager")) {
 			%>
 			
-			<%@ include file="includes/managerNavBar.jsp" %>
+			 <%@ include file="includes/managerSideNav.jsp" %> 
+			
 			<div class="container-fluid"> 
     			<div class="row-fluid">
         			<div class="col-md-offset-2 col-md-8" id="box">
             			<h2>Welcome, ${firstName}! </h2>
         			</div>
     			</div>
+    			
 			
 			<%
 		}

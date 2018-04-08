@@ -58,37 +58,42 @@ else {
     
     <div class="container-fluid">
 
-    <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Become a User</h3>
-                </div>
+     <div class="login">
+        <div class="container">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="inner-form">
+                    <h2>Become a User</h2> 
+                    <hr>
                 <p style="color:red;">${errorMessage}</p>
                 <div class="panel-body">
                     <form method="post">
                     		<div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                     				<div class ="form-group">
+                    					<label>First Name</label>
                     					<input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name" autofocus="autofocus" required/>
                     				</div>
                     			</div>
                     			<div class="col-xs-6 col-sm-6 col-md-6">
                     				<div class ="form-group">
+                    					<label>Last Name</label>
                     					<input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name" required/>
                     				</div>
                     			</div>
                     		</div>
                     		
                     		<div class = "form-group">
+                    			<label>Address</label>
                     			<input type="text" name="address" id="address" class="form-control input-sm" placeholder="Address" required/>
                     		</div>
                     		<div class = "form-group">
+                    			<label>City</label>
                     			<input type="text" name="city" id="city" class="form-control input-sm" placeholder="City" required/>
                     		</div>
                     		<div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
 		                    		<div class = "form-group">
+		                    			<label>State</label>
 		                    			<select class="form-control" id="state" name="state" required>
 										<option value="AK">Alaska</option>
 										<option value="AL">Alabama</option>
@@ -147,20 +152,24 @@ else {
 		                    	</div>
 		                    	<div class="col-xs-6 col-sm-6 col-md-6">
 		                    		<div class = "form-group">
+		                    			<label>Zip Code</label>
                     					<input type="text" name="zipcode" id="zipcode" class="form-control input-sm" placeholder="Zip Code" required/>
                     				</div>
 		                    	</div>
 		                </div>
                     		<!--  city, state, zip -->
                     		<div class = "form-group">
+                    			<label>Social Security Number</label>
                     			<input type="text" name="ssn" id="ssn" class="form-control input-sm" placeholder="Social Security Number" required/>
                     		</div>
                         <div class="form-group">
+                        		<label>Email</label>
                             <input type="email" name="email" id="email" class="form-control input-sm"
                                    placeholder="Email Address"  required>
                         </div>
 
                         <div class="form-group">
+                        		<label>Username</label>
                             <input type="text" name="username" id="username" class="form-control input-sm"
                                    placeholder="Username" required>
                         </div>
@@ -168,12 +177,14 @@ else {
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
+                                		<label>Password</label>
                                     <input type="password" name="password" id="password" class="form-control input-sm"
                                            placeholder="Password" required>
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
+                                		<label>Re-type Password</label>
                                     <input type="password" name="password2" id="password2" class="form-control input-sm"
                                            placeholder="Re-type Password" required>
                                 </div>
