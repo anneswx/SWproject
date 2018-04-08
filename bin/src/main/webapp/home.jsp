@@ -1,26 +1,33 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Anne Sun
-  Date: 2/24/2018
-  Time: 2:38 PM
-  To change this template use File | Settings | File Templates.
+<%-- 
+    Document   : userHome
+    Created on : Mar 8, 2018, 10:11:15 AM
+    Author     : kate
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Welcome</title>
+    <meta charset="utf-8">
+    <meta http-equiv="XA-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+
+    <title>welcome</title>
 </head>
 <body>
-
-<h1>Election System</h1>
-<form action="loginRegister" method="post">
-    <p>Hello, ${username}</p>
-    <p style="color: green" ;>${successMessage}</p>
-    <p>voter information status: ${noteMessage}</p>
-    <% //if ((Integer) request.getAttribute("voterstatus") == 0) { %>
-    <p><input type="submit" name="submit" value="become a voter"/></p>
-    <% //} %>
-    <p><input type="submit" name="submit" value="logout"/></p>
-</form>
+<%@ include file="includes/userNavBar.jsp" %>
+<div class="container-fluid"> <!-- div to hold all other divs -->
+    <h1>hello user</h1>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+</div>
 </body>
 </html>

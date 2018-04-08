@@ -1,10 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kate
-  Date: 2/26/2018
-  Time: 6:59 PM
-  To change this template use File | Settings | File Templates.
+<%-- 
+    Document   : footer.jsp
+    Created on : Mar 8, 2018, 10:18:44 AM
+    Author     : kate
 --%>
-<div class="well-sm text-center footer fixed-bottom"><!-- footer -->
-    &copy; Copyright 2018 FundamentalsOfSoftwareEngineering | All rights reserved
-</div><!-- close footer -->
+<nav class="navbar navbar-inverse navbar-bottom" role="navigation">
+    <div class="container-fluid center">    
+        <p class="navbar-brand footer">&copy; Copyright 2018 FundamentalsOfSoftwareEngineering.com | All rights reserved</p>
+    </div>
+</nav>

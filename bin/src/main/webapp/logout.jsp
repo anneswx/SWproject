@@ -20,11 +20,10 @@
     <title>Welcome!</title>
 </head>
 
-<h1>Election System</h1>
-
-<div class="container-fluid"> <!-- div to hold all other divs -->
+<!-- div to hold all other divs -->
 
 <%@ include file="includes/navBar.jsp" %>
+<div class="container-fluid"> 
 
 <% 
 
