@@ -18,13 +18,15 @@
 
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+    
 
     <title>Welcome!</title>
 </head>
 
-<h1>Election System</h1>
-
-<div class="container-fluid"> <!-- div to hold all other divs -->
+<!-- div to hold all other divs -->
 
 <% 
 
@@ -46,6 +48,7 @@ String sessionCode = "";
 	if (sessionCode.equals("")){ // Not logged in
 		%>
 		<%@ include file="includes/navBar.jsp" %>
+		<div class="container-fluid"> 
     		<div class="row-fluid">
         		<div class="col-md-offset-2 col-md-8" id="box">
             		<h2>Welcome to our voting service! Please register or login!</h2>
@@ -63,6 +66,7 @@ String sessionCode = "";
 			%>
 			
 			<%@ include file="includes/adminNavBar.jsp" %>
+			<div class="container-fluid"> 
     			<div class="row-fluid">
         			<div class="col-md-offset-2 col-md-8" id="box">
             			<h2>Welcome, ${firstName}! </h2>
@@ -74,12 +78,15 @@ String sessionCode = "";
 		else if (userStatus.equals("manager")) {
 			%>
 			
-			<%@ include file="includes/managerNavBar.jsp" %>
+			 <%@ include file="includes/managerSideNav.jsp" %> 
+			
+			<!--  <div class="container-fluid"> 
     			<div class="row-fluid">
         			<div class="col-md-offset-2 col-md-8" id="box">
             			<h2>Welcome, ${firstName}! </h2>
         			</div>
     			</div>
+    			-->
 			
 			<%
 		}
@@ -95,6 +102,7 @@ String sessionCode = "";
 				%>
 				
 				<%@ include file="includes/userNavBar.jsp" %>
+				<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-2 col-md-8" id="box">
             				<h2>Welcome, ${firstName}! Make sure to verify your email! You can't become a voter without doing so!</h2>
@@ -107,6 +115,7 @@ String sessionCode = "";
 					%>
 					
 					<%@ include file="includes/userNavBar.jsp" %>
+					<div class="container-fluid"> 
     					<div class="row-fluid">
         					<div class="col-md-offset-2 col-md-8" id="box">
             					<h2>Welcome, ${firstName}! Make sure you apply to become a voter before the next election cycle! To apply, <a href="/voterApply">click here!</a></h2>
@@ -121,6 +130,7 @@ String sessionCode = "";
 				%>
 				
 				<%@ include file="includes/userNavBar.jsp" %>
+				<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-2 col-md-8" id="box">
             				<h2>Welcome, ${firstName}! An administrator is reviewing your application now! Please check in again later! </h2>
@@ -134,6 +144,7 @@ String sessionCode = "";
 				%>
 				
 				<%@ include file="includes/userNavBar.jsp" %>
+				<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-2 col-md-8" id="box">
             				<h2>Welcome, ${firstName}! </h2>
