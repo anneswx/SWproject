@@ -102,6 +102,7 @@ SessionGrabber sg = new SessionGrabber();
                     <h2>Update User Information</h2> 
                     <hr>
                 <p style="color:red;">${errorMessage}</p>
+                <p style="color:green;">${successMessage}</p>
                 <div class="panel-body">
                     <form method="post">
                     		<div class="row">
