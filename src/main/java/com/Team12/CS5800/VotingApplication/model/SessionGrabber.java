@@ -122,6 +122,10 @@ public class SessionGrabber {
 		return UDAO.getUser(sessionID).getPrecinct();
 	}
 	
+	public String getEmail(String sessionID) {
+		return UDAO.getUser(sessionID).getEmail();
+	}
+	
 
 
 	
