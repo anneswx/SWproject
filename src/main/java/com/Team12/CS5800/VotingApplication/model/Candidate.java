@@ -9,11 +9,24 @@ public class Candidate {
 	private int votesRecieved;
 	private String party;
 	
-	public Candidate(int candidateID, String candidateName, int electionID, boolean isWinner, int votesRecieved, String party) {
+	public Candidate(int candidateID, String candidateName, int electionID, int votesRecieved, String party) {
 		this.candidateID = candidateID;
 		this.candidateName = candidateName;
 		this.electionID = electionID;
+		this.votesRecieved = votesRecieved;
+		this.party = party;
+	}
+	public Candidate(String candidateName, int electionID, int votesRecieved, String party) {
+		this.candidateName = candidateName;
+		this.electionID = electionID;
+		this.votesRecieved = votesRecieved;
+		this.party = party;
+	}
+	public Candidate(int candidateID, String candidateName, int electionID, boolean isWinner, int votesRecieved, String party) {
 		this.isWinner = isWinner;
+		this.candidateID = candidateID;
+		this.candidateName = candidateName;
+		this.electionID = electionID;
 		this.votesRecieved = votesRecieved;
 		this.party = party;
 	}
