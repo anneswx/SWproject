@@ -16,7 +16,7 @@ public class UserDAOImpl implements UserDAO {
 	static PreparedStatement ps;
 	
 	
-	public int insertUser( String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode, String precinct ) {
+	public int insertUser( String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct ) {
 		int status = 0;
         try {
         	
@@ -49,7 +49,7 @@ public class UserDAOImpl implements UserDAO {
             ps.setInt(3, voterstatus);
             ps.setString(4, firstName);
             ps.setString(5, lastName);
-            ps.setInt(6, ssn);
+            ps.setString(6, ssn);
             ps.setString(7, address);
             ps.setString(8, city);
             ps.setString(9, state);
@@ -92,6 +92,49 @@ public class UserDAOImpl implements UserDAO {
 		return false;
 	}
 	
+	public User getUserWithID(int id) {
+		//SELECT * FROM db.users WHERE id = 18;
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from users where id = ?");
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			String username = rs.getString(2);
+			String password = rs.getString(3);
+			int adminStatus = rs.getInt(4);
+			rs.close();
+			ps.close();
+			
+			ps = con.prepareStatement("select * from user_info where id = ?");
+			ps.setInt(1, id);
+			
+			rs = ps.executeQuery();
+			rs.first();
+			String email = rs.getString(2);
+			int voterStatus = rs.getInt(3);
+			String firstName = rs.getString(4);
+			String lastName = rs.getString(5);
+			String ssn = rs.getString(6);
+			String address = rs.getString(7);
+			String city = rs.getString(8);
+			String state = rs.getString(9);
+			String zipcode = rs.getString(10);
+			String precinct = rs.getString(12);
+			rs.close();
+			ps.close();
+			con.close();
+			
+			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
+			
+			} catch (Exception e) {
+	             System.out.println(e);
+	         }
+			
+			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "");
+	}
+	
 	public User getUserWithUsername(String username) {
 		try {
 			con = MyConnectionProvider.getCon();
@@ -115,7 +158,7 @@ public class UserDAOImpl implements UserDAO {
 			int voterStatus = rs.getInt(3);
 			String firstName = rs.getString(4);
 			String lastName = rs.getString(5);
-			int ssn = rs.getInt(6);
+			String ssn = rs.getString(6);
 			String address = rs.getString(7);
 			String city = rs.getString(8);
 			String state = rs.getString(9);
@@ -131,7 +174,7 @@ public class UserDAOImpl implements UserDAO {
 	             System.out.println(e);
 	         }
 			
-			return new User(0, "", "", 0, "", 0, "", "", 0, "", "", "", "", "");
+			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "");
 	}
 			
 	// Returns a user object based on the session id
@@ -170,7 +213,7 @@ public class UserDAOImpl implements UserDAO {
 		int voterStatus = rs.getInt(3);
 		String firstName = rs.getString(4);
 		String lastName = rs.getString(5);
-		int ssn = rs.getInt(6);
+		String ssn = rs.getString(6);
 		String address = rs.getString(7);
 		String city = rs.getString(8);
 		String state = rs.getString(9);
@@ -186,7 +229,7 @@ public class UserDAOImpl implements UserDAO {
              System.out.println(e);
          }
 		
-		return new User(0, "", "", 0, "", 0, "", "", 0, "", "", "", "", "");
+		return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "");
 		
 	}
 	
@@ -232,7 +275,7 @@ public class UserDAOImpl implements UserDAO {
             
             ps.setString(3, user.getFirstName());
             ps.setString(4, user.getLastName());
-            ps.setInt(5, user.getSSN());
+            ps.setString(5, user.getSSN());
             ps.setString(6, user.getAddress());
             ps.setString(7, user.getCity());
             ps.setString(8, user.getState());

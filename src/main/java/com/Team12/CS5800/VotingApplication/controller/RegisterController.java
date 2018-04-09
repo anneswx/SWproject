@@ -63,9 +63,8 @@ public class RegisterController {
     		return model;
     	}
     	
-    	int convertedSSN = Integer.parseInt(ssn);
     	
-    	boolean successful = service.registerUser(username, password, email, first_name, last_name, convertedSSN, address, city, state, zipcode, precinct);
+    	boolean successful = service.registerUser(username, password, email, first_name, last_name, ssn, address, city, state, zipcode, precinct);
 
     	int userID;
     	if (!successful) {
