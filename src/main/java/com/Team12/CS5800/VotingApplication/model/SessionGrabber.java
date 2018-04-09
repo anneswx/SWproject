@@ -98,7 +98,7 @@ public class SessionGrabber {
 		return UDAO.getUser(sessionID).getAddress();
 	}
 	
-	public int getSSN(String sessionID) {
+	public String getSSN(String sessionID) {
 		return UDAO.getUser(sessionID).getSSN();
 	}
 	
@@ -116,6 +116,10 @@ public class SessionGrabber {
 	
 	public String getUsername(String sessionID) {
 		return UDAO.getUser(sessionID).getUsername();
+	}
+	
+	public String getPrecinct(String sessionID) {
+		return UDAO.getUser(sessionID).getPrecinct();
 	}
 	
 

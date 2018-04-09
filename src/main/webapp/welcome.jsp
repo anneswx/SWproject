@@ -79,6 +79,11 @@ String sessionCode = "";
 			%>
 			
 			 <%@ include file="includes/managerSideNav.jsp" %> 
+			 
+			 <%@ include file="includes/managerNavBar.jsp" %> 
+			 
+			 <%@ include file="managerWelcome.jsp" %>
+    				
 			
 			<!--  <div class="container-fluid"> 
     			<div class="row-fluid">

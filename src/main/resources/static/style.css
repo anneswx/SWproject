@@ -1,5 +1,10 @@
 body{background-color: #ecf0f1;}
 
+table, th, td {
+   border: 1px solid black;
+   padding: 10px;
+}
+
 .footer{
     text-align: center;
     font-size: 14px !important;
@@ -119,7 +124,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 .navbar-brand {
     float: left;
     height: auto;
-    padding: 15px 15px;
+    padding: 20px 30px;
     font-size: 18px;
     line-height: 20px;
 }

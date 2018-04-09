@@ -14,14 +14,14 @@ public class User {
 		 private VoterStatus voterstatus;
 		 private String firstName;
 		 private String lastName;
-		 private int ssn;
+		 private String ssn;
 		 private String address;
 		 private String city;
 		 private String state;
 		 private String zipcode;
 		 private String precinct;
 		 
-		 public UserInfo( String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode, String precinct) {
+		 public UserInfo( String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct) {
 			 this.email = email;
 			 if(voterstatus == 0) {
 				 this.voterstatus = VoterStatus.NOT_APPLIED;
@@ -58,7 +58,7 @@ public class User {
 			 return lastName;
 		 }
 		 
-		 public int getSSN() {
+		 public String getSSN() {
 			 return ssn;
 		 }
 		 
@@ -94,7 +94,7 @@ public class User {
 			 this.lastName = newLastName;
 		 }
 		 
-		 public void setSSN(int newSSN) {
+		 public void setSSN(String newSSN) {
 			 this.ssn = newSSN;
 		 }
 		 
@@ -133,7 +133,7 @@ public class User {
     
     private UserDAOImpl UDAO = new UserDAOImpl();
     
-    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, int ssn, String address, String city, String state, String zipcode, String precinct) {
+    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct) {
     		this.id = id;
     		this.username = username;
     		this.password = password;
@@ -216,11 +216,11 @@ public class User {
     		UDAO.updateUser(this);
     }
     
-    public int getSSN() {
+    public String getSSN() {
     		return userInfo.getSSN();
     }
     
-    public void setSSN(int newSSN) {
+    public void setSSN(String newSSN) {
     		userInfo.setSSN(newSSN);
     		UDAO.updateUser(this);
     }

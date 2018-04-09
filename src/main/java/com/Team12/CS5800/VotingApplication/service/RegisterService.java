@@ -11,7 +11,7 @@ public class RegisterService {
 	
 	private UserDAOImpl UDAO = new UserDAOImpl();
 	
-	public boolean registerUser(String username, String password, String email, String first_name, String last_name, int socialSecurity, String address, String city, String state, String zipcode, String precinct) {
+	public boolean registerUser(String username, String password, String email, String first_name, String last_name, String socialSecurity, String address, String city, String state, String zipcode, String precinct) {
 		int voterStatus = 0;
 		int adminStatus = 0;
 		
