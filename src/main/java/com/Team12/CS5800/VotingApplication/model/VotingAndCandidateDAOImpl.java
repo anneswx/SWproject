@@ -264,5 +264,126 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 		return voterStatusCheck;
 	}
 	
+	public boolean addCandidatesToElection(ArrayList<Candidate> candidateListToAdd, int electionID) {
+		boolean successfullyAdded = false;
+		
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("INSERT INTO candidate_info (candidateName, electionID, party, votes) VALUES (?,?,?,?)");
 
+	
+			for(Candidate toAdd:candidateListToAdd){
+				ps.setString(1, toAdd.getCandidateName());
+				ps.setInt(2, electionID);
+				ps.setString(3, toAdd.getParty());
+				ps.setInt(4, 0);
+				ps.executeUpdate();
+			}
+	
+			ps.close();
+			successfullyAdded = true;
+		}catch(Exception e) {
+			System.out.println(e);
+			successfullyAdded = false;
+		}
+			
+		return successfullyAdded;
+	}
+	
+	public boolean includePrecinct(int electionID, String precinctName) { //used to flag users from specific precincts for elections
+		boolean flagCompleteStatus = false;
+		
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("SELECT id from user_info WHERE precinct = ?");
+			ps.setString(1, precinctName);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			boolean lastRowCheck = rs.isLast();
+			boolean atLastRowFlag = lastRowCheck;
+			ArrayList<Integer> userIDToAdd = new ArrayList<Integer>();
+			while (!lastRowCheck){
+				
+				int userID = rs.getInt(1);
+				userIDToAdd.add(userID);
+				
+				
+				rs.next();
+				if(atLastRowFlag == true) {
+					lastRowCheck = true;
+				}
+				
+				if(rs.isLast() ==true) {
+					atLastRowFlag = true;
+				}
+			}
+			
+			
+			
+			
+			for(int idToAdd:userIDToAdd) {
+				if(onGoingElectionVoterCheck(electionID, idToAdd)) {
+					ps = con.prepareStatement("INSERT INTO ongoing_election_voters (electionID, userID) VALUES (?,?)");
+					ps.setInt(1, electionID);
+					ps.setInt(2, idToAdd);
+					ps.executeUpdate();
+				}
+			}
+			rs.close();
+			ps.close();
+			
+		}catch(Exception e) {
+			System.out.println(e);
+			flagCompleteStatus = false;
+		}
+		
+		
+		return flagCompleteStatus;
+		
+	}
+	/*
+	 * CURRENTLY DOES NOT WORK PROPERLY. DOES NOT BREAK ANYTHING BUT ALLOWS DUPLICATES
+	 */
+	private boolean onGoingElectionVoterCheck(int electionID, int userID) {
+		boolean addUserStatus = true;
+		//checks that a user isn't already flagged to vote in a specific election
+		try {
+			ps = con.prepareStatement("select * from ongoing_election_voters where userID = ?");
+			ps.setInt(1, userID);
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			boolean lastRowCheck = rs.isLast();
+			boolean atLastRowFlag = lastRowCheck;
+			while (!lastRowCheck){
+				
+				int electionIDToCheck = rs.getInt(2);
+				
+				if(electionIDToCheck == electionID) {
+					addUserStatus = false;
+					break;
+				}
+				
+				
+				rs.next();
+				if(atLastRowFlag == true) {
+					lastRowCheck = true;
+				}
+				
+				if(rs.isLast() ==true) {
+					atLastRowFlag = true;
+				}
+			}
+			
+			
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return addUserStatus;
+	}
 }

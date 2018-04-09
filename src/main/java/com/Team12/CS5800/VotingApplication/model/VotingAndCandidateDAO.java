@@ -13,6 +13,10 @@ public interface VotingAndCandidateDAO {
 	//retrieves candidates who ran in a specified election
 	public ArrayList<Candidate> getElectionCandidates(int electionID);
 	
+	public boolean addCandidatesToElection(ArrayList<Candidate> candidateListToAdd, int electionID);
+	
 	public boolean castVote(int userID, int candidateID);
+	
+	public boolean includePrecinct(int electionID, String precinctName); //used to flag users from specific precincts for elections
 	
 }
