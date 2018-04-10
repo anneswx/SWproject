@@ -16,7 +16,7 @@
          url = "jdbc:mysql://bais.mysql.database.azure.com/db"
          user = "voterapp@bais"  password = "P@$$w0rD"/>
 <sql:query dataSource = "${data}" var = "result">
-         select distinct precinct from user_info where precinct != "" order by precinct;
+         select distinct precinct from user_info where voter_status = 2 order by precinct;
 </sql:query>
 <h1>Voters</h1>
 <form method="post" action="voterlist.jsp">
@@ -30,36 +30,38 @@ Search by Precinct: <select name="choice">
 <table>
 	<tr>
 		<th>UserId</th>
-		<th>Voter Status</th>
 		<th>First Name</th>
 		<th>Last Name</th>
-		<th>Gender</th>
 		<th>SSN</th>
 		<th>Address</th>
 		<th>City</th>
 		<th>State</th>
 		<th>Zipcode</th>
 		<th>Precinct</th>
+		<th>Gender</th>
+		<th>Age</th>
+		<th>Education</th>
 				
 	</tr>
 	
 	<sql:query dataSource = "${data}" var = "result">
-         select id, voter_status,first_name,last_name, gender, ssn, address, city, 
-         state, zipcode, precinct from user_info where precinct ="${param.choice}" order by id;
+         select id, first_name,last_name, ssn, address, city, 
+         state, zipcode, precinct, gender, age, education from user_info where voter_status = 2 and precinct ="${param.choice}" order by id;
     </sql:query>
 	<c:forEach var = "row" items = "${result.rows}">
 		<tr>
 			<td> <c:out value = "${row.id}"/> </td>
-			<td> <c:out value = "${row.voter_status}"/> </td>
 			<td> <c:out value = "${row.first_name}"/> </td>
 			<td> <c:out value = "${row.last_Name}"/> </td>
-			<td> <c:out value = "${row.gender}"/> </td>
 			<td> <c:out value = "${row.ssn}"/> </td>
 			<td> <c:out value = "${row.address}"/> </td>
 			<td> <c:out value = "${row.city}"/> </td>
 			<td> <c:out value = "${row.state}"/> </td>
 			<td> <c:out value = "${row.zipcode}"/> </td>
 			<td> <c:out value = "${row.precinct}"/> </td>
+			<td> <c:out value = "${row.gender}"/> </td>
+			<td> <c:out value = "${row.age}"/> </td>
+			<td> <c:out value = "${row.education}"/> </td>
 		</tr>
 	</c:forEach>	
 </table>

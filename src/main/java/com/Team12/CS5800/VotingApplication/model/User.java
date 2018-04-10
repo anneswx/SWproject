@@ -20,8 +20,11 @@ public class User {
 		 private String state;
 		 private String zipcode;
 		 private String precinct;
+		 private String gender;
+		 private int age;
+		 private String education;
 		 
-		 public UserInfo( String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct) {
+		 public UserInfo( String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education) {
 			 this.email = email;
 			 if(voterstatus == 0) {
 				 this.voterstatus = VoterStatus.NOT_APPLIED;
@@ -40,6 +43,9 @@ public class User {
 			 this.state = state;
 			 this.zipcode = zipcode;
 			 this.precinct = precinct;
+			 this.gender = gender;
+			 this.age = age;
+			 this.education = education;
 		 }
 		 
 		 public String getEmail() {
@@ -76,6 +82,18 @@ public class User {
 		 
 		 public String getZipCode() {
 			 return zipcode;
+		 }
+		 
+		 public String getGender() {
+			 return gender;
+		 }
+		 
+		 public int getAge() {
+			 return age;
+		 }
+		 
+		 public String getEducation() {
+			 return education;
 		 }
 		 
 		 public void setEmail(String newEmail) {
@@ -121,6 +139,18 @@ public class User {
 		 public void setPrecinct(String precinct) {
 			 this.precinct = precinct;
 		 }
+		 
+		 public void setGender(String newGender) {
+			 this.gender = newGender;
+		 }
+		 
+		 public void setAge(int newAge) {
+			 this.age = newAge;
+		 }
+		 
+		 public void setEducation(String newEducation) {
+			 this.education = newEducation;
+		 }
 
 	}
 	
@@ -133,7 +163,7 @@ public class User {
     
     private UserDAOImpl UDAO = new UserDAOImpl();
     
-    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct) {
+    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education) {
     		this.id = id;
     		this.username = username;
     		this.password = password;
@@ -146,7 +176,7 @@ public class User {
     		else {
     			this.adminStatus = AdminStatus.ADMIN;
     		}
-    		this.userInfo = new UserInfo(email, voterstatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
+    		this.userInfo = new UserInfo(email, voterstatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
     }
     
     public int getID() {
@@ -270,6 +300,32 @@ public class User {
     		UDAO.updateUser(this);
     }
     
+    public String getGender() {
+		return userInfo.getGender();
+    }
+
+    public void setGender(String gender) {
+		userInfo.setGender(gender);
+		UDAO.updateUser(this);
+    }
+    
+    public int getAge() {
+    	return userInfo.getAge();
+    }
+    
+    public void setAge(int age) {
+    	userInfo.setAge(age);
+    	UDAO.updateUser(this);
+    }
+    
+    public String getEducation() {
+    	return userInfo.getEducation();
+    }
+    
+    public void setEducation(String education) {
+    	userInfo.setEducation(education);
+    	UDAO.updateUser(this);
+    }
     
    
 

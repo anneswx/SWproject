@@ -16,7 +16,7 @@ public class UserDAOImpl implements UserDAO {
 	static PreparedStatement ps;
 	
 	
-	public int insertUser( String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct ) {
+	public int insertUser( String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education ) {
 		int status = 0;
         try {
         	
@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
             rs.close();
             ps.close();
             
-            ps = con.prepareStatement("INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode, precinct) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            ps = con.prepareStatement("INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode, precinct, gender, age, education) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         // 
             ps.setInt(1, id);
             ps.setString(2, email);
@@ -55,6 +55,9 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(9, state);
             ps.setString(10, zipcode);
             ps.setString(11, precinct);
+            ps.setString(12, gender);
+            ps.setInt(13, age);
+            ps.setString(14, education);
             ps.executeUpdate();
 
             status = 1;
@@ -122,17 +125,20 @@ public class UserDAOImpl implements UserDAO {
 			String state = rs.getString(9);
 			String zipcode = rs.getString(10);
 			String precinct = rs.getString(12);
+			String gender = rs.getString(13);
+			int age = rs.getInt(14);
+			String education = rs.getString(15);
 			rs.close();
 			ps.close();
 			con.close();
 			
-			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
+			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
 			
 			} catch (Exception e) {
 	             System.out.println(e);
 	         }
 			
-			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "");
+			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "");
 	}
 	
 	public User getUserWithUsername(String username) {
@@ -164,17 +170,20 @@ public class UserDAOImpl implements UserDAO {
 			String state = rs.getString(9);
 			String zipcode = rs.getString(10);
 			String precinct = rs.getString(12);
+			String gender = rs.getString(13);
+			int age = rs.getInt(14);
+			String education = rs.getString(15);
 			rs.close();
 			ps.close();
 			con.close();
 			
-			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
+			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
 			
 			} catch (Exception e) {
 	             System.out.println(e);
 	         }
 			
-			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "");
+			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "");
 	}
 			
 	// Returns a user object based on the session id
@@ -219,17 +228,20 @@ public class UserDAOImpl implements UserDAO {
 		String state = rs.getString(9);
 		String zipcode = rs.getString(10);
 		String precinct = rs.getString(12);
+		String gender = rs.getString(13);
+		int age = rs.getInt(14);
+		String education = rs.getString(15);
 		rs.close();
 		ps.close();
 		con.close();
 		
-		return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct);
+		return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
 		
 		} catch (Exception e) {
              System.out.println(e);
          }
 		
-		return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "");
+		return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "");
 		
 	}
 	
@@ -258,7 +270,7 @@ public class UserDAOImpl implements UserDAO {
             ps.close();
             
             
-            ps = con.prepareStatement("UPDATE user_info SET email = ?, voter_status = ?, first_name = ?, last_name = ?, ssn = ?, address = ?, city = ?, state = ?, zipcode = ?, precinct = ? WHERE id = ?");
+            ps = con.prepareStatement("UPDATE user_info SET email = ?, voter_status = ?, first_name = ?, last_name = ?, ssn = ?, address = ?, city = ?, state = ?, zipcode = ?, precinct = ?, gender = ?, age = ?, education = ? WHERE id = ?");
         // INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             
             
@@ -281,7 +293,10 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(8, user.getState());
             ps.setString(9, user.getZipCode());
             ps.setString(10, user.getPrecinct());
-            ps.setInt(11, user.getID());
+            ps.setString(11, user.getGender());
+            ps.setInt(12, user.getAge());
+            ps.setString(13, user.getEducation());
+            ps.setInt(14, user.getID());
 
             ps.executeUpdate();
 

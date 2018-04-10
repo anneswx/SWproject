@@ -65,6 +65,10 @@ SessionGrabber sg = new SessionGrabber();
 		String ssn = sg.getSSN(sessionCode);
 		String username = sg.getUsername(sessionCode);
 		String email = sg.getEmail(sessionCode);
+		String gender = sg.getGender(sessionCode);
+		int age = sg.getAge(sessionCode);
+		String education = sg.getEducation(sessionCode);
+		
 		if (userStatus.equals("admin")){
 			%>
 			
@@ -227,6 +231,22 @@ SessionGrabber sg = new SessionGrabber();
                                            placeholder="New Password" >
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="form-group">
+                        		<label>Gender</label>
+                            <input type="text" name="gender" id="gender" class="form-control input-sm"
+                                   value="<%=gender %>" required>
+                        </div>
+                        <div class="form-group">
+                        		<label>Age</label>
+                            <input type="text" name="age" id="age" class="form-control input-sm"
+                                   value="<%=age %>" required>
+                        </div>
+                        <div class="form-group">
+                        		<label>Education</label>
+                            <input type="text" name="education" id="education" class="form-control input-sm"
+                                   value="<%=education %>" required>
                         </div>
                         
                         <input type="submit" name ="submit" value="Update" class="btn btn-success btn-block">
