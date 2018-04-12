@@ -11,6 +11,23 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 	static Connection con;
 	static PreparedStatement ps;
 	
+	
+	
+	/*
+	 * to create a new election call this method
+	 * 
+	 * returns either -1, 1, or 0. 
+	 * -1 means something really wrong happened. You will hopefully never
+	 * see this output. 1 means that it successfully wrote to the database
+	 * 0 means that an exception of some kind was thrown and it didn't write to the database
+	 * 
+	 * election name: written name of the election
+	 * date started: date election starts
+	 * date ended: date election ends
+	 * number of candidates: number of candidates who will be running
+	 * onGoin: boolean saying whether or not the election is currently happening
+	 * (this isn't permanent. I plan on adding something to auto detect this
+	 */
 	public int createElection(String electionName, int dateStarted, int dateEnded, int numberOfCandidates, int onGoing) {
 		int status = -1;
 		try {
@@ -86,7 +103,9 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 			}
 			
 			
-			
+			rs.close();
+			ps.close();
+			con.close();
 			
 		}catch(Exception e) {
 			System.out.println(e);
@@ -253,7 +272,9 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 				}
 				
 			}
-			
+			rs.close();
+			ps.close();
+			con.close();
 			
 		}catch(Exception e) {
 			System.out.println(e);
@@ -377,7 +398,9 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 				}
 			}
 			
-			
+			rs.close();
+			ps.close();
+			con.close();
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -385,5 +408,74 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 		
 		
 		return addUserStatus;
+	}
+	
+	public ArrayList<County> getCountyList(){
+		
+		ArrayList<County> listOfCounties = new ArrayList<County>();
+		
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from counties");
+			
+			ResultSet rs= ps.executeQuery();
+			rs.first();
+			System.out.println(rs.first());
+			
+			boolean lastRowCheck = rs.isLast();
+			System.out.println(rs.isLast());
+			boolean atLastRowFlag = lastRowCheck;
+			
+			while(!lastRowCheck) {
+				
+				int countyID =rs.getInt(1);
+				String countyName = rs.getString(2);
+				System.out.println(countyName);
+				int congressionalDistrict = rs.getInt(3);
+				
+				listOfCounties.add(new County(countyID, countyName, congressionalDistrict));
+				
+				rs.next();
+				if(atLastRowFlag == true) {
+					lastRowCheck = true;
+				}
+				
+				if(rs.isLast() ==true) {
+					atLastRowFlag = true;
+				}
+			}
+			rs.close();
+			ps.close();
+			con.close();
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return listOfCounties;
+		
+	}
+	
+	//retrieves the 
+	public boolean updateCountyCongressionalDistrict(int countyID, int newCongressionalDistrict) {
+		boolean successfullyChanged = false;
+		
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("UPDATE counties SET congressional_district = ? WHERE id = ?");
+			ps.setInt(1, newCongressionalDistrict);
+			ps.setInt(2, countyID);
+			ps.executeUpdate();
+			
+			ps.close();
+			con.close();
+			successfullyChanged = true;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		return successfullyChanged;
+		
 	}
 }

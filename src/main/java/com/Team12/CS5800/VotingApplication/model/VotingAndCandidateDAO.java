@@ -13,10 +13,20 @@ public interface VotingAndCandidateDAO {
 	//retrieves candidates who ran in a specified election
 	public ArrayList<Candidate> getElectionCandidates(int electionID);
 	
+	//adds candidate to the running of a specific election
 	public boolean addCandidatesToElection(ArrayList<Candidate> candidateListToAdd, int electionID);
 	
+	//casts a vote for a candidate from a user
 	public boolean castVote(int userID, int candidateID);
 	
-	public boolean includePrecinct(int electionID, String precinctName); //used to flag users from specific precincts for elections
+	//flags all users from a specified precinct to allow them to vote in a specified election
+	public boolean includePrecinct(int electionID, String precinctName); 
+	
+	//retrieves list of all counties in Iowa
+	public ArrayList<County> getCountyList();
+	
+	//retrieves the 
+	public boolean updateCountyCongressionalDistrict(int countyID, int newCongressionalDistrict);
+	
 	
 }

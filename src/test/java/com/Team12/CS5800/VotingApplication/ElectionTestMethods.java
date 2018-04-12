@@ -116,7 +116,27 @@
 		 * of the precinct an admin would like to add
 		 */
 		  //DAO.includePrecinct(int electionID, String precinctName);
-		
+
+		/***
+		 * Use to get a list of every county in iowa
+		 * 
+		 * returns: ArrayList<County> which holds a county object of every county in iowa
+		 * 
+		 * 
+		 */
+		//ArrayList<County> countyHolder = DAO.getCountyList();
+
+		/**
+		 * Use to update a counties congressional district
+		 * 
+		 * returns: true if database updated properly, otherwise false
+		 * 
+		 * countyID: Unique ID of the county you wish to update
+		 * 
+		 * newCongressionalDistrict: int of the congressional district you 
+		 * wish to change the county to 
+		 */
+		//DAO.updateCountyCongressionalDistrict(int countyID, int newCongressionalDistrict);
 		
 //	}
 //}
