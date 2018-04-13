@@ -10,10 +10,10 @@
 
 
 
-        <div class="wrapper">
+        <div class="wrapper container-1">
             <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
+            <nav id="sidebar" class="nav navbar-nav-1 side-nav">
+                <div class="sidebar-header side-user">
                     <h3>Administration Portal</h3>
                     <img class="img-circle" src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" alt="manager user" height="75" width="75">
             <p class="welcome"><i class="fa fa-key"></i> Logged in as</p>
@@ -34,10 +34,10 @@
 			                </div>
 			            </form>
 			        </li>
-			        <li>
+			        <li class="dashboard">
                         <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li>
+                    <li class="panel">
                     		
                         <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-users"></i> Users <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="usersSubmenu">
@@ -46,21 +46,21 @@
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Administrators</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="panel">
                         <a href="#analyticsSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-bar-chart-o"></i> Analytics <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="analyticsSubmenu">
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Create a Report</a></li>
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Review Reports</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="panel">
                         <a href="#calendarSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-calendar"></i> Calendar <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="calendarSubmenu">
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Upcoming Events</a></li>
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> All Events</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="panel">
                         <a href="#pollsSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-edit"></i> Polls <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="pollsSubmenu">
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Add a Poll</a></li>
@@ -69,7 +69,7 @@
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> View All Polls</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="panel">
                         <a href="#"><i class="fa fa-map-marker"></i> Precincts</a>
                     </li>
                 </ul>
