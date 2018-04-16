@@ -125,6 +125,17 @@ public class SessionGrabber {
 	public String getEmail(String sessionID) {
 		return UDAO.getUser(sessionID).getEmail();
 	}
+	public String getGender(String sessionID) {
+		return UDAO.getUser(sessionID).getGender();
+	}
+	public int getAge(String sessionID) {
+		return UDAO.getUser(sessionID).getAge();
+	}
+	public String getEducation(String sessionID) {
+		return UDAO.getUser(sessionID).getEducation();
+	}
+	
+	
 	
 
 
