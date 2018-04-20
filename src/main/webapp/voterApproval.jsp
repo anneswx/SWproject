@@ -201,7 +201,7 @@ String sessionCode = "";
 			 
 			 if(myPeople[0] != "") {
 			 
-			 var mytable = "<table align='center'><tbody><tr>";
+			 var mytable = "<div class='panel-body'><table align='center'class='table table-striped table-bordered table-list'><tbody><tr>";
 			 
 			 
 			 
@@ -216,14 +216,15 @@ String sessionCode = "";
 					 }
 					 
 	
-					 mytable += "<td><button type='button' className='btn btn-default' onClick='approve()' data-userid=" + myPeople[i][0] + ">Approve</button></td>";
-					 mytable += "<td><button type='button' className='btn btn-default' onClick='decline()' data-userid=" + myPeople[i][0] + ">Decline</button></td>";
+					 mytable += "<td align='center'>
+					 mytable += "<a class='btn btn-default'><em class='fa fa-check-circle' onClick='approve()' data-userid=" + myPeople[i][0] + ">";
+					 mytable += "<a class='btn btn-default'><em class='fa fa-times-circle' onClick='decline()' data-userid=" + myPeople[i][0] + "></td>";
 					 
 					 mytable += "</tr><tr>";
 				 }
 			 
 
-			 mytable += "</tr></tbody></table>";
+			 mytable += "</tr></tbody></table></div>";
 			 
 			 document.write(mytable);
 			 
