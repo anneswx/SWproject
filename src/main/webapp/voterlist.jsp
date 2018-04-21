@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Voterlist</title>
 </head>
 <body>
 <sql:setDataSource var = "data" driver = "com.mysql.jdbc.Driver"
@@ -19,7 +19,7 @@
          select distinct precinct from user_info where voter_status = 2 order by precinct;
 </sql:query>
 <h1>Voters</h1>
-<form method="post" action="voterlist.jsp">
+<form method="post" action="/voterlist">
 Search by Precinct: <select name="choice">
 <c:forEach var = "row" items = "${result.rows}">
     <option><c:out value = "${row.precinct}"/></option>

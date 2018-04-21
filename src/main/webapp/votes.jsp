@@ -18,7 +18,7 @@
          select distinct candidateID from paper_trail order by candidateID;
 </sql:query>
 <h1>Paper Trail</h1>
-<form method="post" action="votes.jsp">
+<form method="post" action="/votes">
 Search by Candidate: <select name="choice">
 <c:forEach var = "row" items = "${result.rows}">
     <option><c:out value = "${row.candidateID}"/></option>
