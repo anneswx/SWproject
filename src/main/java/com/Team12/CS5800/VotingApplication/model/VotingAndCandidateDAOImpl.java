@@ -478,4 +478,19 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 		return successfullyChanged;
 		
 	}
+	
+	public ArrayList<Candidate> getElectionResultsByPrecinct(String precinctName, int electionID){
+		ArrayList<Candidate> resultsToReturn = new ArrayList<Candidate>();
+		
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("GET ");
+		}catch(Exception e) {
+			
+		}
+		
+		return resultsToReturn;
+		
+	}
+
 }
