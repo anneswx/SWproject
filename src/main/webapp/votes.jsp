@@ -7,10 +7,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="utf-8">
+    <meta http-equiv="XA-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+
+    <title>Paper trail</title>
 </head>
 <body>
+<%@ include file="includes/adminSideNav.jsp" %>
+<%@ include file="includes/adminNavBar.jsp" %>
+<div class="container-fluid"> <!-- div to hold all other divs -->
+
 <sql:setDataSource var = "data" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://bais.mysql.database.azure.com/db"
          user = "voterapp@bais"  password = "P@$$w0rD"/>
@@ -51,6 +64,8 @@ Search by Candidate: <select name="choice">
 	</c:forEach>	
 </table>
 
+
+</div>
 
 
 </body>

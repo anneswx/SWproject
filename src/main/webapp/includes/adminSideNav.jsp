@@ -47,14 +47,6 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#analyticsSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-bar-chart-o"></i> Analytics <i class="fa fa-caret-down pull-right"></i></a>
-                        <ul class="collapse list-unstyled" id="analyticsSubmenu">
-                        	<li><a href="/votes"><i class="fa fa-angle-double-right"></i> View Votes</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Create a Report</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Review Reports</a></li>
-                        </ul>
-                    </li>
-                    <li>
                         <a href="#calendarSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-calendar"></i> Calendar <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="calendarSubmenu">
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Upcoming Events</a></li>

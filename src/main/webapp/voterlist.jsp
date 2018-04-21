@@ -8,10 +8,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Voterlist</title>
+    <meta charset="utf-8">
+    <meta http-equiv="XA-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+
+    <title>Voterlist</title>
 </head>
 <body>
+
+
+<%@ include file="includes/adminSideNav.jsp" %>
+<%@ include file="includes/adminNavBar.jsp" %>
+<div class="container-fluid"> <!-- div to hold all other divs -->
+
+	
 <sql:setDataSource var = "data" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://bais.mysql.database.azure.com/db"
          user = "voterapp@bais"  password = "P@$$w0rD"/>
@@ -67,6 +83,12 @@ Search by Precinct: <select name="choice">
 </table>
 
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.1.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+</div>
 
 </body>
 </html>
