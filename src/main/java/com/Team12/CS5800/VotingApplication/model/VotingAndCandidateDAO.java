@@ -25,8 +25,10 @@ public interface VotingAndCandidateDAO {
 	//retrieves list of all counties in Iowa
 	public ArrayList<County> getCountyList();
 	
-	//retrieves the 
+	//changes the counties congressional district 
 	public boolean updateCountyCongressionalDistrict(int countyID, int newCongressionalDistrict);
+	
+	public ArrayList<Candidate> getElectionResultsByPrecinct(String precinctName, int electionID);
 	
 	
 }
