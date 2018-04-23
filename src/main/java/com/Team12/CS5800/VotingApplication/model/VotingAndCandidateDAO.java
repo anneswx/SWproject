@@ -16,6 +16,9 @@ public interface VotingAndCandidateDAO {
 	//adds candidate to the running of a specific election
 	public boolean addCandidatesToElection(ArrayList<Candidate> candidateListToAdd, int electionID);
 	
+	//adds one candidate to the running of a specific election
+	public boolean addOneCandidateToElection(String candidateName, int electionID, String party);
+		
 	//casts a vote for a candidate from a user
 	public boolean castVote(int userID, int candidateID);
 	
