@@ -65,12 +65,123 @@ String sessionCode = "";
 		if (userStatus.equals("admin")){
 			%>
 			
+			<%@ include file="includes/adminSideNav.jsp" %>
 			<%@ include file="includes/adminNavBar.jsp" %>
-			<div class="container-fluid"> 
-    			<div class="row-fluid">
-        			<div class="col-md-offset-2 col-md-8" id="box">
-            			<h2>Welcome, ${firstName}! </h2>
-        			</div>
+			<div class="row" >
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile">
+                        <a href="#">
+                            <div class="circle-tile-heading dark-blue">
+                                <i class="fa fa-users fa-fw fa-3x"></i>
+                            </div>
+                        </a>
+                        <div class="circle-tile-content dark-blue">
+                            <div class="circle-tile-description text-faded">
+                                Users
+                            </div>
+                            <div class="circle-tile-number text-faded">
+                                265
+                                <span id="sparklineA"></span>
+                            </div>
+                            <a href="#" class="circle-tile-footer">Manage Users <i class="fa fa-chevron-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile">
+                        <a href="#">
+                            <div class="circle-tile-heading green">
+                                <i class="fa fa-bar-chart fa-fw fa-3x"></i>
+                            </div>
+                        </a>
+                        <div class="circle-tile-content green">
+                            <div class="circle-tile-description text-faded">
+                                Analytics
+                            </div>
+                            <div class="circle-tile-number text-faded">
+                                20
+                            </div>
+                            <a href="#" class="circle-tile-footer">View Analytics <i class="fa fa-chevron-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile">
+                        <a href="#">
+                            <div class="circle-tile-heading orange">
+                                <i class="fa fa-bell fa-fw fa-3x"></i>
+                            </div>
+                        </a>
+                        <div class="circle-tile-content orange">
+                            <div class="circle-tile-description text-faded">
+                                Alerts
+                            </div>
+                            <div class="circle-tile-number text-faded">
+                                6 New
+                            </div>
+                            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile">
+                        <a href="#">
+                            <div class="circle-tile-heading blue">
+                                <i class="fa fa-check-square-o fa-fw fa-3x"></i>
+                            </div>
+                        </a>
+                        <div class="circle-tile-content blue">
+                            <div class="circle-tile-description text-faded">
+                                Polls
+                            </div>
+                            <div class="circle-tile-number text-faded">
+                                10
+                                <span id="sparklineB"></span>
+                            </div>
+                            <a href="#" class="circle-tile-footer">Manage Polls <i class="fa fa-chevron-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile">
+                        <a href="#">
+                            <div class="circle-tile-heading red">
+                                <i class="fa fa-map-marker fa-fw fa-3x"></i>
+                            </div>
+                        </a>
+                        <div class="circle-tile-content red">
+                            <div class="circle-tile-description text-faded">
+                                Precincts
+                            </div>
+                            <div class="circle-tile-number text-faded">
+                                24
+                                <span id="sparklineC"></span>
+                            </div>
+                            <a href="#" class="circle-tile-footer">Manage Precincts <i class="fa fa-chevron-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="circle-tile">
+                        <a href="#">
+                            <div class="circle-tile-heading purple">
+                                <i class="fa fa-comments fa-fw fa-3x"></i>
+                            </div>
+                        </a>
+                        <div class="circle-tile-content purple">
+                            <div class="circle-tile-description text-faded">
+                                Mentions
+                            </div>
+                            <div class="circle-tile-number text-faded">
+                                96
+                                <span id="sparklineD"></span>
+                            </div>
+                            <a href="#" class="circle-tile-footer">More Info <i class="fa fa-chevron-circle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
     			</div>
 			
 			<%
@@ -79,6 +190,11 @@ String sessionCode = "";
 			%>
 			
 			 <%@ include file="includes/managerSideNav.jsp" %> 
+			 
+			 <%@ include file="includes/managerNavBar.jsp" %> 
+			 
+			 <%@ include file="managerWelcome.jsp" %>
+    				
 			
 			<!--  <div class="container-fluid"> 
     			<div class="row-fluid">

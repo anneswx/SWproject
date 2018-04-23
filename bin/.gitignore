@@ -22,3 +22,13 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/.gitattributes
+/.gitignore
+/.mvn/
+/database.txt
+/lib/
+/mvnw
+/mvnw.cmd
+/pom.xml
+/screenshots.docx
+/src/

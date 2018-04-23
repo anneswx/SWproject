@@ -17,7 +17,7 @@
                     <h3>Management Portal</h3>
                     <img class="img-circle" src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" alt="manager user" height="75" width="75">
             <p class="welcome"><i class="fa fa-key"></i> Logged in as</p>
-                <span class="last-name">Name </span>
+                <span class="last-name">${firstName} </span>
                 <a href="/logout"><i class="fa fa-sign-out"></i></a>      
                 </div>
 
@@ -41,6 +41,7 @@
                     		
                         <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-users"></i> Users <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="usersSubmenu">
+                       		<li><a href="/voterApproval"><i class="fa fa-angle-double-right"></i> Approve Voter Applications</a></li>
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Voters</a></li>
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Managers</a></li>
                         </ul>
@@ -74,68 +75,7 @@
                 </ul>
             </nav>
 
-            <!-- Page Content Holder -->
-            <div id="content">
-				
-				<nav class="navbar navbar-inverse top-navbar" id="top-nav">
-				    <div class="container-fluid" style="width: 90%">
-				        <div class="navbar-header">      
-				        		<div class="navbar-header">
-				                            <button type="button" id="sidebarCollapse" class="navbar-btn">
-				                                <span></span>
-				                                <span></span>
-				                                <span></span>
-				                            </button>
-				             </div>
-				            <a class="navbar-brand" href="/">Voter Application</a>
-				
-				        </div>  
-				        <ul class="social-icon pull-right list-inline">
-				            <li class="dropdown">
-				                <a class="alerts-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-bell"></span>
-				                    <span class="number">0</span>
-				                    <span class="caret"></span>
-				                </a>
-				                <ul class="dropdown-menu">
-				                    <li><a href="#">Notification 1</a></li>
-				                    <li><a href="#">Notification 2</a></li>
-				                    <li><a href="#">Notification 3</a></li>
-				                </ul>
-				            </li> 
-				            <li class="dropdown">
-				                <a class="user-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>             
-				                    <span class="caret"></span>
-				                </a>
-				                <ul class="dropdown-menu">
-				                    <li><a href="#">Profile</a></li>
-				                    <li><a href="/logout">Logout</a></li>
-				                </ul>
-				            </li>
-				            <li class="dropdown">
-				                <a class="tasks-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span> 
-				                    <span class="caret"></span>
-				                </a>
-				                <ul class="dropdown-menu">
-				                    <li><a href="#">Settings</a></li>
-				                    <li><a href="#">Help</a></li>
-				                </ul>
-				            </li>
-				        </ul>       
-				    </div>  
-				</nav>
-				
-				<div class="container-fluid"> 
-		    			<div class="row-fluid">
-		        			<div class="col-md-offset-2 col-md-8" id="box">
-		            			<h2>Welcome, ${firstName}! </h2>
-		        			</div>
-		    			</div>
-    				</div>
-    				
-    				<%@ include file="footer.jsp" %>
-    				
-    			</div>
-    		</div>
+           
 
 
 

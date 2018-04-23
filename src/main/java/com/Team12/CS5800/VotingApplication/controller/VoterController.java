@@ -20,5 +20,9 @@ public class VoterController {
 	public String showVoterlistPage(ModelAndView model){
         return "voterlist";
     }
+	@RequestMapping(value="/voterlist", method = RequestMethod.POST)
+	public String showVoterlistDetails(ModelAndView model){
+        return "voterlist";
+    }
 
 }

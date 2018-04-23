@@ -182,7 +182,7 @@ String sessionCode = "";
                 </div>
             </div>
         </div> 
-    			</div>
+    			
 			
 			<%
 		}
@@ -218,7 +218,6 @@ String sessionCode = "";
 				%>
 				
 				<%@ include file="includes/userNavBar.jsp" %>
-				<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-2 col-md-8" id="box">
             				<h2>Welcome, ${firstName}! Make sure to verify your email! You can't become a voter without doing so!</h2>
@@ -231,7 +230,6 @@ String sessionCode = "";
 					%>
 					
 					<%@ include file="includes/userNavBar.jsp" %>
-					<div class="container-fluid"> 
     					<div class="row-fluid">
         					<div class="col-md-offset-2 col-md-8" id="box">
             					<h2>Welcome, ${firstName}! Make sure you apply to become a voter before the next election cycle! To apply, <a href="/voterApply">click here!</a></h2>
@@ -246,7 +244,6 @@ String sessionCode = "";
 				%>
 				
 				<%@ include file="includes/userNavBar.jsp" %>
-				<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-2 col-md-8" id="box">
             				<h2>Welcome, ${firstName}! An administrator is reviewing your application now! Please check in again later! </h2>

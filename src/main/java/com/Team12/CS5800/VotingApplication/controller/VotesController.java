@@ -14,5 +14,10 @@ public class VotesController {
 	public String showVotersPage(ModelAndView model){
         return "votes";
     }
+	
+	@RequestMapping(value="/votes", method = RequestMethod.POST)
+	public String showVotersDetails(ModelAndView model){
+        return "votes";
+    }
 
 }

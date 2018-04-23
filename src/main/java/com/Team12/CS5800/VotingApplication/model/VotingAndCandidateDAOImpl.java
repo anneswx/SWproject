@@ -297,7 +297,7 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 				ps.setString(1, toAdd.getCandidateName());
 				ps.setInt(2, electionID);
 				ps.setString(3, toAdd.getParty());
-				ps.setInt(4, 0);
+				ps.setInt(4, toAdd.getVotesRecieved());
 				ps.executeUpdate();
 			}
 	
@@ -308,6 +308,27 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 			successfullyAdded = false;
 		}
 			
+		return successfullyAdded;
+	}
+	
+	public boolean addOneCandidateToElection(String candidateName, int electionID, String party) {
+		boolean successfullyAdded = false;
+	
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("INSERT INTO candidate_info (candidateName, electionID, party, isWinner, votes) VALUES (?,?,?,?,?)");
+			ps.setString(1, candidateName);
+			ps.setInt(2, electionID);
+			ps.setString(3, party);
+			ps.setInt(4, 0);
+			ps.setInt(5, 0);
+			ps.executeUpdate();
+			ps.close();
+			
+		}catch(Exception e) {
+			System.out.println(e);
+			successfullyAdded = false;
+		}		
 		return successfullyAdded;
 	}
 	
@@ -478,4 +499,19 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 		return successfullyChanged;
 		
 	}
+	
+	public ArrayList<Candidate> getElectionResultsByPrecinct(String precinctName, int electionID){
+		ArrayList<Candidate> resultsToReturn = new ArrayList<Candidate>();
+		
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("GET ");
+		}catch(Exception e) {
+			
+		}
+		
+		return resultsToReturn;
+		
+	}
+
 }
