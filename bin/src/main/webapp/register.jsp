@@ -190,6 +190,18 @@ else {
                                 </div>
                             </div>
                         </div>
+                        <div class = "form-group">
+                    			<label>Gender</label>
+                    			<input type="text" name="gender" id="gender" class="form-control input-sm" placeholder="Gender" required/>
+                    	</div>
+                    	<div class = "form-group">
+                    			<label>Age</label>
+                    			<input type="text" name="age" id="age" class="form-control input-sm" placeholder="Age" required/>
+                    	</div>
+                    	<div class = "form-group">
+                    			<label>Education</label>
+                    			<input type="text" name="education" id="education" class="form-control input-sm" placeholder="Education" required/>
+                    	</div>
                         
                         <input type="submit" name ="submit" value="Register" class="btn btn-success btn-block">
                     </form>
