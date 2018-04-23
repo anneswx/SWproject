@@ -53,6 +53,25 @@ public class Candidate {
 	public String getParty() {
 		return party;
 	}
+	
+	@Override
+	public boolean equals(Object toCheck) {
+		Candidate candidateToCheck = (Candidate)toCheck;
+		
+		boolean match = false;
+		if(this.candidateName.equals(candidateToCheck.candidateName)) {
+				if(this.electionID == candidateToCheck.electionID) {
+						if(this.votesRecieved == candidateToCheck.votesRecieved) {
+							if(this.party.equals(candidateToCheck.party)) {
+								match = true;
+							}
+						}
+					}
+				}
+			
+		
+		return match;
+	}
 
 
 	
