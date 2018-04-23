@@ -297,7 +297,7 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 				ps.setString(1, toAdd.getCandidateName());
 				ps.setInt(2, electionID);
 				ps.setString(3, toAdd.getParty());
-				ps.setInt(4, 0);
+				ps.setInt(4, toAdd.getVotesRecieved());
 				ps.executeUpdate();
 			}
 	
