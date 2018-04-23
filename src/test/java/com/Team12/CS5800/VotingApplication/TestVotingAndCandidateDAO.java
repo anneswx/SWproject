@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.Team12.CS5800.VotingApplication.model.Candidate;
+import com.Team12.CS5800.VotingApplication.model.County;
 import com.Team12.CS5800.VotingApplication.model.Election;
 import com.Team12.CS5800.VotingApplication.model.GetPrecinct;
 import com.Team12.CS5800.VotingApplication.model.VotingAndCandidateDAOImpl;
@@ -169,6 +170,9 @@ public class TestVotingAndCandidateDAO {
 		assertEquals(true, correctResults.sameCheck(results));
 	}
 	
+	/***
+	 * Test for getting election candidates 
+	 */
 	@Test
 	public void testGetElectionCandidates() {
 		ArrayList<Candidate> correctCandidateList = new ArrayList();
@@ -248,10 +252,54 @@ public class TestVotingAndCandidateDAO {
 			a.equals(b);
 		}
 		
+		assertEquals(true, correctCandidateList.equals(candidatesToCheck));
+	}
+	
+	@Test
+	public void getCountyListTest() {
+		ArrayList<County> listOfCounties = new ArrayList<County>();
 		
-		assertEquals(true, correctCandidateList.equals(candidatesToCheck) );
-
 		
+		try {
+			Connection con;
+			PreparedStatement ps;
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from counties");
+			
+			ResultSet rs= ps.executeQuery();
+			rs.first();
+			System.out.println(rs.first());
+			
+			boolean lastRowCheck = rs.isLast();
+			boolean atLastRowFlag = lastRowCheck;
+			
+			while(!lastRowCheck) {
+				
+				int countyID =rs.getInt(1);
+				String countyName = rs.getString(2);
+				int congressionalDistrict = rs.getInt(3);
+				
+				listOfCounties.add(new County(countyID, countyName, congressionalDistrict));
+				
+				rs.next();
+				if(atLastRowFlag == true) {
+					lastRowCheck = true;
+				}
+				
+				if(rs.isLast() ==true) {
+					atLastRowFlag = true;
+				}
+			}
+			rs.close();
+			ps.close();
+			con.close();
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		assertEquals(true, listOfCounties.size()==98);
+	
 	}
 	
 	
