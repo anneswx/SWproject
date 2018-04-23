@@ -311,6 +311,27 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 		return successfullyAdded;
 	}
 	
+	public boolean addOneCandidateToElection(String candidateName, int electionID, String party) {
+		boolean successfullyAdded = false;
+	
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("INSERT INTO candidate_info (candidateName, electionID, party, isWinner, votes) VALUES (?,?,?,?,?)");
+			ps.setString(1, candidateName);
+			ps.setInt(2, electionID);
+			ps.setString(3, party);
+			ps.setInt(4, 0);
+			ps.setInt(5, 0);
+			ps.executeUpdate();
+			ps.close();
+			
+		}catch(Exception e) {
+			System.out.println(e);
+			successfullyAdded = false;
+		}		
+		return successfullyAdded;
+	}
+	
 	public boolean includePrecinct(int electionID, String precinctName) { //used to flag users from specific precincts for elections
 		boolean flagCompleteStatus = false;
 		

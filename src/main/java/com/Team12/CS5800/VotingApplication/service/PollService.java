@@ -21,5 +21,12 @@ public class PollService {
 			return false;
 		}
 
-    }
+	}
+	
+	public boolean addCandidate(String candidateName, int electionID, String party) {
+		
+		boolean status = VDAO.addOneCandidateToElection(candidateName, electionID, party);
+
+		return status;
+	}
 }
