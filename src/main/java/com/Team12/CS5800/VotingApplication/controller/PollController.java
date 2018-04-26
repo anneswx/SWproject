@@ -18,6 +18,7 @@ import com.Team12.CS5800.VotingApplication.service.PollService;
 
 
 @Controller
+@SessionAttributes("name")
 public class PollController {
 	
 	@Autowired

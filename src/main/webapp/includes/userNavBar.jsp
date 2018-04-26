@@ -26,6 +26,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="/profile">Profile</a></li>
+                    <li><a href="/vote">Vote</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
             </li>
