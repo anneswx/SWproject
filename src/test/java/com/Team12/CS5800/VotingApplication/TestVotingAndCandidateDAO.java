@@ -464,6 +464,8 @@ public class TestVotingAndCandidateDAO {
 		return voterStatusCheck;
 	}
 	
+
+	
 	
 }
 

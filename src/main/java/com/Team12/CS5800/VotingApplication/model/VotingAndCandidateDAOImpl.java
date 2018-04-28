@@ -385,9 +385,8 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 		return flagCompleteStatus;
 		
 	}
-	/*
-	 * CURRENTLY DOES NOT WORK PROPERLY. DOES NOT BREAK ANYTHING BUT ALLOWS DUPLICATES
-	 */
+	
+	
 	private boolean onGoingElectionVoterCheck(int electionID, int userID) {
 		boolean addUserStatus = true;
 		//checks that a user isn't already flagged to vote in a specific election
