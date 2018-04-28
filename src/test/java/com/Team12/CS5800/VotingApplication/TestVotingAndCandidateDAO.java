@@ -244,15 +244,17 @@ public class TestVotingAndCandidateDAO {
 			System.out.println(e);
 		}
 		
-		
+		boolean allCandidatesSame = true;
 		for(int i=0; i<correctCandidateList.size(); i++) {
 			Candidate a = correctCandidateList.get(i);
 			Candidate b = candidatesToCheck.get(i);
 			
-			a.equals(b);
+			if(!a.equals(b)) {
+				allCandidatesSame = false;
+			}
 		}
 		
-		assertEquals(true, correctCandidateList.equals(candidatesToCheck));
+		assertEquals(true, allCandidatesSame);
 	}
 	
 	@Test
@@ -301,7 +303,166 @@ public class TestVotingAndCandidateDAO {
 		assertEquals(true, listOfCounties.size()==98);
 	
 	}
+	@Test
+	public void addCandidatesToElectionTest() {
+		try {
+			Connection con;
+			PreparedStatement ps;
+			String candidateName = "ThisIsATestCandidate";
+			int electionID = 13;
+			int votesRecieved = 0;
+			String party = "testParty";
+			Candidate testCandidate = new Candidate(candidateName, electionID, votesRecieved, party);
+			
+			
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("INSERT INTO candidate_info (candidateName, electionID, party, isWinner, votes) VALUES (?,?,?,?,?)");
+			ps.setString(1, candidateName);
+			ps.setInt(2, electionID);
+			ps.setString(3, party);
+			ps.setInt(4, 0);
+			ps.setInt(5, 0);
+			ps.executeUpdate();
+			ps.close();
+			
+			ps = con.prepareStatement("select * from candidate_info where candidateName = ?");
+			ps.setString(1, candidateName);
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			Candidate toCheck = new Candidate(rs.getString(2), rs.getInt(3), rs.getInt(6), rs.getString(4));
+			rs.close();
+			ps.close();
+			
+			
+			assertEquals(true, testCandidate.equals(toCheck));
+			
+			ps = con.prepareStatement("DELETE from candidate_info where candidateName = ?");
+			ps.setString(1, candidateName);
+			ps.executeUpdate();
+			ps.close();
+			con.close();
+			
+			
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}		
+		
+	}
 	
+	@Test
+	public void castVoteTest() {
+		try {
+			
+			int candidateID = 64;
+			int userID = 24;
+			Connection con;
+			PreparedStatement ps;
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from candidate_info where candidateID = ?");
+			ps.setInt(1, candidateID);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			int candidateElectionID = rs.getInt(3);
+			int beforeVoteCount = rs.getInt(6);
+			int afterVoteCount;
+			//checks that user has not already voted
+			if(canUserVote(userID, candidateElectionID)){
+				//increments vote count
+				con = MyConnectionProvider.getCon();
+				
+				ps = con.prepareStatement("UPDATE candidate_info SET votes = votes + 1 WHERE candidateID = ?");
+				ps.setInt(1, candidateID);
+				ps.executeUpdate();
+				System.out.println("here");
+				//adds user ID to paper trail to track users who have voted for each candidate to verify voting results (sorry Russia)
+				ps = con.prepareStatement("INSERT INTO paper_trail (candidateID, voterID) VALUES ( ?, ?)");
+				ps.setInt(1, candidateID);
+				ps.setInt(2, userID);
+				ps.executeUpdate();
+				
+				//adds user ID to election_voter_data to assure that the user can only vote once per election
+				ps = con.prepareStatement("INSERT INTO ongoing_election_voters (electionID, userID) VALUES ( ?, ?)");
+				ps.setInt(1, candidateElectionID);
+				ps.setInt(2, userID);
+				ps.executeUpdate();
+				
+				afterVoteCount = rs.getInt(6);
+				
+				rs.close();
+				ps.close();
+				
+				
+				boolean testCheck = false;
+				if(afterVoteCount>beforeVoteCount) {
+					testCheck = true;
+				}
+				
+				assertEquals(true, testCheck);
+				
+			}
+			else {
+				
+				rs.close();
+				ps.close();
+				
+			}
+			
+		}catch(Exception e) {
+			
+			System.out.println(e);
+		}
+	}
+	
+	private boolean canUserVote(int userID, int electionID) {
+		boolean voterStatusCheck = true;
+		
+		try {
+			Connection con;
+			PreparedStatement ps;
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from ongoing_election_voters where electionID = ?");
+			ps.setInt(1, electionID);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			boolean lastRowFlag = rs.isLast();
+			boolean exitLoop = lastRowFlag;
+			
+			while(!exitLoop) {
+				int userIDToCheck = rs.getInt(3);
+				
+				
+				if(userIDToCheck == userID) {
+					voterStatusCheck = false;
+					break;
+				}
+				
+				rs.next();
+				
+				if(lastRowFlag) {
+					exitLoop = true;
+				}
+				if(rs.isLast()) {
+					lastRowFlag = true;
+				}
+				
+			}
+			rs.close();
+			ps.close();
+			con.close();
+			
+		}catch(Exception e) {
+			voterStatusCheck = false;
+		}
+
+		
+		return voterStatusCheck;
+	}
 	
 	
 }
