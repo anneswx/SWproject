@@ -23,8 +23,12 @@ public class User {
 		 private String gender;
 		 private int age;
 		 private String education;
+		 private String securityQuestion1;
+		 private String securityAnswer1;
+		 private String securityQuestion2;
+		 private String securityAnswer2;
 		 
-		 public UserInfo( String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education) {
+		 public UserInfo( String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education, String securityQuestion1, String securityAnswer1, String securityQuestion2, String securityAnswer2) {
 			 this.email = email;
 			 if(voterstatus == 0) {
 				 this.voterstatus = VoterStatus.NOT_APPLIED;
@@ -46,6 +50,10 @@ public class User {
 			 this.gender = gender;
 			 this.age = age;
 			 this.education = education;
+			 this.securityQuestion1 = securityQuestion1;
+			 this.securityAnswer1 = securityAnswer1;
+			 this.securityQuestion2 = securityQuestion2;
+			 this.securityAnswer2 = securityAnswer2;
 		 }
 		 
 		 public String getEmail() {
@@ -94,6 +102,20 @@ public class User {
 		 
 		 public String getEducation() {
 			 return education;
+		 }
+		 
+		 public String getSecurityQuestion1() {
+			 return securityQuestion1;
+			 
+		 }
+		 public String getSecurityQuestion2() {
+			 return securityQuestion2;
+		 }
+		 public String getSecurityAnswer1() {
+			 return securityAnswer1;
+		 }
+		 public String getSecurityAnswer2() {
+			 return securityAnswer2;
 		 }
 		 
 		 public void setEmail(String newEmail) {
@@ -151,6 +173,20 @@ public class User {
 		 public void setEducation(String newEducation) {
 			 this.education = newEducation;
 		 }
+		 
+		 public void setSecurityQuestion1(String newQuestion) {
+			 this.securityQuestion1 = newQuestion;
+			 
+		 }
+		 public void setSecurityQuestion2(String newQuestion) {
+			 this.securityQuestion2 = newQuestion;
+		 }
+		 public void setSecurityAnswer1(String newAnswer) {
+			 this.securityAnswer1 = newAnswer;
+		 }
+		 public void setSecurityAnswer2(String newAnswer) {
+			 this.securityAnswer2 = newAnswer;
+		 }
 
 	}
 	
@@ -163,7 +199,7 @@ public class User {
     
     private UserDAOImpl UDAO = new UserDAOImpl();
     
-    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education) {
+    public User( int id, String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education, String securityQuestion1, String securityAnswer1, String securityQuestion2, String securityAnswer2) {
     		this.id = id;
     		this.username = username;
     		this.password = password;
@@ -176,7 +212,7 @@ public class User {
     		else {
     			this.adminStatus = AdminStatus.ADMIN;
     		}
-    		this.userInfo = new UserInfo(email, voterstatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
+    		this.userInfo = new UserInfo(email, voterstatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education, securityQuestion1, securityAnswer1, securityQuestion2, securityAnswer2);
     }
     
     public int getID() {
@@ -325,6 +361,36 @@ public class User {
     public void setEducation(String education) {
     	userInfo.setEducation(education);
     	UDAO.updateUser(this);
+    }
+    
+    public String getSecurityQuestion1() {
+    		return userInfo.getSecurityQuestion1();
+    	
+    }
+    public void setSecurityQuestion1(String newQuestion) {
+    		userInfo.setSecurityQuestion1(newQuestion);
+    		UDAO.updateUser(this);
+    }
+    public String getSecurityQuestion2() {
+    		return userInfo.getSecurityQuestion2();
+    }
+    public void setSecurityQuestion2(String newQuestion) {
+    	userInfo.setSecurityQuestion2(newQuestion);
+		UDAO.updateUser(this);
+    }
+    public String getSecurityAnswer1() {
+    		return userInfo.getSecurityAnswer1();
+    }
+    public void setSecurityAnswer1(String newAnswer) {
+    		userInfo.setSecurityAnswer1(newAnswer);
+		UDAO.updateUser(this);
+    }
+    public String getSecurityAnswer2() {
+    		return userInfo.getSecurityAnswer2();
+    }
+    public void setSecurityAnswer2(String newAnswer) {
+    		userInfo.setSecurityAnswer2(newAnswer);
+		UDAO.updateUser(this);
     }
     
    

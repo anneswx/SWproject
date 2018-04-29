@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Anne Sun
+  User: Heather Kemp
   Date: 2/24/2018
   Time: 1:09 PM
   To change this template use File | Settings | File Templates.
@@ -20,37 +20,72 @@
     
     <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
     
-    <title>Login</title>
+    <title>Forgot Password</title>
 </head>
 <body>
 <%
 	Cookie[] cookies = null;
 	boolean wasLoggedIn = false;
+	SessionGrabber sg = new SessionGrabber();
+	String adminStatus = "";
 	
 	cookies = request.getCookies();
 	if ( cookies != null) {
 		for (int i = 0; i < cookies.length; i++) {
 			
 			if (cookies[i].getName().equals("sessionID") && !cookies[i].getValue().equals("")) {
+				adminStatus = sg.checkAdminStatus(cookies[i].getValue());
 				wasLoggedIn = true;
 			}
 		}
 	}
 	
-	if (wasLoggedIn) { %>
-	
-	<%@ include file="includes/userNavBar.jsp" %>
-    			<div class="container-fluid"> 
+	if (adminStatus.equals("admin")){
+		%>
+		
+		<%@ include file="includes/adminSideNav.jsp" %>
+		<%@ include file="includes/adminNavBar.jsp" %>
+		<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-2 col-md-8" id="box">
             				<h2>You are already logged in! Did you land here by mistake!</h2>
             			</div>
             		</div>
 		
-	<% }
-	
+		<%
+	}
+	else if (adminStatus.equals("manager")) {
+		%>
+		
+		 <%@ include file="includes/managerSideNav.jsp" %> 
+		 
+		 <%@ include file="includes/managerNavBar.jsp" %> 
+		 <div class="container-fluid"> 
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>You are already logged in! Did you land here by mistake!</h2>
+            			</div>
+            		</div>
+		
+		<%
+	}
+	else if (adminStatus == "user"){ 
+			%>
+			
+			<%@ include file="includes/userNavBar.jsp" %>
+			<div class="container-fluid"> 
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>You are already logged in! Did you land here by mistake!</h2>
+            			</div>
+            		</div>
+			
+			<%
 
-	else if (request.getAttribute("successMessage") == null){ %>
+	
+	}
+	else {
+		 if (request.getAttribute("successMessage") == null){ %>
     <%@ include file="includes/navBar.jsp" %>
     <div class="container-fluid"> 
     <div class="row-fluid">
@@ -59,40 +94,30 @@
         <div class="container">
             <div class="col-lg-6 col-lg-offset-3">
                 <div class="inner-form">
-                    <h2>Login</h2> 
+                    <h2>Forgot Password Request</h2> 
                     <hr>
             			<p class="error">${errorMessage}</p>
-                    <form action="login" method="post">
+                    <form action="forgotPasswordRequest" method="post">
                         <div class="row">      
                             <div class="col-lg-12">
                             	
-                            		<span><i class="glyphicon glyphicon-user"></i></span>
-                                <label>Username</label>
+                            		<span><i class="glyphicon glyphicon-envelope"></i></span>
+                                <label>Email</label>
                                 <div class="form-group">
                                 		
-                                    <input name="username" placeholder="Username" class="form-control" type="text"
+                                    <input name="email" placeholder="Email" class="form-control" type="email"
                                        autofocus="autofocus">
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                            	<span><i class="glyphicon glyphicon-lock"></i></span>
-                                <label>Password</label>
-                                <div class="form-group">
-                               		
-                                    	<input name="password" placeholder="Password" class="form-control" type="password">
-                                </div>
-                            </div>	
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-default">
-                                    <span>LOGIN</span>
-                                </button>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="forgot">
-                                    <p><a href="/forgotPasswordRequest">Forgot Password or Email?</a></p>
-                                </div>
-                            </div>
                         </div>
+                        <div class="row">
+	                        <div class="col-lg-12">
+	                                <button type="submit" class="btn btn-default">
+	                                    <span>Submit</span>
+	                                </button>
+	                        </div>
+                        </div>
+                        
                     </form>
                 </div> <!-- inner-form -->
             </div>   
@@ -102,14 +127,15 @@
 </div>
         <% }
     		else { %>
-    			<%@ include file="includes/userNavBar.jsp" %>
+    		    <%@ include file="includes/navBar.jsp" %>
     			<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-4 col-md-4" id="box">
-            				<h2>You've been successfully logged in!</h2>
+            				<h2>If an account with that email exists, you can expect an email to arrive soon with further instructions.</h2>
             			</div>
             		</div>
     		<% }
+	}
     		%>
     </div>
 

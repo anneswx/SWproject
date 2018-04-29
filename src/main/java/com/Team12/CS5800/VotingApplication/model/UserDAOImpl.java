@@ -16,12 +16,15 @@ public class UserDAOImpl implements UserDAO {
 	static PreparedStatement ps;
 	
 	
-	public int insertUser( String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education ) {
+	public int insertUser( String username, String password, int adminStatus, String email, int voterstatus, String firstName, String lastName, String ssn, String address, String city, String state, String zipcode, String precinct, String gender, int age, String education, String securityQuestion1, String securityQuestion1Answer, String securityQuestion2, String securityQuestion2Answer ) {
 		int status = 0;
         try {
         	
         	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     		String hashedPassword = passwordEncoder.encode(password);
+    		
+    		String hashedSecurityAnswer1 = passwordEncoder.encode(securityQuestion1Answer);
+    		String hashedSecurityAnswer2 = passwordEncoder.encode(securityQuestion2Answer);
 
         	// Create new user entry: username, password, adminStatus
             con = MyConnectionProvider.getCon();
@@ -42,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
             rs.close();
             ps.close();
             
-            ps = con.prepareStatement("INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode, precinct, gender, age, education) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+            ps = con.prepareStatement("INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode, precinct, gender, age, education, securityQuestion1, securityAnswer1, securityQuestion2, securityAnswer2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         // 
             ps.setInt(1, id);
             ps.setString(2, email);
@@ -58,6 +61,10 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(12, gender);
             ps.setInt(13, age);
             ps.setString(14, education);
+            ps.setString(15, securityQuestion1);
+            ps.setString(16, hashedSecurityAnswer1);
+            ps.setString(17, securityQuestion2);
+            ps.setString(18, hashedSecurityAnswer2);
             ps.executeUpdate();
 
             status = 1;
@@ -128,17 +135,21 @@ public class UserDAOImpl implements UserDAO {
 			String gender = rs.getString(13);
 			int age = rs.getInt(14);
 			String education = rs.getString(15);
+			String securityQuestion1 = rs.getString(16);
+			String securityAnswer1 = rs.getString(17);
+			String securityQuestion2 = rs.getString(18);
+			String securityAnswer2 = rs.getString(19);
 			rs.close();
 			ps.close();
 			con.close();
 			
-			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
+			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education, securityQuestion1, securityAnswer1, securityQuestion2, securityAnswer2);
 			
 			} catch (Exception e) {
 	             System.out.println(e);
 	         }
 			
-			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "");
+			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "", "", "", "", "");
 	}
 	
 	public User getUserWithUsername(String username) {
@@ -173,17 +184,21 @@ public class UserDAOImpl implements UserDAO {
 			String gender = rs.getString(13);
 			int age = rs.getInt(14);
 			String education = rs.getString(15);
+			String securityQuestion1 = rs.getString(16);
+			String securityAnswer1 = rs.getString(17);
+			String securityQuestion2 = rs.getString(18);
+			String securityAnswer2 = rs.getString(19);
 			rs.close();
 			ps.close();
 			con.close();
 			
-			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
+			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education, securityQuestion1, securityAnswer1, securityQuestion2, securityQuestion2);
 			
 			} catch (Exception e) {
 	             System.out.println(e);
 	         }
 			
-			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "");
+			return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "", "", "", "", "");
 	}
 			
 	// Returns a user object based on the session id
@@ -231,17 +246,21 @@ public class UserDAOImpl implements UserDAO {
 		String gender = rs.getString(13);
 		int age = rs.getInt(14);
 		String education = rs.getString(15);
+		String securityQuestion1 = rs.getString(16);
+		String securityAnswer1 = rs.getString(17);
+		String securityQuestion2 = rs.getString(18);
+		String securityAnswer2 = rs.getString(19);
 		rs.close();
 		ps.close();
 		con.close();
 		
-		return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education);
+		return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education, securityQuestion1, securityAnswer1, securityQuestion2, securityAnswer2);
 		
 		} catch (Exception e) {
              System.out.println(e);
          }
 		
-		return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "");
+		return new User(0, "", "", 0, "", 0, "", "", "", "", "", "", "", "", "", 0, "", "", "", "", "");
 		
 	}
 	
@@ -297,6 +316,10 @@ public class UserDAOImpl implements UserDAO {
             ps.setInt(12, user.getAge());
             ps.setString(13, user.getEducation());
             ps.setInt(14, user.getID());
+            ps.setString(15, user.getSecurityQuestion1());
+            ps.setString(16, user.getSecurityAnswer1());
+            ps.setString(17, user.getSecurityQuestion2());
+            ps.setString(18, user.getSecurityAnswer1());
 
             ps.executeUpdate();
 
