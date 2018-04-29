@@ -452,5 +452,29 @@ public int getUserIDWithEmail(String email) {
 		return -1;
 }
 
+public int getUserIDByRequestKey(String requestKey) {
+	int userID = -1;
+	try {
+	 
+		con = MyConnectionProvider.getCon();
+		ps = con.prepareStatement("select * from forgot_password_requests where requestid = ?");
+		ps.setString(1, requestKey);
+		
+		ResultSet rs = ps.executeQuery();
+		if(rs.first()) {
+			rs.first();
+		
+			userID = rs.getInt(2);
+			rs.close();
+			ps.close();
+			con.close();
+		}
+
+	} catch (Exception e) {
+		System.out.println(e);
+	}
+
+	return userID;
+}
 	
 }

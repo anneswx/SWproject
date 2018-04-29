@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.UserDAOImpl" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.User" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -85,7 +87,24 @@
 	
 	}
 	else {
-		 if (request.getAttribute("successMessage") == null){ %>
+		 if (request.getAttribute("successMessage") == null){ 
+			 String requestKey = request.getParameter("request");
+			 UserDAOImpl udao = new UserDAOImpl();
+			 int userID = udao.getUserIDByRequestKey(requestKey);
+			 
+			 if (userID == -1){ // there wasn't a request made
+				 
+			 } 
+			 else {
+				 User thisUser = udao.getUserWithID(userID);
+				 pageContext.setAttribute("question1", thisUser.getSecurityQuestion1());
+				 pageContext.setAttribute("question2", thisUser.getSecurityQuestion2());
+			 }
+ 
+			 
+		 %>
+		 
+		 
     <%@ include file="includes/navBar.jsp" %>
     <div class="container-fluid"> 
     <div class="row-fluid">
@@ -101,12 +120,34 @@
                         <div class="row">      
                             <div class="col-lg-12">
                             	
-                            		<span><i class="glyphicon glyphicon-envelope"></i></span>
-                                <label>Email</label>
+                            		
+                                <label>${question1}</label>
                                 <div class="form-group">
                                 		
                                     <input name="email" placeholder="Email" class="form-control" type="email"
                                        autofocus="autofocus">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">      
+                            <div class="col-lg-12">
+                            	
+                                <label>${question2}</label>
+                                <div class="form-group">
+                                		
+                                    <input name="email" placeholder="Email" class="form-control" type="email"
+                                       >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">      
+                            <div class="col-lg-12">
+                            	
+                                <label>New Password</label>
+                                <div class="form-group">
+                                		
+                                    <input name="email" placeholder="Email" class="form-control" type="email"
+                                       >
                                 </div>
                             </div>
                         </div>
@@ -131,7 +172,7 @@
     			<div class="container-fluid"> 
     				<div class="row-fluid">
         				<div class="col-md-offset-4 col-md-4" id="box">
-            				<h2>If an account with that email exists, you can expect an email to arrive soon with further instructions.</h2>
+            				<h2>Your password has been reset!</h2>
             			</div>
             		</div>
     		<% }

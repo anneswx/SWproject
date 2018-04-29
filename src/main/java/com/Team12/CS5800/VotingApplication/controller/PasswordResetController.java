@@ -27,7 +27,7 @@ public class PasswordResetController {
 
     @RequestMapping(value="/forgotPassword", method = RequestMethod.GET)
     public String showLoginPage(ModelAndView model){
-        return "forgotPasswordRequest";
+        return "forgotPassword";
     }
 
     @RequestMapping(value="/forgotPassword", method = RequestMethod.POST)
