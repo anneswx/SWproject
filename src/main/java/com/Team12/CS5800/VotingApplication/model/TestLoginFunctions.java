@@ -125,5 +125,54 @@ public class TestLoginFunctions {
     		
     		return b;
     }
+    
+    public static void sendPasswordRecoveryEmail(String clientEmail, String requestCode){
+    		String username = "fswe.login.check.team12@gmail.com";
+        String password = "fsweIsFun";
+
+        String sender = "fswe.login.check.team12@gmail.com";
+        String host = "smtp.gmail.com";
+
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.host", sender);
+        properties.put("mail.smtp.user",clientEmail);
+        properties.put("mail.smtp.password", password);
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(properties);
+        MimeMessage message = new MimeMessage(session);
+        
+
+        try{
+
+            message.setFrom(new InternetAddress(sender));
+            InternetAddress toAddress = new InternetAddress(clientEmail);
+
+            message.addRecipient(Message.RecipientType.TO, toAddress);
+
+            message.setSubject("Forgot Password");
+
+            String url = "http://localhost:8080/forgotPassword?request=" + requestCode;
+            
+            String html = "There was a request to reset your password for Team 12's VottingApplication service. If this wasn't you, feel free to ignore this email. Otherwise, please <a href='" + url + "'> reset your password here.</a>.";
+            
+            message.setText(html, "UTF-8", "html");
+
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, username, password);
+            transport.sendMessage(message, message.getAllRecipients());
+            
+
+            transport.close();
+
+        } catch (MessagingException error1){
+            error1.printStackTrace();
+        }
+
+
+    }
 
 }

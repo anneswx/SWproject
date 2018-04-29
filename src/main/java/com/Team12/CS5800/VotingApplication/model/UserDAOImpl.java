@@ -369,6 +369,88 @@ public class UserDAOImpl implements UserDAO {
 		return status;
 	}
 	
+public boolean verifySecurityQuestion1(String email, String theirAnswer) {
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from user_info where email = ?");
+			ps.setString(1, email);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			String dbAnswer = rs.getString(17);
+			ps.close();
+			con.close();
+			rs.close();
+			if (dbAnswer != null) {
+				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+	    			if (passwordEncoder.matches(theirAnswer, dbAnswer)) {
+	    				return true;
+	    			}
+			}
+		} catch (Exception e) {
+            System.out.println(e);
+        }
+		return false;
+	
+}
+
+public boolean verifySecurityQuestion2(String email, String theirAnswer) {
+	try {
+		con = MyConnectionProvider.getCon();
+		ps = con.prepareStatement("select * from user_info where email = ?");
+		ps.setString(1, email);
+		
+		ResultSet rs = ps.executeQuery();
+		rs.first();
+		String dbAnswer = rs.getString(19);
+		ps.close();
+		con.close();
+		rs.close();
+		if (dbAnswer != null) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    			if (passwordEncoder.matches(theirAnswer, dbAnswer)) {
+    				return true;
+    			}
+		}
+	} catch (Exception e) {
+        System.out.println(e);
+    }
+	return false;
+
+}
+	
+public int getUserIDWithEmail(String email) {
+	try {
+		
+		con = MyConnectionProvider.getCon();
+
+		ps = con.prepareStatement("select * from user_info where email = ?");
+		ps.setString(1, email);
+		
+		ResultSet rs = ps.executeQuery();
+		rs.first();
+		
+		int id = -1;
+		
+		if(rs.first()) {
+			id = rs.getInt(1);
+			
+		}
+		
+		rs.close();
+		ps.close();
+		con.close();
+		
+		return id;
+		
+		} catch (Exception e) {
+             System.out.println(e);
+         }
+		
+		return -1;
+}
 
 	
 }

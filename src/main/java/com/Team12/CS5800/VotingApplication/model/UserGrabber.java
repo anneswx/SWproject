@@ -13,8 +13,6 @@ public class UserGrabber {
     static PreparedStatement ps;
     
     private UserDAOImpl UDAO = new UserDAOImpl();
-	
-	// Get users based on precinct
     
     public ArrayList<User> getAppliedUsersByPrecinct(String precinct) {
     		ArrayList<User> userList = new ArrayList<User>();

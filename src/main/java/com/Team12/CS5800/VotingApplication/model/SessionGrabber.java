@@ -135,6 +135,55 @@ public class SessionGrabber {
 		return UDAO.getUser(sessionID).getEducation();
 	}
 	
+	public String getSecurityQuestion1(String sessionID) {
+		return UDAO.getUser(sessionID).getSecurityQuestion1();
+	}
+	
+	public String getSecurityQuestion2(String sessionID) {
+		return UDAO.getUser(sessionID).getSecurityQuestion2();
+	}
+	
+	public String getSecurityAnswer1(String sessionID) {
+		return UDAO.getUser(sessionID).getSecurityAnswer1();
+	}
+	
+	public String getSecurityAnswer2(String sessionID) {
+		return UDAO.getUser(sessionID).getSecurityAnswer2();
+	}
+	
+	
+	public int storePasswordRequest(String requestID, int userID) {
+		int status = 0;
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("insert into forgot_password_requests (requestid, userid) values (?,?)");
+			ps.setString(1, requestID);
+			ps.setInt(2, userID);
+			status = ps.executeUpdate();
+			ps.close();
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return status;
+	}
+	
+	public int removePasswordRequest(String requestID) {
+		int status = 0;
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("delete from forgot_password_requests where requestid=?");
+			ps.setString(1, requestID);
+			status = ps.executeUpdate();
+			ps.close();
+			con.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return status;
+	}
 	
 	
 

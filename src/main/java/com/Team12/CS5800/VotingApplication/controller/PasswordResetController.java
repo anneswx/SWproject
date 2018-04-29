@@ -15,41 +15,45 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.Team12.CS5800.VotingApplication.model.SessionGrabber;
 import com.Team12.CS5800.VotingApplication.service.RequestPasswordResetService;
-import com.Team12.CS5800.VotingApplication.model.UserDAOImpl;
 
 
 
 @Controller
 @SessionAttributes("name")
-public class RequestPasswordResetController {
+public class PasswordResetController {
 
     @Autowired
     RequestPasswordResetService service;
 
-    @RequestMapping(value="/forgotPasswordRequest", method = RequestMethod.GET)
+    @RequestMapping(value="/forgotPassword", method = RequestMethod.GET)
     public String showLoginPage(ModelAndView model){
         return "forgotPasswordRequest";
     }
 
-    @RequestMapping(value="/forgotPasswordRequest", method = RequestMethod.POST)
+    @RequestMapping(value="/forgotPassword", method = RequestMethod.POST)
     public ModelAndView showHomePage(ModelAndView model, @RequestParam String email, HttpServletResponse response){
-    		
-    	UserDAOImpl udao = new UserDAOImpl();
-    	SessionGrabber sg = new SessionGrabber();
-    	
-    int id = udao.getUserIDWithEmail(email);
-    
-    model.addObject("successMessage", "Done");
-    
-    if (id == -1) { // user doesn't have an account
-    		return model;
-    } else {
-    		String requestID = sg.generateSessionID() + LocalDateTime.now();
-    		sg.storePasswordRequest(requestID, id);
-    		service.sendRecoveryEmail(email, requestID);
-    		return model;
-    }
-    	
+    		/*
+    		int userID;
+    		boolean isValidLogin = service.validateUser(username, password);
+    		if (!isValidLogin) {
+    			model.addObject("errorMessage", "Invalid Credentials");
+	        return model;
+    		} else {
+    			userID = service.getUser(username).getID();
+    		}
+        
+        model.setViewName("redirect:/");
+
+        SessionGrabber sg = new SessionGrabber();
+        
+        String cookieToAdd = sg.generateSessionID() + LocalDateTime.now();
+        
+        sg.storeSession(cookieToAdd, userID);
+        
+        response.addCookie(new Cookie("sessionID", cookieToAdd));
+        */
+        
+        return model;
     }
 
 }
