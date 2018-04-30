@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.EmailAuthGrabber" %>
 
 <html>
 <head>
@@ -68,30 +69,70 @@ SessionGrabber sg = new SessionGrabber();
 			
 			<%@ include file="includes/adminSideNav.jsp" %>
 			<%@ include file="includes/adminNavBar.jsp" %>
-			
+			<div class="container-fluid"> 
 			<%
 		}
 		else if (userStatus.equals("manager")) {
 			%>
-			
+		
 			 <%@ include file="includes/managerSideNav.jsp" %> 
 			 
 			 <%@ include file="includes/managerNavBar.jsp" %> 
-			
+			<div class="container-fluid"> 
 			<%
 		}
-		else { 
-				%>
+		else { // user
+			int voterStatus = sg.getVoterStatus(sessionCode);
+
+			if (voterStatus == 0) { // Not applied
 				
+				EmailAuthGrabber eag = new EmailAuthGrabber();
+				System.out.println(sg.getUsername(sessionCode));
+				if (eag.checkValidatedEmail(sessionCode) == 0){
+					
+				%>
+				<div class="container-fluid"> 
 				<%@ include file="includes/userNavBar.jsp" %>
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>Welcome, ${firstName}! Make sure to verify your email! You can't become a voter without doing so!</h2>
+        				</div>
+    				</div>
 				
 				<%
-
+				}
+				else {
+					%>
+					<div class="container-fluid"> 
+					<%@ include file="includes/userNavBar.jsp" %>
+    					<div class="row-fluid">
+        					<div class="col-md-offset-2 col-md-8" id="box">
+            					<h2>Welcome, ${firstName}! Make sure you apply to become a voter before the next election cycle! To apply, <a href="/voterApply">click here!</a></h2>
+        					</div>
+    					</div>
+					
+					
+					<%
+				}
+			}
+			else if (voterStatus == 1) { // Applied but not yet approved
+				%>
+				<div class="container-fluid"> 
+				<%@ include file="includes/userNavBar.jsp" %>
 		
-	}
-%>
-
-    <div class="container-fluid">
+				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>Welcome, ${firstName}! An administrator is reviewing your application now! Please check in again later! </h2>
+        				</div>
+    				</div>
+				
+				<%
+				
+			}
+			else { // Registered and was approved
+				%>
+				<div class="container-fluid"> 
+				<%@ include file="includes/userNavBar.jsp" %>
 
      <div class="login">
         <div class="container">
@@ -130,8 +171,9 @@ SessionGrabber sg = new SessionGrabber();
     </div>
     
 </div>
+</div>
 <% 
-}
+}}}
 %>
 <%@ include file="includes/footer.jsp" %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>

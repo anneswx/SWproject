@@ -55,8 +55,8 @@ String sessionCode = "";
 		String firstName = sg.getFirstName(sessionCode);
 		pageContext.setAttribute("firstName", firstName);
 		if (userStatus.equals("manager")) { %>
-	<%@ include file="includes/adminSideNav.jsp" %>
-	<%@ include file="includes/adminNavBar.jsp" %>
+	<%@ include file="includes/managerSideNav.jsp" %>
+	<%@ include file="includes/managerNavBar.jsp" %>
 	
 	<div class="container-fluid"> <!-- div to hold all other divs -->
 	
