@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
 
-    <title>Registration</title>
+    <title>Profile</title>
 </head>
 <body>
 
@@ -68,6 +68,12 @@ SessionGrabber sg = new SessionGrabber();
 		String gender = sg.getGender(sessionCode);
 		int age = sg.getAge(sessionCode);
 		String education = sg.getEducation(sessionCode);
+		String state = sg.getState(sessionCode);
+		String securityQuestion1 = sg.getSecurityQuestion1(sessionCode);
+		String securityQuestion2 = sg.getSecurityQuestion2(sessionCode);
+		String securityAnswer1 = sg.getSecurityAnswer1(sessionCode);
+		String securityAnswer2 = sg.getSecurityAnswer2(sessionCode);
+		
 		
 		if (userStatus.equals("admin")){
 			%>
@@ -94,9 +100,8 @@ SessionGrabber sg = new SessionGrabber();
 				<%
 
 		
-	}
+		}
 %>
-
     <div class="container-fluid">
 
      <div class="login">
@@ -149,7 +154,7 @@ SessionGrabber sg = new SessionGrabber();
 										<option value="FL">Florida</option>
 										<option value="GA">Georgia</option>
 										<option value="HI">Hawaii</option>
-										<option selected value="IA">Iowa</option>
+										<option value="IA">Iowa</option>
 										<option value="ID">Idaho</option>
 										<option value="IL">Illinois</option>
 										<option value="IN">Indiana</option>
@@ -248,6 +253,58 @@ SessionGrabber sg = new SessionGrabber();
                             <input type="text" name="education" id="education" class="form-control input-sm"
                                    value="<%=education %>" required>
                         </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+		                    		<div class = "form-group">
+		                    			<label>Security Question 1</label>
+		                    			<select class="form-control" id="securityQuestion1" name="securityQuestion1" required>
+										<option>What was your childhood nickname?</option>
+										<option>What is the name of your favorite childhood friend?</option>
+										<option>In what city or town did your mother and father meet?</option>
+										<option>What is the middle name of your oldest child?</option>
+										<option>What is your favorite sports team?</option>
+										<option>What is your favorite movie?</option>
+										<option">What was the color of your first car?</option>
+										<option>What was the name of the hospital where you were born?</option>
+										<option>What was the name of the company where you had your first job?</option>
+										<option>What school did you attend for sixth grade?</option>
+										<option>What is the name of the first person you kissed?</option>
+									</select>
+		                    		</div>
+		                    	</div>
+		                    	<div class="col-xs-6 col-sm-6 col-md-6">
+		                    		<div class = "form-group">
+		                    			<label>Security Question 1 Answer</label>
+		                    			<input type="text" name="securityQuestion1Answer" id="securityQuestion1Answer" class="form-control input-sm" value="<%=securityAnswer1 %>" required/>
+		                    		</div>
+		                    	</div>
+				           </div>
+				           <div class="row">
+		                            <div class="col-xs-6 col-sm-6 col-md-6">
+				                    		<div class = "form-group">
+				                    			<label>Security Question 2</label>
+				                    			<select class="form-control" id="securityQuestion2" name="securityQuestion2" required>
+												<option>What was your childhood nickname?</option>
+												<option>What is the name of your favorite childhood friend?</option>
+												<option>In what city or town did your mother and father meet?</option>
+												<option>What is the middle name of your oldest child?</option>
+												<option>What is your favorite sports team?</option>
+												<option>What is your favorite movie?</option>
+												<option>What was the color of your first car?</option>
+												<option>What was the name of the hospital where you were born?</option>
+												<option>What was the name of the company where you had your first job?</option>
+												<option>What school did you attend for sixth grade?</option>
+												<option>What is the name of the first person you kissed?</option>
+											</select>
+				                    		</div>
+				                    	</div>
+				                    	<div class="col-xs-6 col-sm-6 col-md-6">
+				                    		<div class = "form-group">
+				                    			<label>Security Question 2 Answer</label>
+				                    			<input type="text" name="securityQuestion2Answer" id="securityQuestion2Answer" class="form-control input-sm" value="<%=securityAnswer2 %>" required/>
+				                    		</div>
+				                    	</div>
+				           </div>
                         
                         <input type="submit" name ="submit" value="Update" class="btn btn-success btn-block">
                     </form>
@@ -257,6 +314,12 @@ SessionGrabber sg = new SessionGrabber();
     </div>
     
 </div>
+
+	<script>
+	$(state).val("<%=state%>");
+	$(securityQuestion1).val("<%=securityQuestion1%>");
+	$(securityQuestion2).val("<%=securityQuestion2%>");
+	</script>
 <% 
 }
 %>

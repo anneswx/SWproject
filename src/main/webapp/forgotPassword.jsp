@@ -99,6 +99,7 @@
 				 User thisUser = udao.getUserWithID(userID);
 				 pageContext.setAttribute("question1", thisUser.getSecurityQuestion1());
 				 pageContext.setAttribute("question2", thisUser.getSecurityQuestion2());
+				 pageContext.setAttribute("formAction", "forgotPassword?request=" + requestKey);
 			 }
  
 			 
@@ -116,7 +117,7 @@
                     <h2>Forgot Password Request</h2> 
                     <hr>
             			<p class="error">${errorMessage}</p>
-                    <form action="forgotPasswordRequest" method="post">
+                    <form action=${formAction} method="post">
                         <div class="row">      
                             <div class="col-lg-12">
                             	
@@ -124,7 +125,7 @@
                                 <label>${question1}</label>
                                 <div class="form-group">
                                 		
-                                    <input name="email" placeholder="Email" class="form-control" type="email"
+                                    <input name="answer1" placeholder="Answer" class="form-control" type="text"
                                        autofocus="autofocus">
                                 </div>
                             </div>
@@ -135,7 +136,7 @@
                                 <label>${question2}</label>
                                 <div class="form-group">
                                 		
-                                    <input name="email" placeholder="Email" class="form-control" type="email"
+                                    <input name="answer2" placeholder="Answer" class="form-control" type="text"
                                        >
                                 </div>
                             </div>
@@ -146,7 +147,7 @@
                                 <label>New Password</label>
                                 <div class="form-group">
                                 		
-                                    <input name="email" placeholder="Email" class="form-control" type="email"
+                                    <input name="newPassword" placeholder="New Password" class="form-control" type="password"
                                        >
                                 </div>
                             </div>

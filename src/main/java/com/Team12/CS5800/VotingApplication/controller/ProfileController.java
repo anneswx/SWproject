@@ -40,7 +40,7 @@ public class ProfileController {
     }
 
     @RequestMapping(value="/profile", method = RequestMethod.POST)
-    public ModelAndView showWelcomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, @RequestParam String newpassword, @RequestParam String ssn, @RequestParam String address, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String city, @RequestParam String state, @RequestParam String zipcode, @RequestParam String email, @RequestParam String gender, @RequestParam int age, @RequestParam String education, HttpServletResponse response){
+    public ModelAndView showWelcomePage(ModelAndView model, @RequestParam String username, @RequestParam String password, @RequestParam String newpassword, @RequestParam String ssn, @RequestParam String address, @RequestParam String first_name, @RequestParam String last_name, @RequestParam String city, @RequestParam String state, @RequestParam String zipcode, @RequestParam String email, @RequestParam String gender, @RequestParam int age, @RequestParam String education, @RequestParam String securityQuestion1, @RequestParam String securityQuestion1Answer, @RequestParam String securityQuestion2, @RequestParam String securityQuestion2Answer,HttpServletResponse response){
 
     	boolean isValidLogin = loginService.validateUser(username, password);
     	
@@ -102,6 +102,10 @@ public class ProfileController {
     	thisUser.setGender(gender);
     	thisUser.setAge(age);
     	thisUser.setEducation(education);
+    	thisUser.setSecurityAnswer1(securityQuestion1Answer);
+    	thisUser.setSecurityAnswer2(securityQuestion2Answer);
+    	thisUser.setSecurityQuestion1(securityQuestion1);
+    	thisUser.setSecurityQuestion2(securityQuestion2);
     	
     	model.addObject("successMessage", "Your information has been updated!");
 

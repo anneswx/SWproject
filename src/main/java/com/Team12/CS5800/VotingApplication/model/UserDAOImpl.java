@@ -23,8 +23,6 @@ public class UserDAOImpl implements UserDAO {
         	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     		String hashedPassword = passwordEncoder.encode(password);
     		
-    		String hashedSecurityAnswer1 = passwordEncoder.encode(securityQuestion1Answer);
-    		String hashedSecurityAnswer2 = passwordEncoder.encode(securityQuestion2Answer);
 
         	// Create new user entry: username, password, adminStatus
             con = MyConnectionProvider.getCon();
@@ -62,9 +60,9 @@ public class UserDAOImpl implements UserDAO {
             ps.setInt(13, age);
             ps.setString(14, education);
             ps.setString(15, securityQuestion1);
-            ps.setString(16, hashedSecurityAnswer1);
+            ps.setString(16, securityQuestion1Answer);
             ps.setString(17, securityQuestion2);
-            ps.setString(18, hashedSecurityAnswer2);
+            ps.setString(18, securityQuestion2Answer);
             ps.executeUpdate();
 
             status = 1;
@@ -192,7 +190,7 @@ public class UserDAOImpl implements UserDAO {
 			ps.close();
 			con.close();
 			
-			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education, securityQuestion1, securityAnswer1, securityQuestion2, securityQuestion2);
+			return new User(id, username, password, adminStatus, email, voterStatus, firstName, lastName, ssn, address, city, state, zipcode, precinct, gender, age, education, securityQuestion1, securityAnswer1, securityQuestion2, securityAnswer2);
 			
 			} catch (Exception e) {
 	             System.out.println(e);
@@ -289,7 +287,7 @@ public class UserDAOImpl implements UserDAO {
             ps.close();
             
             
-            ps = con.prepareStatement("UPDATE user_info SET email = ?, voter_status = ?, first_name = ?, last_name = ?, ssn = ?, address = ?, city = ?, state = ?, zipcode = ?, precinct = ?, gender = ?, age = ?, education = ? WHERE id = ?");
+            ps = con.prepareStatement("UPDATE user_info SET email = ?, voter_status = ?, first_name = ?, last_name = ?, ssn = ?, address = ?, city = ?, state = ?, zipcode = ?, precinct = ?, gender = ?, age = ?, education = ?, securityQuestion1 = ?, securityAnswer1 = ?, securityQuestion2 = ?, securityAnswer2 = ? WHERE id = ?");
         // INSERT INTO user_info (id, email, voter_status, first_name, last_name, ssn, address, city, state, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             
             
@@ -315,11 +313,11 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(11, user.getGender());
             ps.setInt(12, user.getAge());
             ps.setString(13, user.getEducation());
-            ps.setInt(14, user.getID());
-            ps.setString(15, user.getSecurityQuestion1());
-            ps.setString(16, user.getSecurityAnswer1());
-            ps.setString(17, user.getSecurityQuestion2());
-            ps.setString(18, user.getSecurityAnswer1());
+            ps.setString(14, user.getSecurityQuestion1());
+            ps.setString(15, user.getSecurityAnswer1());
+            ps.setString(16, user.getSecurityQuestion2());
+            ps.setString(17, user.getSecurityAnswer2());
+            ps.setInt(18, user.getID());
 
             ps.executeUpdate();
 
@@ -382,9 +380,7 @@ public boolean verifySecurityQuestion1(String email, String theirAnswer) {
 			con.close();
 			rs.close();
 			if (dbAnswer != null) {
-				BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-	    			if (passwordEncoder.matches(theirAnswer, dbAnswer)) {
+				if (theirAnswer.equals(dbAnswer) ) {
 	    				return true;
 	    			}
 			}
@@ -408,11 +404,9 @@ public boolean verifySecurityQuestion2(String email, String theirAnswer) {
 		con.close();
 		rs.close();
 		if (dbAnswer != null) {
-			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    			if (passwordEncoder.matches(theirAnswer, dbAnswer)) {
-    				return true;
-    			}
+			if (theirAnswer.equals(dbAnswer) ) {
+				return true;
+			}
 		}
 	} catch (Exception e) {
         System.out.println(e);
