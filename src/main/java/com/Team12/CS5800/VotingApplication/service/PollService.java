@@ -29,4 +29,12 @@ public class PollService {
 
 		return status;
 	}
+	
+	public boolean vote(int userID, int candidateID, String precinct) {
+		
+		boolean status = VDAO.Vote(userID, candidateID,precinct);
+
+		return status;
+	}
+	
 }

@@ -1,5 +1,7 @@
 <%@ page import = "java.io.*,java.util.*,java.sql.*"%>
 <%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.EmailAuthGrabber" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 
@@ -21,11 +23,51 @@
     <title>Voterlist</title>
 </head>
 <body>
-	<%@ include file="includes/adminSideNav.jsp" %>
-	<%@ include file="includes/adminNavBar.jsp" %>
+
+<% 
+
+
+String sessionCode = ""; 
+	Cookie[] cookies = null;
 	
-	<div class="container-fluid"> <!-- div to hold all other divs -->
+	cookies = request.getCookies();
+	if ( cookies != null) {
+		for (int i = 0; i < cookies.length; i++) {
+			
+			if (cookies[i].getName().equals("sessionID")) {
+				sessionCode = cookies[i].getValue();
+				
+			}
+		}
+	}
 	
+	if (sessionCode.equals("")){ // Not logged in
+		%>
+		<%@ include file="includes/navBar.jsp" %>
+		<div class="container-fluid"> 
+    		<div class="row-fluid">
+        		<div class="col-md-offset-2 col-md-8" id="box">
+            		<h2>Welcome to our voting service! Please register or login!</h2>
+        		</div>
+    		</div>
+
+		<%
+	} else {
+		SessionGrabber sg = new SessionGrabber();
+		String userStatus = sg.checkAdminStatus(sessionCode);
+		String firstName = sg.getFirstName(sessionCode);
+		pageContext.setAttribute("firstName", firstName);
+		if (userStatus.equals("admin")){
+			%>
+			<%@ include file="includes/adminSideNav.jsp" %>
+			<%@ include file="includes/adminNavBar.jsp" %>
+		<% } 
+		else if(userStatus.equals("manager")){ %>
+			<%@ include file="includes/managerSideNav.jsp" %> 
+			<%@ include file="includes/managerNavBar.jsp" %> 
+			<% } %>
+	
+	<div class="container-fluid"> 
 		<sql:setDataSource var = "data" driver = "com.mysql.jdbc.Driver"
 	         url = "jdbc:mysql://bais.mysql.database.azure.com/db"
 	         user = "voterapp@bais"  password = "P@$$w0rD"/>
@@ -94,9 +136,9 @@
 				</table>
 			</div>
 		</div>
-		
-	</div>
-	
+		</div>
+
+	<% }  %>
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>

@@ -42,7 +42,12 @@
                         <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-users"></i> Users <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="usersSubmenu">
                        		<li><a href="/voterApproval"><i class="fa fa-angle-double-right"></i> Approve Voter Applications</a></li>
+<<<<<<< HEAD
                             <li><a href="/voterlist"><i class="fa fa-angle-double-right"></i> Users</a></li>
+=======
+                            <li><a href="voterlist"><i class="fa fa-angle-double-right"></i> Voters</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Managers</a></li>
+>>>>>>> cb60c0e745b84732763ea90edf9776c3c3cecb1f
                         </ul>
                     </li>
                     <li>

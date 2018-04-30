@@ -10,7 +10,7 @@ import com.Team12.CS5800.VotingApplication.model.DataConnection.MyConnectionProv
 public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 	static Connection con;
 	static PreparedStatement ps;
-	
+	private UserDAOImpl UDAO = new UserDAOImpl();
 	
 	
 	/*
@@ -211,6 +211,7 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 				ps.setInt(2, userID);
 				ps.executeUpdate();
 				
+				
 				//adds user ID to election_voter_data to assure that the user can only vote once per election
 				ps = con.prepareStatement("INSERT INTO election_voter_data (electionID, voterID) VALUES ( ?, ?)");
 				ps.setInt(1, candidateElectionID);
@@ -237,7 +238,52 @@ public class VotingAndCandidateDAOImpl implements VotingAndCandidateDAO {
 		
 		return voteSuccessfullyCast;
 	}
-	
+	public boolean Vote(int userID, int candidateID, String precinct) {
+		boolean voteSuccessfullyCast = true;
+		
+		try {
+			con = MyConnectionProvider.getCon();
+			ps = con.prepareStatement("select * from candidate_info where candidateID = ?");
+			ps.setInt(1, candidateID);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.first();
+			
+			
+			
+			
+				//increments vote count
+				con = MyConnectionProvider.getCon();
+				
+				ps = con.prepareStatement("UPDATE candidate_info SET votes = votes + 1 WHERE candidateID = ?");
+				ps.setInt(1, candidateID);
+				ps.executeUpdate();
+				System.out.println("here");
+				//adds user ID to paper trail to track users who have voted for each candidate to verify voting results (sorry Russia)
+				
+				ps = con.prepareStatement("INSERT INTO paper_trail (candidateID, voterID,electionID,precinct) VALUES ( ?, ?, ?,?)");
+				ps.setInt(1, candidateID);
+				ps.setInt(2, userID);
+				ps.setInt(3, 1);
+				ps.setString(4, precinct);
+				ps.executeUpdate();
+				
+			
+				
+				
+				rs.close();
+				ps.close();
+				
+				voteSuccessfullyCast = true;
+		
+		}catch(Exception e) {
+			voteSuccessfullyCast = false;
+			System.out.println(e);
+		}
+		
+		
+		return voteSuccessfullyCast;
+	}
 	//checks that the user hasn't already voted. Returns true if the user has not. False if they have.
 	private boolean canUserVote(int userID, int electionID) {
 		boolean voterStatusCheck = true;

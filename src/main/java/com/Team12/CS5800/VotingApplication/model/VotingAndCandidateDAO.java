@@ -27,6 +27,7 @@ public interface VotingAndCandidateDAO {
 	//casts a vote for a candidate from a user
 	//test case done
 	public boolean castVote(int userID, int candidateID);
+	public boolean Vote(int userID, int candidateID,String precinct);
 	
 	//flags all users from a specified precinct to allow them to vote in a specified election
 	public boolean includePrecinct(int electionID, String precinctName); 

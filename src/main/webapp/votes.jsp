@@ -1,5 +1,6 @@
 <%@ page import = "java.io.*,java.util.*,java.sql.*"%>
 <%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -21,8 +22,41 @@
     <title>Paper trail</title>
 </head>
 <body>
-	<%@ include file="includes/adminSideNav.jsp" %>
-	<%@ include file="includes/adminNavBar.jsp" %>
+<%
+String sessionCode = ""; 
+	Cookie[] cookies = null;
+	
+	cookies = request.getCookies();
+	if ( cookies != null) {
+		for (int i = 0; i < cookies.length; i++) {
+			
+			if (cookies[i].getName().equals("sessionID")) {
+				sessionCode = cookies[i].getValue();
+				
+			}
+		}
+	}
+	
+	if (sessionCode.equals("")){ // Not logged in
+		%>
+		<%@ include file="includes/navBar.jsp" %>
+		<div class="container-fluid"> 
+    		<div class="row-fluid">
+        		<div class="col-md-offset-2 col-md-8" id="box">
+            		<h2>Welcome to our voting service! Please register or login!</h2>
+        		</div>
+    		</div>
+		
+		
+		<%
+	} else {
+		SessionGrabber sg = new SessionGrabber();
+		String userStatus = sg.checkAdminStatus(sessionCode);
+		String firstName = sg.getFirstName(sessionCode);
+		pageContext.setAttribute("firstName", firstName);
+		if (userStatus.equals("manager")) { %>
+	<%@ include file="includes/managerSideNav.jsp" %>
+	<%@ include file="includes/managerNavBar.jsp" %>
 	
 	<div class="container-fluid"> <!-- div to hold all other divs -->
 	
@@ -32,6 +66,7 @@
 		<sql:query dataSource = "${data}" var = "result">
 		         select distinct candidateID from paper_trail order by candidateID;
 		</sql:query>
+		
 		
 		<div class="panel panel-defafult panel-table">
 			<div class="panel-heading">
@@ -59,26 +94,39 @@
 							<th>electionID</th>
 							<th>voterID</th>
 							<th>Precinct</th>
-							<th>candidateID</th>		
+							<th>candidateName</th>		
 						</tr>
 					</thead>
 					<tbody>
 						<sql:query dataSource = "${data}" var = "result">
 				        	select paperTrailID, electionID, voterID, precinct, candidateID from paper_trail where candidateID ="${param.choice}" order by paperTrailID;
 				    	</sql:query>
+				    	
 				    	<c:forEach var = "row" items = "${result.rows}">
 							<tr>
 								<td> <c:out value = "${row.paperTrailID}"/> </td>
 								<td> <c:out value = "${row.electionID}"/> </td>
 								<td> <c:out value = "${row.voterID}"/> </td>
 								<td> <c:out value = "${row.precinct}"/> </td>
-								<td> <c:out value = "${row.candidateID}"/> </td>
+								<sql:query dataSource = "${data}" var = "result1">
+				        			select candidateName from candidate_info where candidateID ="${row.candidateID}";
+				    			</sql:query>
+				    			<c:forEach var = "row1" items = "${result1.rows}">
+				    				<td> <c:out value = "${row1.candidateName}"/> </td>
+				    			</c:forEach>
+								
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
-	</div>
+	</div><%} }%>
+<br><br><br><br><br><br>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
