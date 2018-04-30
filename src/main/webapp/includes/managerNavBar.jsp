@@ -16,17 +16,6 @@
 				        </div>  
 				        <ul class="social-icon pull-right list-inline">
 				            <li class="dropdown">
-				                <a class="alerts-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-bell"></span>
-				                    <span class="number">0</span>
-				                    <span class="caret"></span>
-				                </a>
-				                <ul class="dropdown-menu">
-				                    <li><a href="#">Notification 1</a></li>
-				                    <li><a href="#">Notification 2</a></li>
-				                    <li><a href="#">Notification 3</a></li>
-				                </ul>
-				            </li> 
-				            <li class="dropdown">
 				                <a class="user-link dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>             
 				                    <span class="caret"></span>
 				                </a>
@@ -40,8 +29,7 @@
 				                    <span class="caret"></span>
 				                </a>
 				                <ul class="dropdown-menu">
-				                    <li><a href="#">Settings</a></li>
-				                    <li><a href="#">Help</a></li>
+				                    <li><a href="mailto:fswe.login.check.team12@gmail.com">Contact Us</a></li>
 				                </ul>
 				            </li>
 				        </ul>       

@@ -23,8 +23,7 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li><a href="mailto:fswe.login.check.team12@gmail.com">Contact Us</a></li>
                 </ul>
             </li>
         </ul>       

@@ -91,6 +91,7 @@
 			 String requestKey = request.getParameter("request");
 			 UserDAOImpl udao = new UserDAOImpl();
 			 int userID = udao.getUserIDByRequestKey(requestKey);
+			 System.out.println(userID);
 			 
 			 if (userID == -1){ // there wasn't a request made
 				 %>
@@ -108,6 +109,7 @@
 			 } 
 			 else {
 				 User thisUser = udao.getUserWithID(userID);
+				 System.out.println("q" + thisUser.getSecurityQuestion1());
 				 pageContext.setAttribute("question1", thisUser.getSecurityQuestion1());
 				 pageContext.setAttribute("question2", thisUser.getSecurityQuestion2());
 				 pageContext.setAttribute("formAction", "forgotPassword?request=" + requestKey);

@@ -35,15 +35,14 @@
 			            </form>
 			        </li>
 			        <li>
-                        <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
+                        <a href="/"><i class="fa fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                     		
                         <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-users"></i> Users <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="usersSubmenu">
                        		<li><a href="/voterApproval"><i class="fa fa-angle-double-right"></i> Approve Voter Applications</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Voters</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Managers</a></li>
+                            <li><a href="/voterlist"><i class="fa fa-angle-double-right"></i> Users</a></li>
                         </ul>
                     </li>
                     <li>
@@ -53,23 +52,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#calendarSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-calendar"></i> Calendar <i class="fa fa-caret-down pull-right"></i></a>
-                        <ul class="collapse list-unstyled" id="calendarSubmenu">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Upcoming Events</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> All Events</a></li>
-                        </ul>
-                    </li>
-                    <li>
                         <a href="#pollsSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-edit"></i> Polls <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="pollsSubmenu">
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Add a Poll</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Update a Poll</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> Delete a Poll</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i> View All Polls</a></li>
+                            <li><a href="/poll"><i class="fa fa-angle-double-right"></i> Add a Poll</a></li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-map-marker"></i> Precincts</a>
                     </li>
                 </ul>
             </nav>

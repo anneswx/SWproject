@@ -48,6 +48,9 @@ public class PasswordResetController {
     			User currentUser = udao.getUserWithID(userID);
     			String email = currentUser.getEmail();
     			
+    			System.out.println(userID);
+    			System.out.println(email);
+    			
     			if (service.validateQuestions(email, answer1, answer2)) { // they were right
     				
     				if (TestLoginFunctions.passwordRequirementCheck(newPassword) && !newPassword.equals("")) {
