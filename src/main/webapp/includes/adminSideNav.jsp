@@ -41,6 +41,7 @@
                     		
                         <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false"><i class="fa fa-users"></i> Users <i class="fa fa-caret-down pull-right"></i></a>
                         <ul class="collapse list-unstyled" id="usersSubmenu">
+                        		<li><a href="/voterApproval"><i class="fa fa-angle-double-right"></i> Approve Voter Applications</a></li>
                             <li><a href="/voterlist"><i class="fa fa-angle-double-right"></i> Voters</a></li>
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Managers</a></li>
                             <li><a href="#"><i class="fa fa-angle-double-right"></i> Administrators</a></li>

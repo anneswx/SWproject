@@ -44,11 +44,7 @@ public class VoterApprovalController {
 			model.addObject("errorMessage", "You don't have the rights to access this page.");
 	        return model;
 		}
-		System.out.println(userID);
-		System.out.println(command);
-		System.out.println(sessionID);
-		
-		
+				
 		
 		return model;
 	}

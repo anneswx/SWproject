@@ -207,17 +207,17 @@ else {
 		                    		<div class = "form-group">
 		                    			<label>Security Question 1</label>
 		                    			<select class="form-control" id="securityQuestion1" name="securityQuestion1" required>
-										<option value="Q1">What was your childhood nickname?</option>
-										<option value="Q2">What is the name of your favorite childhood friend?</option>
-										<option value="Q3">In what city or town did your mother and father meet?</option>
-										<option value="Q4">What is the middle name of your oldest child?</option>
-										<option value="Q5">What is your favorite sports team?</option>
-										<option value="Q6">What is your favorite movie?</option>
-										<option value="Q7">What was the color of your first car?</option>
-										<option value="Q8">What was the name of the hospital where you were born?</option>
-										<option value="Q9">What was the name of the company where you had your first job?</option>
-										<option value="Q10">What school did you attend for sixth grade?</option>
-										<option value="Q11">What is the name of the first person you kissed?</option>
+										<option>What was your childhood nickname?</option>
+										<option>What is the name of your favorite childhood friend?</option>
+										<option>In what city or town did your mother and father meet?</option>
+										<option>What is the middle name of your oldest child?</option>
+										<option>What is your favorite sports team?</option>
+										<option>What is your favorite movie?</option>
+										<option>What was the color of your first car?</option>
+										<option>What was the name of the hospital where you were born?</option>
+										<option>What was the name of the company where you had your first job?</option>
+										<option>What school did you attend for sixth grade?</option>
+										<option>What is the name of the first person you kissed?</option>
 									</select>
 		                    		</div>
 		                    	</div>
@@ -233,17 +233,17 @@ else {
 		                    		<div class = "form-group">
 		                    			<label>Security Question 2</label>
 		                    			<select class="form-control" id="securityQuestion2" name="securityQuestion2" required>
-										<option value="Q1">What was your childhood nickname?</option>
-										<option value="Q2">What is the name of your favorite childhood friend?</option>
-										<option value="Q3">In what city or town did your mother and father meet?</option>
-										<option value="Q4">What is the middle name of your oldest child?</option>
-										<option value="Q5">What is your favorite sports team?</option>
-										<option value="Q6">What is your favorite movie?</option>
-										<option value="Q7">What was the color of your first car?</option>
-										<option value="Q8">What was the name of the hospital where you were born?</option>
-										<option value="Q9">What was the name of the company where you had your first job?</option>
-										<option value="Q10">What school did you attend for sixth grade?</option>
-										<option value="Q11">What is the name of the first person you kissed?</option>
+										<option>What was your childhood nickname?</option>
+										<option>What is the name of your favorite childhood friend?</option>
+										<option>In what city or town did your mother and father meet?</option>
+										<option>What is the middle name of your oldest child?</option>
+										<option>What is your favorite sports team?</option>
+										<option>What is your favorite movie?</option>
+										<option>What was the color of your first car?</option>
+										<option>What was the name of the hospital where you were born?</option>
+										<option>What was the name of the company where you had your first job?</option>
+										<option>What school did you attend for sixth grade?</option>
+										<option>What is the name of the first person you kissed?</option>
 									</select>
 		                    		</div>
 		                    	</div>
