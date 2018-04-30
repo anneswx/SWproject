@@ -86,6 +86,9 @@ public class SessionGrabber {
 		}
 	}
 
+	public int getID(String sessionID) {
+		return UDAO.getUser(sessionID).getID();
+	}
 	public String getFirstName(String sessionID) {
 		return UDAO.getUser(sessionID).getFirstName();
 	}

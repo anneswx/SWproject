@@ -1,11 +1,13 @@
-<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
-<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
+<%--
+  Created by IntelliJ IDEA.
+  User: Anne Sun
+  Date: 2/24/2018
+  Time: 5:12 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.Team12.CS5800.VotingApplication.model.SessionGrabber" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta charset="utf-8">
@@ -13,64 +15,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
-    
-    <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 
-    <title>vote</title>
+    <title>Registration</title>
 </head>
 <body>
 
+<%
 
-<%@ include file="includes/userNavBar.jsp" %>
-<div class="container-fluid"> <!-- div to hold all other divs -->
+Cookie[] cookies = null;
+boolean wasLoggedIn = false;
+String sessionCode = "";
 
-	
-<sql:setDataSource var = "data" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://bais.mysql.database.azure.com/db"
-         user = "voterapp@bais"  password = "P@$$w0rD"/>
-<sql:query dataSource = "${data}" var = "result">
-         select distinct electionID from candidate_info order by electionID;
-</sql:query>
-<h1>Candidate List</h1>
-<form method="post" action="/vote">
-Search by Election number: <select name="choice">
-<c:forEach var = "row" items = "${result.rows}">
-    <option><c:out value = "${row.electionID}"/></option>
-</c:forEach>
-</select>
-<input type="submit" value="Select" />
-</form>
-<table>
-	<tr>
-		<th>electionID</th>
-		<th>Candidate Name</th>	
-		<th>Party</th>	
-		<th>Select</th>		
-	</tr>
-	
-	<sql:query dataSource = "${data}" var = "result">
-         select electionID, candidateName, party from candidate_info where electionID ="${param.choice}" order by candidateName;
-    </sql:query>
-	<c:forEach var = "row" items = "${result.rows}">
-		<tr>
-			<td> <c:out value = "${row.electionID}"/> </td>
-			<td> <c:out value = "${row.candidateName}"/> </td>
-			<td> <c:out value = "${row.party}"/> </td>
-			<td> <input type="checkbox" name="choice" ></td>
-		</tr>
-	</c:forEach>
-	
-</table>
-<input type="submit" name ="submit" value="vote" class="btn btn-success btn-block">	
+cookies = request.getCookies();
+if ( cookies != null) {
+	for (int i = 0; i < cookies.length; i++) {
+		
+		if (cookies[i].getName().equals("sessionID") && !cookies[i].getValue().equals("")) {
+			wasLoggedIn = true;
+			sessionCode = cookies[i].getValue();
+		}
+	}
+}
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="js/jquery-3.1.1.js"></script>
-    <script src="js/bootstrap.js"></script>
+if (!wasLoggedIn) { %>
+
+<%@ include file="includes/navBar.jsp" %>
+			<div class="container-fluid"> 
+				<div class="row-fluid">
+    				<div class="col-md-offset-4 col-md-4" id="box">
+        				<h2>Did you land here by mistake? You aren't logged in.</h2>
+        			</div>
+        			</div>
+        		</div>
+	
+<% }
+
+
+else {
+
+SessionGrabber sg = new SessionGrabber();
+		String userStatus = sg.checkAdminStatus(sessionCode);
+		String firstName = sg.getFirstName(sessionCode);
+		String lastName = sg.getLastName(sessionCode);
+		String precinct = sg.getPrecinct(sessionCode);
+		pageContext.setAttribute("firstName", firstName);
+		int id = sg.getID(sessionCode);
+
+		
+		if (userStatus.equals("admin")){
+			%>
+			
+			<%@ include file="includes/adminSideNav.jsp" %>
+			<%@ include file="includes/adminNavBar.jsp" %>
+			
+			<%
+		}
+		else if (userStatus.equals("manager")) {
+			%>
+			
+			 <%@ include file="includes/managerSideNav.jsp" %> 
+			 
+			 <%@ include file="includes/managerNavBar.jsp" %> 
+			
+			<%
+		}
+		else { 
+				%>
+				
+				<%@ include file="includes/userNavBar.jsp" %>
+				
+				<%
+
+		
+	}
+%>
+
+    <div class="container-fluid">
+
+     <div class="login">
+        <div class="container">
+            <div class="col-lg-6 col-lg-offset-1">
+                <div class="inner-form">
+                    <h2>Candidate List</h2> 
+                    <hr>
+                <p style="color:red;">${errorMessage}</p>
+                <p style="color:green;">${successMessage}</p>
+                <div class="panel-body">
+                    <form method="post">
+                    	
+                    		<input type="hidden" id="userID" name="userID" value="<%=id%>">
+                    		<input type="hidden" id="precinct" name="precinct" value="<%=precinct%>">
+                    		<div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+		                    		<div class = "form-group">
+		                    			 <input type="radio" name="candidateID" value="1" >Hilary Clinton 
+		                    			 </div>   
+		                    			 <div class = "form-group">         
+    									<input type="radio" name="candidateID" value=2 >Donald Trump
+    									</div>  
+    									<div class = "form-group">
+    									<input type="radio" name="candidateID" value=3 >Bernie Sanders
+    									
+		                    		</div>
+		                    	</div>
+		                    	
+		                </div>
+                  
+                        <input type="submit" name ="submit" value="Vote" class="btn btn-success btn-block">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>
-
+<% 
+}
+%>
+<%@ include file="includes/footer.jsp" %>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
