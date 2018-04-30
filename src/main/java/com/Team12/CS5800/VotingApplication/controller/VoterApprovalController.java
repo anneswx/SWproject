@@ -30,7 +30,10 @@ public class VoterApprovalController {
 	@RequestMapping(value="/voterApproval", method = RequestMethod.POST)
 	public ModelAndView processRequest(ModelAndView model, @RequestParam int userID, @RequestParam String command, @RequestParam String sessionID, HttpServletRequest request) {
 		
+		System.out.println("why");
 		if(service.verifyAccount(sessionID)) {
+			
+			System.out.println(command);
 			
 			if(command.equals("approve")) {
 				service.approveUser(userID);
@@ -41,6 +44,7 @@ public class VoterApprovalController {
 			
 		}
 		else {
+			System.out.println("why2");
 			model.addObject("errorMessage", "You don't have the rights to access this page.");
 	        return model;
 		}

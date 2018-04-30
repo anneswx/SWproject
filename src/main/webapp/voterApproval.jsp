@@ -26,7 +26,7 @@
     <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
     
 
-    <title>Welcome!</title>
+    <title>Voter Approval</title>
 </head>
 
 <!-- div to hold all other divs -->
@@ -67,9 +67,164 @@ String sessionCode = "";
 		String firstName = sg.getFirstName(sessionCode);
 		pageContext.setAttribute("firstName", firstName);
 		if (userStatus.equals("admin")){
+			UserGrabber ug = new UserGrabber();
+			ArrayList<User> userList = ug.getAppliedUsers();
+			
+			
+			ArrayList<ArrayList<String>> arrayList = new ArrayList();
+			
+			for(int i = 0; i < userList.size(); i++){
+				User currentUser = userList.get(i);
+				ArrayList<String> inner = new ArrayList();
+				String id = Integer.toString(currentUser.getID());
+				String name = currentUser.getFirstName() + " " + currentUser.getLastName();
+				String ssn = currentUser.getSSN();
+				inner.add(id);
+				inner.add(name);
+				inner.add(ssn);
+				arrayList.add(inner);
+				
+			}
+			
+
+			
 			%>
 			
-			Admin
+			<%@ include file="includes/adminSideNav.jsp" %> 
+			 
+			<%@ include file="includes/adminNavBar.jsp" %> 
+			
+			<br/>
+			<h1 style="text-align:center">ALL APPLICANTS</h1>
+			<br/>
+
+			 <script type = "application/javascript">
+			 
+			 function approve(e) {
+				 	var e = e || window.event;
+				  	var src = e.target || e.srcElement;
+				    var userId = src.getAttribute('data-userid');
+				    
+				    var form = document.createElement("form");
+				    var element1 = document.createElement("input"); 
+				    var element2 = document.createElement("input");  
+				    var element3 = document.createElement("input"); 
+
+				    form.method = "POST";
+				    form.action = "#";  
+				    
+				    element1.value=userId;
+				    element1.name="userID";
+				    element1.type="hidden";
+				    form.appendChild(element1);  
+
+				    element2.value="approve";
+				    element2.name="command";
+				    element2.type="hidden";
+				    form.appendChild(element2);
+				    
+				    element3.value="<%=sessionCode%>";
+				    element3.name="sessionID";
+				    element3.type="hidden";
+				    form.appendChild(element3);
+				    
+				    document.body.appendChild(form);
+
+				    form.submit();
+			        event.preventDefault();
+
+				    
+				}
+			 
+			 function decline(e) {
+				 	var e = e || window.event;
+				  	var src = e.target || e.srcElement;
+				    var userId = src.getAttribute('data-userid');
+				    
+				    var form = document.createElement("form");
+				    var element1 = document.createElement("input"); 
+				    var element2 = document.createElement("input");  
+				    var element3 = document.createElement("input"); 
+
+				    form.method = "POST";
+				    form.action = "#";  
+				    
+				    element1.value=userId;
+				    element1.name="userID";
+				    element1.type="hidden";
+				    form.appendChild(element1);  
+
+				    element2.value="decline";
+				    element2.name="command";
+				    element2.type="hidden";
+				    form.appendChild(element2);
+				    
+				    element3.value="<%=sessionCode%>";
+				    element3.name="sessionID";
+				    element3.type="hidden";
+				    form.appendChild(element3);
+				    
+				    document.body.appendChild(form);
+
+				    form.submit();
+			        event.preventDefault();
+			        
+				}
+			 
+			 function toJavascript(){
+		          var array="<%=arrayList%>";
+
+		          array=array.replace(/\[/g, "");
+		          console.log(array);
+		          array=array.split("],");
+		          console.log(array);
+		          for(var i = 0; i < array.length; i++){
+		        	  	array[i] = array[i].replace(/\]/g, "");
+		        	  	array[i] = array[i].split(",");
+		          }
+		          
+		          return array;
+
+		}
+			 var myPeople = toJavascript();
+			 
+			 var sessionID = "Heyo";
+			 
+			 if(myPeople[0] != "") {
+			 
+			 var mytable = "<div class='panel-body'><table align='center'class='table table-striped table-bordered table-list'><tbody><tr>";
+			 
+			 
+			 
+
+				 for (var i = 0; i < myPeople.length; i++) {
+					 for(var j = 0; j < myPeople[i].length; j++){
+						 if(j != 0) {
+						 mytable += "<td>";
+						 mytable += myPeople[i][j];
+						 mytable += "</td>";
+						 }
+					 }
+					 
+					 
+					 mytable += "<td align='center'><button type='button' class='btn btn-default' onClick='approve()' data-userid=" + myPeople[i][0] + "><span class='fa fa-check-circle'> Approve</button></td>";
+					 mytable += "<td align='center'><button type='button' class='btn btn-default' onClick='decline()' data-userid=" + myPeople[i][0] + "><span class='fa fa-times-circle'> Decline</button></td>";
+	
+					 mytable += "</tr><tr>";
+				 }
+			 
+
+			 mytable += "</tr></tbody></table></div>";
+			 
+			 document.write(mytable);
+			 
+			 }
+
+			 </script>
+			 
+			 </div>
+			 </div>
+			
 			
 			<%
 		}
@@ -197,6 +352,8 @@ String sessionCode = "";
 		}
 			 var myPeople = toJavascript();
 			 
+			 console.log("My people");
+			 
 			 var sessionID = "Heyo";
 			 
 			 if(myPeople[0] != "") {
@@ -216,10 +373,9 @@ String sessionCode = "";
 					 }
 					 
 	
-					 mytable += "<td align='center'>
-					 mytable += "<a class='btn btn-default'><em class='fa fa-check-circle' onClick='approve()' data-userid=" + myPeople[i][0] + ">";
-					 mytable += "<a class='btn btn-default'><em class='fa fa-times-circle' onClick='decline()' data-userid=" + myPeople[i][0] + "></td>";
-					 
+					 mytable += "<td align='center'><button type='button' class='btn btn-default' onClick='approve()' data-userid=" + myPeople[i][0] + "><span class='fa fa-check-circle'> Approve</button></td>";
+					 mytable += "<td align='center'><button type='button' class='btn btn-default' onClick='decline()' data-userid=" + myPeople[i][0] + "><span class='fa fa-times-circle'> Decline</button></td>";
+	
 					 mytable += "</tr><tr>";
 				 }
 			 
@@ -244,7 +400,13 @@ String sessionCode = "";
 		else { // user
 			%>
 			
-			<h3>You shouldn't be here</h3>
+			<%@ include file="includes/userNavBar.jsp" %>
+    			<div class="container-fluid"> 
+    				<div class="row-fluid">
+        				<div class="col-md-offset-2 col-md-8" id="box">
+            				<h2>You shouldn't be here. Did you land on this page by mistake?</h2>
+            			</div>
+            		</div>
 			
 			<% 
 		}

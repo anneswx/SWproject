@@ -28,7 +28,8 @@ public class VoterApprovalService {
 	public boolean verifyAccount(String sessionCode) {
 		UserDAOImpl UDAO = new UserDAOImpl();
 		User currentUser = UDAO.getUser(sessionCode);
-		if(currentUser.getAdminStatus() == AdminStatus.MANAGER) {
+		
+		if(currentUser.getAdminStatus() == AdminStatus.MANAGER || currentUser.getAdminStatus() == AdminStatus.ADMIN ) {
 			return true;
 		}
 		return false;
